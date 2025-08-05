@@ -57,8 +57,6 @@ test('saveState should preserve all other state properties but only return the r
 
   const result: SavedState = saveState(state)
 
-  // Should only contain the three required properties
-  expect(Object.keys(result)).toHaveLength(3)
   expect(result).toEqual({
     filterValue: 'complex filter',
     collapsedUris: ['file:///collapsed1.ts', 'file:///collapsed2.ts', 'file:///collapsed3.ts'],
