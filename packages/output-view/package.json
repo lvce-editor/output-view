@@ -1,7 +1,7 @@
 {
   "name": "@lvce-editor/output-view",
   "version": "0.0.0-dev",
-  "description": "Problems View Worker",
+  "description": "Output View Worker",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lvce-editor/output-view.git"
