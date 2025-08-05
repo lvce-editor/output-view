@@ -1,5 +1,5 @@
-import * as InputSource from '../InputSource/InputSource.ts'
 import type { OutputState } from '../OutputState/OutputState.ts'
+import * as InputSource from '../InputSource/InputSource.ts'
 import * as OutputStates from '../OutputStates/OutputStates.ts'
 
 export const create = (id: number, uri: string, x: number, y: number, width: number, height: number, workspaceUri: string): void => {

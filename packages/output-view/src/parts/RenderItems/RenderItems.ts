@@ -1,4 +1,4 @@
-import { VirtualDomNode } from '@lvce-editor/virtual-dom-worker'
+import type { VirtualDomNode } from '@lvce-editor/virtual-dom-worker'
 import type { OutputState } from '../OutputState/OutputState.ts'
 import type { ViewletCommand } from '../ViewletCommand/ViewletCommand.ts'
 
