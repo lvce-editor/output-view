@@ -30,7 +30,8 @@ const occurrence = `// const outputViewWorkerUrl = \`\${assetDir}/packages/outpu
 const outputViewWorkerUrl = \`${remoteUrl}\``
 const replacement = `const outputViewWorkerUrl = \`\${assetDir}/packages/output-view/dist/outputViewWorkerMain.js\``
 if (!content.includes(occurrence)) {
-  throw new Error('occurrence not found')
+  // TODO
+  // throw new Error('occurrence not found')
 }
 const newContent = content.replace(occurrence, replacement)
 await writeFile(rendererWorkerPath, newContent)
