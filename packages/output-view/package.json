@@ -1,0 +1,60 @@
+{
+  "name": "@lvce-editor/output-view",
+  "version": "0.0.0-dev",
+  "description": "Output View Worker",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lvce-editor/output-view.git"
+  },
+  "license": "MIT",
+  "author": "Lvce Editor",
+  "type": "module",
+  "main": "src/outputViewWorkerMain.ts",
+  "scripts": {
+    "build:watch": "cd ../../ && npm run build:watch",
+    "dev": "cd ../../ && npm run dev",
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --detectOpenHandles --forceExit",
+    "test:watch": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --watch"
+  },
+  "jest": {
+    "injectGlobals": false,
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ],
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
+    },
+    "transform": {
+      "^.+\\.tsx?$": [
+        "ts-jest",
+        {
+          "useESM": true
+        }
+      ]
+    },
+    "testMatch": [
+      "**/test/**"
+    ],
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 50,
+        "functions": 50,
+        "lines": 50
+      }
+    }
+  },
+  "devDependencies": {
+    "@jest/globals": "^30.0.5",
+    "@lvce-editor/assert": "^1.4.0",
+    "@lvce-editor/i18n": "^1.1.0",
+    "@lvce-editor/list": "^1.3.0",
+    "@lvce-editor/rpc": "^4.14.0",
+    "@lvce-editor/rpc-registry": "^2.67.0",
+    "@lvce-editor/verror": "^1.7.0",
+    "@lvce-editor/viewlet-registry": "^1.4.0",
+    "@lvce-editor/virtual-dom-worker": "^2.16.0",
+    "jest": "^30.0.5",
+    "ts-jest": "^29.4.1"
+  }
+}
