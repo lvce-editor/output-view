@@ -28,7 +28,7 @@ export const commandMap = {
   'Output.handleData': handleData,
   'Output.handleError': handleError,
   'Output.initialize': Initialize.initialize,
-  'Output.loadContent': WrapCommand.wrapCommand(loadContent),
+  'Output.loadContent2': WrapCommand.wrapCommand(loadContent),
   'Output.openFindWidget': openFindWidget,
   'Output.render2': Render2.render2,
   'Output.renderActions': renderActions,
