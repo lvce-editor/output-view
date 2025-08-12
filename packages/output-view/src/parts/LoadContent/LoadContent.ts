@@ -18,14 +18,15 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
   const collapsedUris = getSavedCollapsedUris(savedState)
   const platform = /* Electron */ 4
   const selectedUri = getSelectedItem(platform)
-  const { lines, error } = await loadLines(selectedUri)
+  const { lines, error, code } = await loadLines(selectedUri)
   return {
     ...state,
+    collapsedUris,
+    error,
+    errorCode: code,
     inputSource: InputSource.Script,
     listItems: lines,
-    collapsedUris,
     options: [],
     selectedOption: selectedUri,
-    error,
   }
 }
