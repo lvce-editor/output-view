@@ -7,6 +7,7 @@ import * as GetCommandIds from '../GetCommandIds/GetCommandIds.ts'
 import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
 import { handleData } from '../HandleData/HandleData.ts'
 import { handleError } from '../HandleError/HandleError.ts'
+import { handleSelect } from '../HandleSelect/HandleSelect.ts'
 import * as Initialize from '../Initialize/Initialize.ts'
 import { loadContent } from '../LoadContent/LoadContent.ts'
 import { openFindWidget } from '../OpenFindWidget/OpenFindWidget.ts'
@@ -39,4 +40,5 @@ export const commandMap = {
   'Output.setOutputChannel': setOutputChannel,
   'Output.getActions': getActions,
   'Output.terminate': ViewletRegistry.terminate,
+  'Output.handleSelect': handleSelect,
 }
