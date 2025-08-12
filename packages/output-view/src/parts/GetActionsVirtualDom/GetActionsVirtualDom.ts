@@ -9,9 +9,11 @@ export const getActionsVirtualDom = (actions: readonly ViewletAction[]): readonl
   const options: readonly Option[] = [
     {
       id: 'Main',
+      uri: '',
     },
     {
       id: 'Shared Process',
+      uri: '',
     },
   ]
   return [
