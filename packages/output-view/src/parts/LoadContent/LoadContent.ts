@@ -16,14 +16,15 @@ const getSavedCollapsedUris = (savedState: any): readonly string[] => {
 
 export const loadContent = async (state: OutputState, savedState: any): Promise<OutputState> => {
   const collapsedUris = getSavedCollapsedUris(savedState)
-  const selectedItem = getSelectedItem()
-  const lines = await loadLines()
+  const platform = /* Electron */ 4
+  const selectedUri = getSelectedItem(platform)
+  const lines = await loadLines(selectedUri)
   return {
     ...state,
     inputSource: InputSource.Script,
     listItems: lines,
     collapsedUris,
     options: [],
-    selectedOption: selectedItem,
+    selectedOption: selectedUri,
   }
 }
