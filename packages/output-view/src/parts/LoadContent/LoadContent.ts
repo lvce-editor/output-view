@@ -19,5 +19,6 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
     inputSource: InputSource.Script,
     listItems: [],
     collapsedUris,
+    options: [],
   }
 }
