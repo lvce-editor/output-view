@@ -1,5 +1,6 @@
 export interface OutputState {
   readonly collapsedUris: readonly string[]
+  readonly error: string
   readonly filterValue: string
   readonly focusedIndex: number
   readonly height: number
@@ -8,14 +9,14 @@ export interface OutputState {
   readonly listItems: readonly string[]
   readonly maxLineY: number
   readonly message: string
-  readonly selectedOption: string
   readonly minLineY: number
+  readonly options: readonly any[]
+  readonly selectedOption: string
   readonly smallWidthBreakPoint: number
   readonly uid: number
+  readonly uri: string
   readonly width: number
   readonly workspaceUri: string
   readonly x: number
   readonly y: number
-  readonly options: readonly any[]
-  readonly uri: string
 }

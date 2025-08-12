@@ -23,6 +23,7 @@ export const create = (id: number, uri: string, x: number, y: number, width: num
     smallWidthBreakPoint: 650,
     workspaceUri,
     options: [],
+    error: '',
   }
   OutputStates.set(id, state, state)
 }
