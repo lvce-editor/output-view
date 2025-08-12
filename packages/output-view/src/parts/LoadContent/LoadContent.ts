@@ -1,5 +1,6 @@
 import type { OutputState } from '../OutputState/OutputState.ts'
 import * as InputSource from '../InputSource/InputSource.ts'
+import { loadLines } from '../LoadLines/LoadLines.ts'
 
 const isString = (value: unknown): boolean => {
   return typeof value === 'string'
@@ -14,10 +15,11 @@ const getSavedCollapsedUris = (savedState: any): readonly string[] => {
 
 export const loadContent = async (state: OutputState, savedState: any): Promise<OutputState> => {
   const collapsedUris = getSavedCollapsedUris(savedState)
+  const lines = await loadLines()
   return {
     ...state,
     inputSource: InputSource.Script,
-    listItems: [],
+    listItems: lines,
     collapsedUris,
     options: [],
   }
