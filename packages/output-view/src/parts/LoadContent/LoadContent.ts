@@ -18,7 +18,7 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
   const collapsedUris = getSavedCollapsedUris(savedState)
   const platform = /* Electron */ 4
   const selectedUri = getSelectedItem(platform)
-  const lines = await loadLines(selectedUri)
+  const { lines, error } = await loadLines(selectedUri)
   return {
     ...state,
     inputSource: InputSource.Script,
@@ -26,5 +26,6 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
     collapsedUris,
     options: [],
     selectedOption: selectedUri,
+    error,
   }
 }
