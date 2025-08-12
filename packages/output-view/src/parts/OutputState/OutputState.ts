@@ -1,3 +1,5 @@
+import type { Option } from '../Option/Option.ts'
+
 export interface OutputState {
   readonly collapsedUris: readonly string[]
   readonly error: string
@@ -11,7 +13,7 @@ export interface OutputState {
   readonly maxLineY: number
   readonly message: string
   readonly minLineY: number
-  readonly options: readonly any[]
+  readonly options: readonly Option[]
   readonly selectedOption: string
   readonly smallWidthBreakPoint: number
   readonly uid: number
