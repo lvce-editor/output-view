@@ -22,6 +22,7 @@ export const createDefaultState = (): OutputState => {
     workspaceUri: '',
     options: [],
     uri: '',
+    error: '',
   }
   return state
 }
