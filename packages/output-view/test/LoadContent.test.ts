@@ -1,9 +1,8 @@
 import { test, expect } from '@jest/globals'
+import { MockRpc } from '@lvce-editor/rpc'
 import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import { loadContent } from '../src/parts/LoadContent/LoadContent.ts'
-
 import * as RendererWorker from '../src/parts/RendererWorker/RendererWorker.ts'
-import { MockRpc } from '@lvce-editor/rpc'
 
 test('loadContent returns a new state with expected properties', async () => {
   RendererWorker.set(
