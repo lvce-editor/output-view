@@ -1,2 +1,6 @@
 export const ViewAsTable = 'View as Table'
 export const ViewAsList = 'View as List'
+export const Output = 'output'
+export const ClearOutput = 'clear output'
+export const TurnOffAutoScroll = 'Turn auto scrolling off'
+export const OpenLogFile = 'open output log file'

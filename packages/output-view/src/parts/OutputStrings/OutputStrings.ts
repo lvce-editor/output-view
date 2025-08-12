@@ -1,14 +1,5 @@
 import * as I18NString from '@lvce-editor/i18n'
-
-/**
- * @enum {string}
- */
-const UiStrings = {
-  Output: 'output',
-  ClearOutput: 'clear output',
-  TurnOffAutoScroll: 'Turn auto scrolling off',
-  OpenLogFile: 'open output log file',
-}
+import * as UiStrings from '../UiStrings/UiStrings.ts'
 
 export const output = (): string => {
   return I18NString.i18nString(UiStrings.Output)
