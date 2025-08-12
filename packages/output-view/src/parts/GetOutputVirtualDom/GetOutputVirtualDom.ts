@@ -4,7 +4,7 @@ import * as ClassNames from '../ClassNames/ClassNames.ts'
 import { getContentDom } from '../GetContentDom/GetContentDom.ts'
 import { getErrorDom } from '../GetErrorDom/GetErrorDom.ts'
 
-export const getOutputVirtualDom = (lines: readonly string[], error: string): readonly VirtualDomNode[] => {
+export const getOutputVirtualDom = (lines: readonly string[], errorCode: number, error: string): readonly VirtualDomNode[] => {
   return [
     {
       type: VirtualDomElements.Div,
@@ -12,6 +12,6 @@ export const getOutputVirtualDom = (lines: readonly string[], error: string): re
       childCount: 1,
     },
     ...getContentDom(lines, error),
-    ...getErrorDom(error),
+    ...getErrorDom(errorCode, error),
   ]
 }
