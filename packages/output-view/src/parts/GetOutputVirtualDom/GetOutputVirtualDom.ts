@@ -15,6 +15,7 @@ export const getOutputVirtualDom = (lines: readonly string[]): readonly VirtualD
       className: 'OutputContent',
       role: 'log',
       tabIndex: 0,
+      childCount: lines.length,
     },
     ...lines.flatMap(getLineDom),
   ]
