@@ -24,6 +24,7 @@ export const create = (id: number, uri: string, x: number, y: number, width: num
     workspaceUri,
     options: [],
     error: '',
+    errorCode: 0,
   }
   OutputStates.set(id, state, state)
 }
