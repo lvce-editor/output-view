@@ -23,6 +23,7 @@ export const createDefaultState = (): OutputState => {
     options: [],
     uri: '',
     error: '',
+    errorCode: 0,
   }
   return state
 }

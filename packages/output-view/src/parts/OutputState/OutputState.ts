@@ -1,6 +1,7 @@
 export interface OutputState {
   readonly collapsedUris: readonly string[]
   readonly error: string
+  readonly errorCode: number
   readonly filterValue: string
   readonly focusedIndex: number
   readonly height: number
