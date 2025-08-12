@@ -17,6 +17,7 @@ export const createDefaultState = (): OutputState => {
     maxLineY: 0,
     listItems: [],
     collapsedUris: [],
+    selectedOption: '',
     smallWidthBreakPoint: 650,
     workspaceUri: '',
     options: [],
