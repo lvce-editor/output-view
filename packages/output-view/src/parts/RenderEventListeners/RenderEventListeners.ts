@@ -9,6 +9,10 @@ export const renderEventListeners = (): readonly DomEventListener[] => {
       params: ['handleBlur'],
     },
     {
+      name: DomEventListenerFunctions.HandleSelect,
+      params: ['handleSelect', 'event.target.value'],
+    },
+    {
       name: DomEventListenerFunctions.HandleContextMenu,
       params: ['handleContextMenu', 'event.clientX', 'event.clientY'],
       preventDefault: true,
