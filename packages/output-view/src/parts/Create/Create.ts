@@ -19,6 +19,7 @@ export const create = (id: number, uri: string, x: number, y: number, width: num
     maxLineY: 0,
     listItems: [],
     collapsedUris: [],
+    selectedOption: '',
     smallWidthBreakPoint: 650,
     workspaceUri,
     options: [],

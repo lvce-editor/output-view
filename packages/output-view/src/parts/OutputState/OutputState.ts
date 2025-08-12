@@ -8,6 +8,7 @@ export interface OutputState {
   readonly listItems: readonly any[]
   readonly maxLineY: number
   readonly message: string
+  readonly selectedOption: string
   readonly minLineY: number
   readonly smallWidthBreakPoint: number
   readonly uid: number
