@@ -16,3 +16,7 @@ export const turnOffAutoScroll = (): string => {
 export const openLogFile = (): string => {
   return I18NString.i18nString(UiStrings.OpenLogFile)
 }
+
+export const logFileNotFound = (): string => {
+  return I18NString.i18nString(UiStrings.LogFileNotFound)
+}
