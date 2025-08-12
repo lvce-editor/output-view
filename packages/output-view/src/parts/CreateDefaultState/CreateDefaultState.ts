@@ -19,6 +19,7 @@ export const createDefaultState = (): OutputState => {
     collapsedUris: [],
     smallWidthBreakPoint: 650,
     workspaceUri: '',
+    options: [],
   }
   return state
 }
