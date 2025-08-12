@@ -4,6 +4,6 @@ import type { ViewletCommand } from '../ViewletCommand/ViewletCommand.ts'
 import { getOutputVirtualDom } from '../GetOutputVirtualDom/GetOutputVirtualDom.ts'
 
 export const renderItems = (oldState: OutputState, newState: OutputState): ViewletCommand => {
-  const dom: readonly VirtualDomNode[] = getOutputVirtualDom()
+  const dom: readonly VirtualDomNode[] = getOutputVirtualDom(newState.listItems)
   return ['Viewlet.setDom2', dom]
 }
