@@ -1,7 +1,7 @@
 import type { OutputState } from '../OutputState/OutputState.ts'
+import { getSelectedItem } from '../GetSelectedItem/GetSelectedItem.ts'
 import * as InputSource from '../InputSource/InputSource.ts'
 import { loadLines } from '../LoadLines/LoadLines.ts'
-import { getSelectedItem } from '../GetSelectedItem/GetSelectedItem.ts'
 
 const isString = (value: unknown): boolean => {
   return typeof value === 'string'
