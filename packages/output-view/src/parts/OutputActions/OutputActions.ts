@@ -1,6 +1,6 @@
+import type { OutputState } from '../OutputState/OutputState.ts'
 import * as ActionType from '../ActionType/ActionType.ts'
 import * as Icon from '../Icon/Icon.ts'
-import { OutputState } from '../OutputState/OutputState.ts'
 import * as ViewletOutputStrings from '../OutputStrings/OutputStrings.ts'
 
 const toSelectOption = (option: any): number => {

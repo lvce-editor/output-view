@@ -10,18 +10,18 @@ const UiStrings = {
   OpenLogFile: 'open output log file',
 }
 
-export const output = () => {
+export const output = (): string => {
   return I18NString.i18nString(UiStrings.Output)
 }
 
-export const clearOutput = () => {
+export const clearOutput = (): string => {
   return I18NString.i18nString(UiStrings.ClearOutput)
 }
 
-export const turnOffAutoScroll = () => {
+export const turnOffAutoScroll = (): string => {
   return I18NString.i18nString(UiStrings.TurnOffAutoScroll)
 }
 
-export const openLogFile = () => {
+export const openLogFile = (): string => {
   return I18NString.i18nString(UiStrings.OpenLogFile)
 }

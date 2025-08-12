@@ -10,6 +10,7 @@ import { handleError } from '../HandleError/HandleError.ts'
 import * as Initialize from '../Initialize/Initialize.ts'
 import { loadContent } from '../LoadContent/LoadContent.ts'
 import { openFindWidget } from '../OpenFindWidget/OpenFindWidget.ts'
+import { getActions } from '../OutputActions/OutputActions.ts'
 import * as WrapCommand from '../OutputStates/OutputStates.ts'
 import * as Render2 from '../Render2/Render2.ts'
 import { renderActions } from '../RenderActions/RenderActions.ts'
@@ -17,7 +18,6 @@ import { renderEventListeners } from '../RenderEventListeners/RenderEventListene
 import * as Resize from '../Resize/Resize.ts'
 import * as SaveState from '../SaveState/SaveState.ts'
 import { setOutputChannel } from '../SetOutputChannel/SetOutputChannel.ts'
-import { getActions } from '../OutputActions/OutputActions.ts'
 
 export const commandMap = {
   'Output.closeFindWidget': closeFindWidget,
