@@ -16,4 +16,5 @@ export interface OutputState {
   readonly x: number
   readonly y: number
   readonly options: readonly any[]
+  readonly uri: string
 }

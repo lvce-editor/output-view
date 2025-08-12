@@ -20,6 +20,7 @@ export const createDefaultState = (): OutputState => {
     smallWidthBreakPoint: 650,
     workspaceUri: '',
     options: [],
+    uri: '',
   }
   return state
 }
