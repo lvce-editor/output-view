@@ -1,26 +1,26 @@
 import type { VirtualDomNode } from '@lvce-editor/virtual-dom-worker'
-import { AriaRoles, text, VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
+import { AriaRoles, VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
+import type { Option } from '../Option/Option.ts'
 import type { ViewletAction } from '../ViewletAction/ViewletAction.ts'
 import * as ClassNames from '../ClassNames/ClassNames.ts'
-
-const getActionDom = (): readonly VirtualDomNode[] => {
-  return [
-    {
-      type: VirtualDomElements.Div,
-      childCount: 1,
-    },
-    text('test action'),
-  ]
-}
+import { getSelectVirtualDom } from '../GetSelectVirtualDom/GetSelectVirtualDom.ts'
 
 export const getActionsVirtualDom = (actions: readonly ViewletAction[]): readonly VirtualDomNode[] => {
+  const options: readonly Option[] = [
+    {
+      id: 'Main',
+    },
+    {
+      id: 'Shared Process',
+    },
+  ]
   return [
     {
       type: VirtualDomElements.Div,
       className: ClassNames.Actions,
       role: AriaRoles.ToolBar,
-      childCount: actions.length,
+      childCount: 1,
     },
-    ...actions.flatMap(getActionDom),
+    ...getSelectVirtualDom(options),
   ]
 }
