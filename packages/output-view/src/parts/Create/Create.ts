@@ -5,6 +5,7 @@ import * as OutputStates from '../OutputStates/OutputStates.ts'
 export const create = (id: number, uri: string, x: number, y: number, width: number, height: number, workspaceUri: string): void => {
   const state: OutputState = {
     uid: id,
+    uri,
     focusedIndex: -2,
     message: '',
     itemHeight: 22,
