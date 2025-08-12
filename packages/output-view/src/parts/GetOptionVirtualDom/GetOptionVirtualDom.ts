@@ -6,7 +6,7 @@ import * as ClassNames from '../ClassNames/ClassNames.ts'
 export const getOptionVirtualDom = (option: Option): readonly VirtualDomNode[] => {
   return [
     {
-      type: VirtualDomElements.Div,
+      type: VirtualDomElements.Option,
       className: ClassNames.Option,
       childCount: 1,
     },
