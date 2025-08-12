@@ -5,7 +5,7 @@ export interface OutputState {
   readonly height: number
   readonly inputSource: number
   readonly itemHeight: number
-  readonly listItems: readonly any[]
+  readonly listItems: readonly string[]
   readonly maxLineY: number
   readonly message: string
   readonly selectedOption: string
