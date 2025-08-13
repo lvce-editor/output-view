@@ -1,19 +1,20 @@
 import type { ActionButton } from '../ActionButton/ActionButton.ts'
+import * as InputName from '../InputName/InputName.ts'
 
 export const loadButtons = (): readonly ActionButton[] => {
   return [
     {
-      id: 'Clear',
+      id: InputName.Clear,
       label: 'Clear',
       icon: 'MaskIconClearAll',
     },
     {
-      id: 'Scroll Lock',
+      id: InputName.ScrollLock,
       label: 'Scroll Lock',
       icon: 'MaskIconListFlat',
     },
     {
-      id: 'Settings',
+      id: InputName.Settings,
       label: 'Settings',
       icon: 'MaskIconListFlat',
     },
