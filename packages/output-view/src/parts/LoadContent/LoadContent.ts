@@ -30,6 +30,7 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
     errorCode: code,
     inputSource: InputSource.Script,
     listItems: lines,
+    filteredItems: lines,
     options,
     selectedOption: selectedUri,
     buttons,
