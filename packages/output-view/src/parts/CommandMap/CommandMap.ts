@@ -7,6 +7,7 @@ import * as GetCommandIds from '../GetCommandIds/GetCommandIds.ts'
 import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
 import { handleData } from '../HandleData/HandleData.ts'
 import { handleError } from '../HandleError/HandleError.ts'
+import { handleFilterInput } from '../HandleFilterInput/HandleFilterInput.ts'
 import { handleSelect } from '../HandleSelect/HandleSelect.ts'
 import * as Initialize from '../Initialize/Initialize.ts'
 import { loadContent } from '../LoadContent/LoadContent.ts'
@@ -41,4 +42,5 @@ export const commandMap = {
   'Output.getActions': getActions,
   'Output.terminate': ViewletRegistry.terminate,
   'Output.handleSelect': WrapCommand.wrapCommand(handleSelect),
+  'Output.handleFilterInput': WrapCommand.wrapCommand(handleFilterInput),
 }
