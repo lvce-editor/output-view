@@ -18,5 +18,3 @@ test('getContentDom - renders container and lines', () => {
 test('getContentDom - returns empty when error present', () => {
   expect(getContentDom(['a'], 'boom')).toEqual([])
 })
-
-
