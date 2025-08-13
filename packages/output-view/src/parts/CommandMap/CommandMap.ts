@@ -5,6 +5,7 @@ import * as Diff2 from '../Diff2/Diff2.ts'
 import * as FocusIndex from '../FocusIndex/FocusIndex.ts'
 import * as GetCommandIds from '../GetCommandIds/GetCommandIds.ts'
 import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
+import { handleButtonClick } from '../HandleButtonClick/HandleButtonClick.ts'
 import { handleData } from '../HandleData/HandleData.ts'
 import { handleError } from '../HandleError/HandleError.ts'
 import { handleFilterInput } from '../HandleFilterInput/HandleFilterInput.ts'
@@ -43,4 +44,5 @@ export const commandMap = {
   'Output.terminate': ViewletRegistry.terminate,
   'Output.handleSelect': WrapCommand.wrapCommand(handleSelect),
   'Output.handleFilterInput': WrapCommand.wrapCommand(handleFilterInput),
+  'Output.handleButtonClick': WrapCommand.wrapCommand(handleButtonClick),
 }
