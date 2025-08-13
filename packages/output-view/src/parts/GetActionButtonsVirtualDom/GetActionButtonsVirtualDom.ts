@@ -1,7 +1,8 @@
 import type { VirtualDomNode } from '@lvce-editor/virtual-dom-worker'
 import { text, VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
+import type { ActionButton } from '../ActionButton/ActionButton.ts'
 
-export const getActionButtonsVirtualDom = (buttons: readonly any[]): readonly VirtualDomNode[] => {
+export const getActionButtonsVirtualDom = (buttons: readonly ActionButton[]): readonly VirtualDomNode[] => {
   return [
     {
       type: VirtualDomElements.Button,
