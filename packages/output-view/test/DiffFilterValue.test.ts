@@ -1,8 +1,8 @@
 import { test, expect } from '@jest/globals'
 import type { OutputState } from '../src/parts/OutputState/OutputState.ts'
 import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
-import * as InputSource from '../src/parts/InputSource/InputSource.ts'
 import * as DiffFilterValue from '../src/parts/DiffFilterValue/DiffFilterValue.ts'
+import * as InputSource from '../src/parts/InputSource/InputSource.ts'
 
 test('isEqual - when inputSource is User, returns true regardless of value', () => {
   const oldState: OutputState = { ...createDefaultState(), filterValue: 'a' }
