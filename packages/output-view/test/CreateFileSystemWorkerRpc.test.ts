@@ -1,19 +1,20 @@
-import { test, expect } from '@jest/globals'
+import { expect, test } from '@jest/globals'
 import { MockRpc } from '@lvce-editor/rpc'
 import { VError } from '@lvce-editor/verror'
-import * as SendMessagePortToFileSystemWorker from '../src/parts/SendMessagePortToFileSystemWorker/SendMessagePortToFileSystemWorker.ts'
 import * as CreateFileSystemWorkerRpc from '../src/parts/CreateFileSystemWorkerRpc/CreateFileSystemWorkerRpc.ts'
+import * as RendererWorker from '../src/parts/RendererWorker/RendererWorker.ts'
 
 test('createFileSystemWorkerRpc - wraps error', async () => {
-  const original = SendMessagePortToFileSystemWorker.sendMessagePortToFileSystemWorker
-  // simulate failure by throwing from send
-  // @ts-expect-error temporary override
-  SendMessagePortToFileSystemWorker.sendMessagePortToFileSystemWorker = () => {
-    throw new Error('no port')
-  }
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    // send will be used by TransferMessagePortRpcParent within create
+    invoke: () => {
+      throw new Error('no port')
+    },
+    invokeAndTransfer: () => {
+      throw new Error('no port')
+    },
+  })
+  RendererWorker.set(mockRpc)
   await expect(CreateFileSystemWorkerRpc.createFileSystemWorkerRpc()).rejects.toBeInstanceOf(VError)
-  // restore
-  SendMessagePortToFileSystemWorker.sendMessagePortToFileSystemWorker = original
 })
-
-
