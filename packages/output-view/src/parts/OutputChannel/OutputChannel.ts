@@ -1,6 +1,7 @@
 import type { ReadPendingResult } from '../ReadPendingResult/ReadPendingResult.ts'
 import * as FileSystemWorker from '../FileSystemWorker/FileSystemWorker.ts'
 import * as SharedProcess from '../SharedProcess/SharedProcess.ts'
+import * as WatchCallbacks from '../WatchCallbacks/WatchCallbacks.ts'
 
 export class OutputChannel extends EventTarget {
   public readonly uri: string
@@ -13,12 +14,17 @@ export class OutputChannel extends EventTarget {
   }
 
   public async open(): Promise<void> {
+    WatchCallbacks.registerWatchCallback(this.watchId, (): void => {
+      // TODO
+      // console.log('channel changed')
+    })
     // @ts-ignore
     await FileSystemWorker.invoke(/* OutputChannel.open */ 'FileSystem.watchFile', this.watchId, /* path */ this.uri)
     await FileSystemWorker.invoke(/* OutputChannel.open */ 'FileSystem.readFile', /* path */ this.uri)
   }
 
   public async close(): Promise<void> {
+    WatchCallbacks.unregisterWatchCallback(this.watchId)
     await SharedProcess.invoke(/* OutputChannel.close */ 'FileSystem.unwatch', /* id */ this.watchId)
   }
 
