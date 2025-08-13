@@ -1,3 +1,4 @@
+import type { Option } from '../Option/Option.ts'
 import type { OutputState } from '../OutputState/OutputState.ts'
 import { getSelectedItem } from '../GetSelectedItem/GetSelectedItem.ts'
 import * as InputSource from '../InputSource/InputSource.ts'
@@ -16,15 +17,20 @@ const getSavedCollapsedUris = (savedState: any): readonly string[] => {
   return []
 }
 
+const getMatchingOpen = (options: readonly Option[], id: string): Option | undefined => {
+  return options.find((option) => option.id === id) || options[0]
+}
+
 export const loadContent = async (state: OutputState, savedState: any): Promise<OutputState> => {
   const { platform } = state
   const collapsedUris = getSavedCollapsedUris(savedState)
   const selectedId = getSelectedItem(platform)
   const options = await loadOptions(platform)
-  const uri = options.find((option) => option.id === selectedId)?.uri
-  if (!uri) {
+  const option = getMatchingOpen(options, selectedId)
+  if (!option) {
     throw new Error('option not found')
   }
+  const {uri} = option
   const { lines, error, code } = await loadLines(uri)
   const buttons = loadButtons()
   return {
