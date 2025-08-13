@@ -1,6 +1,6 @@
 import { test, expect } from '@jest/globals'
 import { MockRpc } from '@lvce-editor/rpc'
-import * as RendererWorker from '../src/parts/RendererWorker/RendererWorker.ts'
+import * as FileSystemWorker from '../src/parts/FileSystemWorker/FileSystemWorker.ts'
 import { loadLines } from '../src/parts/LoadLines/LoadLines.ts'
 
 test('loadLines - success', async () => {
@@ -13,7 +13,7 @@ test('loadLines - success', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  RendererWorker.set(mockRpc)
+  FileSystemWorker.set(mockRpc)
   const result = await loadLines('file:///x')
   expect(result).toEqual({ error: '', lines: ['a', 'b'], code: 0 })
 })
@@ -29,7 +29,7 @@ test('loadLines - file not found', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  RendererWorker.set(mockRpc)
+  FileSystemWorker.set(mockRpc)
   const result = await loadLines('file:///missing')
   expect(result).toEqual({ error: 'log file not found', lines: [], code: 1 })
 })
@@ -44,9 +44,7 @@ test('loadLines - other error', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  RendererWorker.set(mockRpc)
+  FileSystemWorker.set(mockRpc)
   const result = await loadLines('file:///x')
   expect(result).toEqual({ error: 'Error: boom', lines: [], code: 2 })
 })
-
-
