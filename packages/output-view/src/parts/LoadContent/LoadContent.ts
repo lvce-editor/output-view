@@ -30,7 +30,7 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
   if (!option) {
     throw new Error('option not found')
   }
-  const {uri} = option
+  const { uri } = option
   const { lines, error, code } = await loadLines(uri)
   const buttons = loadButtons()
   return {
