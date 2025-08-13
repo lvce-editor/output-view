@@ -23,5 +23,5 @@ export interface OutputState {
   readonly workspaceUri: string
   readonly x: number
   readonly y: number
-  readonly buttons: ActionButton[]
+  readonly buttons: readonly ActionButton[]
 }
