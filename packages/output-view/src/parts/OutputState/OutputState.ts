@@ -1,4 +1,4 @@
-import { ActionButton } from '../ActionButton/ActionButton.ts'
+import type { ActionButton } from '../ActionButton/ActionButton.ts'
 import type { Option } from '../Option/Option.ts'
 
 export interface OutputState {
