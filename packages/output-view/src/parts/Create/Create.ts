@@ -26,6 +26,7 @@ export const create = (id: number, uri: string, x: number, y: number, width: num
     error: '',
     errorCode: 0,
     buttons: [],
+    filteredItems: [],
   }
   OutputStates.set(id, state, state)
 }
