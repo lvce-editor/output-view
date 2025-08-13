@@ -2,7 +2,7 @@ import type { OutputState } from '../OutputState/OutputState.ts'
 import * as InputSource from '../InputSource/InputSource.ts'
 import * as OutputStates from '../OutputStates/OutputStates.ts'
 
-export const create = (id: number, uri: string, x: number, y: number, width: number, height: number, workspaceUri: string): void => {
+export const create = (id: number, uri: string, x: number, y: number, width: number, height: number, platform: number): void => {
   const state: OutputState = {
     uid: id,
     uri,
@@ -21,12 +21,13 @@ export const create = (id: number, uri: string, x: number, y: number, width: num
     collapsedUris: [],
     selectedOption: '',
     smallWidthBreakPoint: 650,
-    workspaceUri,
+    workspaceUri: '',
     options: [],
     error: '',
     errorCode: 0,
     buttons: [],
     filteredItems: [],
+    platform,
   }
   OutputStates.set(id, state, state)
 }
