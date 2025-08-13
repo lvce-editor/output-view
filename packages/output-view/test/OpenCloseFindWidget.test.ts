@@ -15,5 +15,3 @@ test('closeFindWidget returns new state', async () => {
   const result = await closeFindWidget(state)
   expect(result).not.toBe(state)
 })
-
-
