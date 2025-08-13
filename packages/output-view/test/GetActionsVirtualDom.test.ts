@@ -1,8 +1,8 @@
 import { test, expect } from '@jest/globals'
 import { VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
+import type { Option } from '../src/parts/Option/Option.ts'
 import * as ClassNames from '../src/parts/ClassNames/ClassNames.ts'
 import { getActionsVirtualDom } from '../src/parts/GetActionsVirtualDom/GetActionsVirtualDom.ts'
-import { Option } from '../src/parts/Option/Option.ts'
 
 test('getActionsVirtualDom - wraps select in actions container', () => {
   const options: readonly Option[] = [

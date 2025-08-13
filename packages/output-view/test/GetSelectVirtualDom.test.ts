@@ -1,10 +1,10 @@
 import { test, expect } from '@jest/globals'
 import { VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
+import type { Option } from '../src/parts/Option/Option.ts'
 import * as ClassNames from '../src/parts/ClassNames/ClassNames.ts'
 import * as DomEventListenerFunctions from '../src/parts/DomEventListenerFunctions/DomEventListenerFunctions.ts'
 import { getSelectVirtualDom } from '../src/parts/GetSelectVirtualDom/GetSelectVirtualDom.ts'
 import * as InputName from '../src/parts/InputName/InputName.ts'
-import { Option } from '../src/parts/Option/Option.ts'
 
 test('getSelectVirtualDom - renders select with options', () => {
   const options: readonly Option[] = [
