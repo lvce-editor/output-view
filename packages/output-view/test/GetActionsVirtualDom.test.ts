@@ -18,6 +18,6 @@ test('getActionsVirtualDom - wraps select in actions container', () => {
     type: VirtualDomElements.Div,
     className: ClassNames.Actions,
     role: 'toolbar',
-    childCount: 1,
+    childCount: 2,
   })
 })

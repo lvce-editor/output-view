@@ -4,11 +4,13 @@ import type { ActionButton } from '../ActionButton/ActionButton.ts'
 import type { Option } from '../Option/Option.ts'
 import * as ClassNames from '../ClassNames/ClassNames.ts'
 import { getActionButtonsVirtualDom } from '../GetActionButtonsVirtualDom/GetActionButtonsVirtualDom.ts'
+import { getFilterVirtualDom } from '../GetFilterVirtualDom/GetFilterVirtualDom.ts'
 import { getSelectVirtualDom } from '../GetSelectVirtualDom/GetSelectVirtualDom.ts'
 
 const getChildCount = (buttonsLength: number): number => {
   const selectLength = 1
-  return buttonsLength + selectLength
+  const filterCount = 1
+  return buttonsLength + filterCount + selectLength
 }
 
 export const getActionsVirtualDom = (options: readonly Option[], buttons: readonly ActionButton[]): readonly VirtualDomNode[] => {
@@ -20,6 +22,7 @@ export const getActionsVirtualDom = (options: readonly Option[], buttons: readon
       role: AriaRoles.ToolBar,
       childCount,
     },
+    ...getFilterVirtualDom(),
     ...getSelectVirtualDom(options),
     ...getActionButtonsVirtualDom(buttons),
   ]
