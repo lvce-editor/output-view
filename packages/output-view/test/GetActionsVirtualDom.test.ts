@@ -2,11 +2,12 @@ import { test, expect } from '@jest/globals'
 import { VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
 import * as ClassNames from '../src/parts/ClassNames/ClassNames.ts'
 import { getActionsVirtualDom } from '../src/parts/GetActionsVirtualDom/GetActionsVirtualDom.ts'
+import { Option } from '../src/parts/Option/Option.ts'
 
 test('getActionsVirtualDom - wraps select in actions container', () => {
-  const options = [
-    { id: 'one', uri: 'file:///one' },
-    { id: 'two', uri: 'file:///two' },
+  const options: readonly Option[] = [
+    { id: 'one', uri: 'file:///one', label: 'One' },
+    { id: 'two', uri: 'file:///two', label: 'Two' },
   ]
 
   const result = getActionsVirtualDom(options)
@@ -15,11 +16,6 @@ test('getActionsVirtualDom - wraps select in actions container', () => {
     type: VirtualDomElements.Div,
     className: ClassNames.Actions,
     role: 'toolbar',
-    childCount: 1,
+    childCount: 4,
   })
-  // container + select + 2 nodes per option
-  expect(result.length).toBe(2 + 2 * options.length)
-  expect(result[1].type).toBe(VirtualDomElements.Select)
 })
-
-

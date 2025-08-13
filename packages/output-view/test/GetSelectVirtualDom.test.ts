@@ -4,11 +4,12 @@ import * as ClassNames from '../src/parts/ClassNames/ClassNames.ts'
 import * as DomEventListenerFunctions from '../src/parts/DomEventListenerFunctions/DomEventListenerFunctions.ts'
 import { getSelectVirtualDom } from '../src/parts/GetSelectVirtualDom/GetSelectVirtualDom.ts'
 import * as InputName from '../src/parts/InputName/InputName.ts'
+import { Option } from '../src/parts/Option/Option.ts'
 
 test('getSelectVirtualDom - renders select with options', () => {
-  const options = [
-    { id: 'a', uri: 'file:///a' },
-    { id: 'b', uri: 'file:///b' },
+  const options: readonly Option[] = [
+    { id: 'a', uri: 'file:///a', label: 'A' },
+    { id: 'b', uri: 'file:///b', label: 'B' },
   ]
 
   const dom = getSelectVirtualDom(options)
@@ -23,5 +24,3 @@ test('getSelectVirtualDom - renders select with options', () => {
   // select + 2 nodes per option
   expect(dom.length).toBe(1 + 2 * options.length)
 })
-
-
