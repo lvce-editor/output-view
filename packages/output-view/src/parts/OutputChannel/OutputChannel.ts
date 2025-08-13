@@ -1,9 +1,39 @@
+import type { OutputEvent } from '../OutputChannelEvents/OutputEvent.ts'
+import type { ReadPendingResult } from '../ReadPendingResult/ReadPendingResult.ts'
+import * as FileSystemWorker from '../FileSystemWorker/FileSystemWorker.ts'
 import * as SharedProcess from '../SharedProcess/SharedProcess.ts'
 
-export const open = async (id: string, file: string): Promise<void> => {
-  await SharedProcess.invoke(/* OutputChannel.open */ 'OutputChannel.open', id, /* path */ file)
-}
+export class OutputChannel extends EventTarget {
+  public readonly uri: string
+  public readonly watchId: number
 
-export const close = async (id: string): Promise<void> => {
-  await SharedProcess.invoke(/* OutputChannel.close */ 'OutputChannel.close', /* id */ id)
+  public constructor(uri: string) {
+    super()
+    this.uri = uri
+    this.watchId = Math.random()
+  }
+
+  public async open(): Promise<void> {
+    // @ts-ignore
+    await FileSystemWorker.invoke(/* OutputChannel.open */ 'FileSystem.watchFile', this.watchId, /* path */ this.uri)
+    await FileSystemWorker.invoke(/* OutputChannel.open */ 'FileSystem.readFile', /* path */ this.uri)
+  }
+
+  public async close(): Promise<void> {
+    await SharedProcess.invoke(/* OutputChannel.close */ 'FileSystem.unwatch', /* id */ this.watchId)
+  }
+
+  public emitDidChange(): void {
+    this.dispatchEvent(new Event('change'))
+  }
+
+  public onDidChange(listener: () => void): () => void {
+    const wrapped = (): void => listener()
+    this.addEventListener('change', wrapped)
+    return () => this.removeEventListener('change', wrapped)
+  }
+
+  public async readPending(): Promise<ReadPendingResult> {
+    return SharedProcess.invoke(/* OutputChannel.readPending */ 'OutputChannel.readPending', this.uri)
+  }
 }
