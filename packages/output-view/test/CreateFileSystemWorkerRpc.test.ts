@@ -17,4 +17,14 @@ test('createFileSystemWorkerRpc - wraps error', async () => {
   })
   RendererWorker.set(mockRpc)
   await expect(CreateFileSystemWorkerRpc.createFileSystemWorkerRpc()).rejects.toBeInstanceOf(VError)
+  const fallbackRpc = MockRpc.create({
+    commandMap: {},
+    invoke: (method: string) => {
+      if (method === 'FileSystem.readFile') {
+        return ''
+      }
+      throw new Error(`unexpected method ${method}`)
+    },
+  })
+  RendererWorker.set(fallbackRpc)
 })
