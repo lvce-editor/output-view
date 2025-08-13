@@ -1,4 +1,3 @@
-import type { OutputEvent } from '../OutputChannelEvents/OutputEvent.ts'
 import type { ReadPendingResult } from '../ReadPendingResult/ReadPendingResult.ts'
 import * as FileSystemWorker from '../FileSystemWorker/FileSystemWorker.ts'
 import * as SharedProcess from '../SharedProcess/SharedProcess.ts'
