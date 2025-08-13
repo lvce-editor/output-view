@@ -1,3 +1,5 @@
+import { initializeFileSystemWorker } from '../InitializeFileSystemWorker/InitializeFileSystemWorker.ts'
+
 export const initialize = async (): Promise<void> => {
-  // TODO create connection to file system worker
+  await initializeFileSystemWorker()
 }
