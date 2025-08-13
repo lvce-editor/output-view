@@ -9,7 +9,7 @@ test('create initializes state with correct default values', () => {
   const y = 200
   const width = 300
   const height = 400
-  create(id, uri, x, y, width, height, '')
+  create(id, uri, x, y, width, height, 0)
   const stateTuple = get(id)
   expect(stateTuple).toBeDefined()
 })
