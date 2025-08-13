@@ -19,9 +19,13 @@ const getSavedCollapsedUris = (savedState: any): readonly string[] => {
 export const loadContent = async (state: OutputState, savedState: any): Promise<OutputState> => {
   const platform = /* Electron */ 4
   const collapsedUris = getSavedCollapsedUris(savedState)
-  const selectedUri = getSelectedItem(platform)
+  const selectedId = getSelectedItem(platform)
   const options = await loadOptions(platform)
-  const { lines, error, code } = await loadLines(selectedUri)
+  const uri = options.find((option) => option.id === selectedId)?.uri
+  if (!uri) {
+    throw new Error('option not found')
+  }
+  const { lines, error, code } = await loadLines(uri)
   const buttons = loadButtons()
   return {
     ...state,
@@ -32,7 +36,7 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
     listItems: lines,
     filteredItems: lines,
     options,
-    selectedOption: selectedUri,
+    selectedOption: selectedId,
     buttons,
   }
 }

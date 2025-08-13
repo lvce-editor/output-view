@@ -6,7 +6,5 @@ test('getSelectedItem - web returns empty', () => {
 })
 
 test('getSelectedItem - native returns default log path', () => {
-  expect(getSelectedItem(0)).toBe('file:///tmp/log-main-process.txt')
+  expect(getSelectedItem(0)).toBe('MainProcess')
 })
-
-
