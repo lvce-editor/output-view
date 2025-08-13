@@ -12,5 +12,3 @@ test('getActionButtonVirtualDom - renders button and mask icon', () => {
   })
   expect(dom[1].type).toBe(VirtualDomElements.Div)
 })
-
-

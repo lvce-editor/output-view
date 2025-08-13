@@ -1,6 +1,6 @@
 import { test, expect } from '@jest/globals'
-import { diff } from '../src/parts/Diff/Diff.ts'
 import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
+import { diff } from '../src/parts/Diff/Diff.ts'
 
 test('diff returns an array (default behavior)', () => {
   const oldState = createDefaultState()

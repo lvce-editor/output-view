@@ -10,5 +10,3 @@ test('filterItems - filters by substring', () => {
   const items = ['alpha', 'beta', 'gamma']
   expect(filterItems(items, 'a')).toEqual(['alpha', 'beta', 'gamma'])
 })
-
-

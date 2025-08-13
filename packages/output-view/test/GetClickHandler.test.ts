@@ -1,7 +1,7 @@
 import { test, expect } from '@jest/globals'
+import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import { getClickHandler } from '../src/parts/GetClickHandler/GetClickHandler.ts'
 import * as InputName from '../src/parts/InputName/InputName.ts'
-import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 
 test('getClickHandler - returns noop for unknown', async () => {
   const handler = getClickHandler('unknown')
