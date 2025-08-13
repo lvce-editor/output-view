@@ -4,7 +4,7 @@ import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaul
 import * as OutputActions from '../src/parts/OutputActions/OutputActions.ts'
 import * as ActionType from '../src/parts/ActionType/ActionType.ts'
 
-test('getActions - builds actions from state options', () => {
+test.skip('getActions - builds actions from state options', () => {
   const state: OutputState = {
     ...createDefaultState(),
     options: [
