@@ -8,13 +8,11 @@ test('renderActions - returns virtual dom from options', () => {
   const state: OutputState = {
     ...base,
     options: [
-      { id: 'a', uri: 'file:///a' },
-      { id: 'b', uri: 'file:///b' },
+      { id: 'a', uri: 'file:///a', label: 'A' },
+      { id: 'b', uri: 'file:///b', label: 'B' },
     ],
   }
   const dom = renderActions(state)
   expect(Array.isArray(dom)).toBe(true)
   expect(dom.length).toBeGreaterThan(0)
 })
-
-
