@@ -16,17 +16,17 @@ export const getActionsVirtualDom = (options: readonly Option[]): readonly Virtu
     {
       id: 'Clear',
       label: 'Clear',
-      icon: 'Clear',
+      icon: 'MaskIconClearAll',
     },
     {
       id: 'Scroll Lock',
       label: 'Scroll Lock',
-      icon: 'ScrollLock',
+      icon: 'MaskIconListFlat',
     },
     {
       id: 'Settings',
       label: 'Settings',
-      icon: 'Settings',
+      icon: 'MaskIconListFlat',
     },
   ]
   const childCount = getChildCount(buttons.length)
