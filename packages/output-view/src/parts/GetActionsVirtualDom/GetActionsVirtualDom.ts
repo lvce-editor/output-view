@@ -13,24 +13,7 @@ const getChildCount = (buttonsLength: number): number => {
   return buttonsLength + filterCount + selectLength
 }
 
-export const getActionsVirtualDom = (options: readonly Option[]): readonly VirtualDomNode[] => {
-  const buttons: readonly ActionButton[] = [
-    {
-      id: 'Clear',
-      label: 'Clear',
-      icon: 'MaskIconClearAll',
-    },
-    {
-      id: 'Scroll Lock',
-      label: 'Scroll Lock',
-      icon: 'MaskIconListFlat',
-    },
-    {
-      id: 'Settings',
-      label: 'Settings',
-      icon: 'MaskIconListFlat',
-    },
-  ]
+export const getActionsVirtualDom = (options: readonly Option[], buttons: readonly ActionButton[]): readonly VirtualDomNode[] => {
   const childCount = getChildCount(buttons.length)
   return [
     {
