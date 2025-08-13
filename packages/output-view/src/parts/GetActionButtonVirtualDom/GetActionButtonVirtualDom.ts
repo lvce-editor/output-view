@@ -8,14 +8,14 @@ export const getActionButtonVirtualDom = (button: ActionButton): readonly Virtua
   return [
     {
       type: VirtualDomElements.Button,
-      classNames: ClassNames.IconButton,
+      className: ClassNames.IconButton,
+      name: id,
       title: label,
       childCount: 1,
-      name: id,
     },
     {
       type: VirtualDomElements.Div,
-      className: mergeClassNames(ClassNames.MaskIcon, `MaskIcon${icon}`),
+      className: mergeClassNames(ClassNames.MaskIcon, icon),
     },
   ]
 }
