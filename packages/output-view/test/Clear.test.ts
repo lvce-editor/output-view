@@ -12,11 +12,12 @@ test('clear - no selected option returns same state', async () => {
 })
 
 test('clear - clears file and reloads', async () => {
+  let wroteContent: string | undefined
   const mockRpc = MockRpc.create({
     commandMap: {},
     invoke: (method: string, uri: string, content?: string) => {
       if (method === 'FileSystem.writeFile') {
-        expect(content).toBe('')
+        wroteContent = content
         return undefined
       }
       if (method === 'FileSystem.readFile') {
@@ -28,6 +29,7 @@ test('clear - clears file and reloads', async () => {
   FileSystemWorker.set(mockRpc)
   const state: OutputState = { ...createDefaultState(), options: [{ id: 'a', uri: 'file:///a', label: 'A' }], selectedOption: 'a' }
   const result = await clear(state)
+  expect(wroteContent).toBe('')
   expect(result.listItems).toEqual([''])
   expect(result.error).toBe('')
   expect(result.errorCode).toBe(0)

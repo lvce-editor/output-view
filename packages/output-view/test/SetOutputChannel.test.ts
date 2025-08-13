@@ -1,6 +1,6 @@
 import { expect, test } from '@jest/globals'
-import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import type { OutputState } from '../src/parts/OutputState/OutputState.ts'
+import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import { setOutputChannel } from '../src/parts/SetOutputChannel/SetOutputChannel.ts'
 
 test('setOutputChannel - returns same state for now', async () => {
