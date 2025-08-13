@@ -3,6 +3,7 @@ import { VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
 import type { Option } from '../src/parts/Option/Option.ts'
 import * as ClassNames from '../src/parts/ClassNames/ClassNames.ts'
 import { getActionsVirtualDom } from '../src/parts/GetActionsVirtualDom/GetActionsVirtualDom.ts'
+import { ActionButton } from '../src/parts/ActionButton/ActionButton.ts'
 
 test('getActionsVirtualDom - wraps select in actions container', () => {
   const options: readonly Option[] = [
@@ -10,7 +11,8 @@ test('getActionsVirtualDom - wraps select in actions container', () => {
     { id: 'two', uri: 'file:///two', label: 'Two' },
   ]
 
-  const result = getActionsVirtualDom(options)
+  const buttons: readonly ActionButton[] = []
+  const result = getActionsVirtualDom(options, buttons)
 
   expect(result[0]).toEqual({
     type: VirtualDomElements.Div,
