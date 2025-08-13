@@ -2,6 +2,7 @@ import type { ActionButton } from '../ActionButton/ActionButton.ts'
 import type { Option } from '../Option/Option.ts'
 
 export interface OutputState {
+  readonly buttons: readonly ActionButton[]
   readonly collapsedUris: readonly string[]
   readonly error: string
   readonly errorCode: number
@@ -11,6 +12,7 @@ export interface OutputState {
   readonly inputSource: number
   readonly itemHeight: number
   readonly listItems: readonly string[]
+  readonly filteredItems: readonly string[]
   readonly maxLineY: number
   readonly message: string
   readonly minLineY: number
@@ -23,5 +25,4 @@ export interface OutputState {
   readonly workspaceUri: string
   readonly x: number
   readonly y: number
-  readonly buttons: readonly ActionButton[]
 }
