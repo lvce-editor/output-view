@@ -20,3 +20,7 @@ export const openLogFile = (): string => {
 export const logFileNotFound = (): string => {
   return I18NString.i18nString(UiStrings.LogFileNotFound)
 }
+
+export const filter = (): string => {
+  return I18NString.i18nString(UiStrings.Filter)
+}
