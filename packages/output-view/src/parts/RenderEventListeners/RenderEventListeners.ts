@@ -9,6 +9,10 @@ export const renderEventListeners = (): readonly DomEventListener[] => {
       params: ['handleBlur'],
     },
     {
+      name: DomEventListenerFunctions.HandleButtonClick,
+      params: ['handleButtonClick', 'event.target.name'],
+    },
+    {
       name: DomEventListenerFunctions.HandleSelect,
       params: ['handleSelect', 'event.target.value'],
     },
