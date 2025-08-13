@@ -9,3 +9,4 @@ test('handleFilterInput - updates filter and filteredItems', async () => {
   expect(result.filterValue).toBe('a')
   expect(result.filteredItems).toEqual(['apple', 'banana', 'carrot'])
 })
+

@@ -15,3 +15,4 @@ test('closeFindWidget - returns same state for now', async () => {
   const result = await closeFindWidget(state)
   expect(result).toEqual(state)
 })
+
