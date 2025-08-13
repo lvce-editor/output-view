@@ -22,7 +22,11 @@ test('handleSelect - loads lines and updates state', async () => {
     },
   })
   RendererWorker.set(mockRpc)
-  const state: OutputState = { ...createDefaultState(), options: [{ id: 'a', uri: 'file:///a', label: 'A' }] }
+  const state: OutputState = {
+    ...createDefaultState(),
+    options: [{ id: 'a', uri: 'file:///a', label: 'A' }],
+    selectedOption: 'a',
+  }
   const result = await handleSelect(state, 'a')
   expect(result.listItems).toEqual(['l1', 'l2'])
   expect(result.error).toBe('')
