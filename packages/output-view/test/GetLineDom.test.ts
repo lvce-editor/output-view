@@ -17,5 +17,3 @@ test('getLineDom - returns parent div and text node', () => {
     childCount: 0,
   })
 })
-
-

@@ -17,5 +17,3 @@ test('isFileNotFoundError - false when message different', () => {
   const err = new FakeError('Permission denied')
   expect(isFileNotFoundError(err)).toBe(false)
 })
-
-

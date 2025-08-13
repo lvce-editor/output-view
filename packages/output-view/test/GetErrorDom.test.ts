@@ -27,5 +27,3 @@ test('getErrorDom - generic error wraps text', () => {
   })
   expect(dom[1]).toEqual({ type: 12, text: 'oops', childCount: 0 })
 })
-
-

@@ -8,5 +8,3 @@ test('OutputStrings - returns localized strings', () => {
   expect(OutputStrings.openLogFile()).toBe('open output log file')
   expect(OutputStrings.logFileNotFound()).toBe('The log file was not found.')
 })
-
-
