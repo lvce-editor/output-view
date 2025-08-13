@@ -11,7 +11,7 @@ export const loadOptions = async (platform: number): Promise<readonly Option[]> 
     {
       id: InputName.SharedProcess,
       label: 'Shared Process',
-      uri: 'File:///tmp/log-shared-process.txt',
+      uri: 'file:///tmp/log-shared-process.txt',
     },
   ]
 }
