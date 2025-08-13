@@ -17,7 +17,7 @@ const getSavedCollapsedUris = (savedState: any): readonly string[] => {
 }
 
 export const loadContent = async (state: OutputState, savedState: any): Promise<OutputState> => {
-  const platform = /* Electron */ 4
+  const { platform } = state
   const collapsedUris = getSavedCollapsedUris(savedState)
   const selectedId = getSelectedItem(platform)
   const options = await loadOptions(platform)

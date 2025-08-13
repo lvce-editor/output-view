@@ -1,7 +1,11 @@
 import type { Option } from '../Option/Option.ts'
 import * as InputName from '../InputName/InputName.ts'
+import * as PlatformType from '../PlatformType/PlatformType.ts'
 
 export const loadOptions = async (platform: number): Promise<readonly Option[]> => {
+  if (platform === PlatformType.Web) {
+    return []
+  }
   return [
     {
       id: InputName.MainProcess,
