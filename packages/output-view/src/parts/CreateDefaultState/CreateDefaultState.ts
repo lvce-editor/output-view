@@ -24,6 +24,7 @@ export const createDefaultState = (): OutputState => {
     uri: '',
     error: '',
     errorCode: 0,
+    buttons: [],
   }
   return state
 }

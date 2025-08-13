@@ -25,6 +25,7 @@ export const create = (id: number, uri: string, x: number, y: number, width: num
     options: [],
     error: '',
     errorCode: 0,
+    buttons: [],
   }
   OutputStates.set(id, state, state)
 }
