@@ -1,6 +1,7 @@
 import type { OutputState } from '../OutputState/OutputState.ts'
 import { getSelectedItem } from '../GetSelectedItem/GetSelectedItem.ts'
 import * as InputSource from '../InputSource/InputSource.ts'
+import { loadButtons } from '../LoadButtons/LoadButtons.ts'
 import { loadLines } from '../LoadLines/LoadLines.ts'
 import { loadOptions } from '../LoadOptions/LoadOptions.ts'
 
@@ -21,6 +22,7 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
   const selectedUri = getSelectedItem(platform)
   const options = await loadOptions(platform)
   const { lines, error, code } = await loadLines(selectedUri)
+  const buttons = loadButtons()
   return {
     ...state,
     collapsedUris,
@@ -30,5 +32,6 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
     listItems: lines,
     options,
     selectedOption: selectedUri,
+    buttons,
   }
 }
