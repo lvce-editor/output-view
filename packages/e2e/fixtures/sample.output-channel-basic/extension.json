@@ -1,5 +1,5 @@
 {
   "browser": "main.js",
   "main": "main.js",
-  "activation": ["onOutput:xyz"]
+  "activation": ["onOutput"]
 }
