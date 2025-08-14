@@ -1,6 +1,6 @@
 import type { OutputState } from '../OutputState/OutputState.ts'
-import { loadLines } from '../LoadLines/LoadLines.ts'
 import { filterItems } from '../FilterItems/FilterItems.ts'
+import { loadLines } from '../LoadLines/LoadLines.ts'
 
 export const selectChannel = async (state: OutputState, id: string): Promise<OutputState> => {
   const { options, filterValue } = state
