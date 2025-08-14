@@ -3,7 +3,6 @@ import { getExtensionOptions } from '../GetExtensionOptions/GetExtensionOptions.
 import * as InputName from '../InputName/InputName.ts'
 import * as PlatformType from '../PlatformType/PlatformType.ts'
 
-// TODO load options from extensions
 export const loadOptions = async (platform: number): Promise<readonly Option[]> => {
   const extensionOptions = await getExtensionOptions()
   if (platform === PlatformType.Web) {
