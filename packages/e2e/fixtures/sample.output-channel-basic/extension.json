@@ -1,10 +1,5 @@
 {
   "browser": "main.js",
   "main": "main.js",
-  "activation": ["onFileSystem:xyz"],
-  "fileSystems": [
-    {
-      "scheme": "xyz"
-    }
-  ]
+  "activation": ["onOutput:xyz"]
 }
