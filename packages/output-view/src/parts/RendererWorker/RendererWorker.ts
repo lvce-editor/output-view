@@ -22,4 +22,5 @@ export const {
   uninstallExtension,
   writeClipBoardImage,
   writeClipBoardText,
+  activateByEvent,
 } = RendererWorker
