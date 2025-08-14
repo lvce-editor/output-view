@@ -4,7 +4,7 @@ import * as ExtensionHostWorker from '../ExtensionHostWorker/ExtensionHostWorker
 export const getExtensionOptions = async (): Promise<readonly Option[]> => {
   try {
     // @ts-ignore
-    const channels = await ExtensionHostWorker.invoke('ExtensionHost.getEnabledProviders')
+    const channels = await ExtensionHostWorker.invoke('Output.getEnabledProviders')
     return channels
   } catch {
     return []
