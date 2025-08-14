@@ -1,5 +1,6 @@
 const outputChannelProvider = {
   id: 'xyz',
+  label: 'Xyz',
 }
 
 export const activate = () => {
