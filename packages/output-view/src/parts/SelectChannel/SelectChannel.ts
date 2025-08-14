@@ -11,8 +11,9 @@ export const selectChannel = async (state: OutputState, id: string): Promise<Out
   const { lines, error, code } = await loadLines(matchingOption.uri)
   return {
     ...state,
-    listItems: lines,
     error,
     errorCode: code,
+    listItems: lines,
+    selectedOption: id,
   }
 }
