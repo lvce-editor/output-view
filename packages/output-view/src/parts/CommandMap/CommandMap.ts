@@ -20,6 +20,7 @@ import { renderActions } from '../RenderActions/RenderActions.ts'
 import { renderEventListeners } from '../RenderEventListeners/RenderEventListeners.ts'
 import * as Resize from '../Resize/Resize.ts'
 import * as SaveState from '../SaveState/SaveState.ts'
+import { selectChannel } from '../SelectChannel/SelectChannel.ts'
 import { setOutputChannel } from '../SetOutputChannel/SetOutputChannel.ts'
 import * as WatchCallback from '../WatchCallbacks/WatchCallbacks.ts'
 
@@ -35,6 +36,7 @@ export const commandMap = {
   'Output.handleButtonClick': WrapCommand.wrapCommand(handleButtonClick),
   'Output.handleData': WrapCommand.wrapCommand(handleData),
   'Output.handleError': WrapCommand.wrapCommand(handleError),
+  'Output.selectChannel': WrapCommand.wrapCommand(selectChannel),
   'Output.handleFilterInput': WrapCommand.wrapCommand(handleFilterInput),
   'Output.handleSelect': WrapCommand.wrapCommand(handleSelect),
   'Output.initialize': Initialize.initialize,
