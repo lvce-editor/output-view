@@ -5,6 +5,7 @@ import * as InputSource from '../InputSource/InputSource.ts'
 import { loadButtons } from '../LoadButtons/LoadButtons.ts'
 import { loadLines } from '../LoadLines/LoadLines.ts'
 import { loadOptions } from '../LoadOptions/LoadOptions.ts'
+import { setupChangeListener } from '../SetupChangeListener/SetupChangeListener.ts'
 
 const isString = (value: unknown): boolean => {
   return typeof value === 'string'
@@ -32,6 +33,7 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
   }
   const { uri } = option
   const { lines, error, code } = await loadLines(uri)
+  await setupChangeListener(uri)
   const buttons = loadButtons()
   return {
     ...state,
