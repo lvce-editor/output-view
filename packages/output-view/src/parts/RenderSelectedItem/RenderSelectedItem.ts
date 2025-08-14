@@ -5,5 +5,5 @@ import * as InputName from '../InputName/InputName.ts'
 export const renderSelectedItem = (oldState: OutputState, newState: OutputState): ViewletCommand => {
   const value = newState.selectedOption
   const name = InputName.Output
-  return ['Viewlet.setValueByName', newState.uid, name, value]
+  return ['Viewlet.setValueByName', newState.parentId, name, value]
 }
