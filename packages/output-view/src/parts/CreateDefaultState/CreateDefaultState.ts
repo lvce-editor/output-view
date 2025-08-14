@@ -27,6 +27,7 @@ export const createDefaultState = (): OutputState => {
     buttons: [],
     filteredItems: [],
     platform: 0,
+    parentId: 0,
   }
   return state
 }
