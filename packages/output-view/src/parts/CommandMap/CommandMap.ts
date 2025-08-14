@@ -21,16 +21,22 @@ import { renderEventListeners } from '../RenderEventListeners/RenderEventListene
 import * as Resize from '../Resize/Resize.ts'
 import * as SaveState from '../SaveState/SaveState.ts'
 import { setOutputChannel } from '../SetOutputChannel/SetOutputChannel.ts'
+import * as WatchCallback from '../WatchCallbacks/WatchCallbacks.ts'
 
 export const commandMap = {
   'Output.closeFindWidget': WrapCommand.wrapCommand(closeFindWidget),
   'Output.create': Create.create,
   'Output.diff2': Diff2.diff2,
+  'Output.executeWatchCallback': WatchCallback.executeWatchCallBack,
   'Output.focusIndex': WrapCommand.wrapCommand(FocusIndex.focusIndex),
+  'Output.getActions': getActions,
   'Output.getCommandIds': GetCommandIds.getCommandIds,
   'Output.getKeyBindings': GetKeyBindings.getKeyBindings,
+  'Output.handleButtonClick': WrapCommand.wrapCommand(handleButtonClick),
   'Output.handleData': WrapCommand.wrapCommand(handleData),
   'Output.handleError': WrapCommand.wrapCommand(handleError),
+  'Output.handleFilterInput': WrapCommand.wrapCommand(handleFilterInput),
+  'Output.handleSelect': WrapCommand.wrapCommand(handleSelect),
   'Output.initialize': Initialize.initialize,
   'Output.loadContent2': WrapCommand.wrapCommand(loadContent),
   'Output.openFindWidget': WrapCommand.wrapCommand(openFindWidget),
@@ -40,9 +46,5 @@ export const commandMap = {
   'Output.resize': Resize.resize,
   'Output.saveState': SaveState.saveState,
   'Output.setOutputChannel': WrapCommand.wrapCommand(setOutputChannel),
-  'Output.getActions': getActions,
   'Output.terminate': ViewletRegistry.terminate,
-  'Output.handleSelect': WrapCommand.wrapCommand(handleSelect),
-  'Output.handleFilterInput': WrapCommand.wrapCommand(handleFilterInput),
-  'Output.handleButtonClick': WrapCommand.wrapCommand(handleButtonClick),
 }

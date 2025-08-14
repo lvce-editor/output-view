@@ -8,4 +8,3 @@ test('handleButtonClick - unknown name is noop', async () => {
   const result = await handleButtonClick(state, 'unknown')
   expect(result).toBe(state)
 })
-

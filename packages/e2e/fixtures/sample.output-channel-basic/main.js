@@ -1,10 +1,8 @@
-const outputChannel = {
+const outputChannelProvider = {
   id: 'xyz',
-  readFile() {
-    return 'test content'
-  },
 }
 
 export const activate = () => {
-  vscode.registerOutputChannel(outputChannel)
+  const channel = vscode.registerOutputChannel(outputChannelProvider)
+  channel.append('test content')
 }
