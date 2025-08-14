@@ -2,9 +2,10 @@ import type { OutputState } from '../OutputState/OutputState.ts'
 import * as InputSource from '../InputSource/InputSource.ts'
 import * as OutputStates from '../OutputStates/OutputStates.ts'
 
-export const create = (id: number, uri: string, x: number, y: number, width: number, height: number, platform: number): void => {
+export const create = (id: number, uri: string, x: number, y: number, width: number, height: number, platform: number, parentId: number): void => {
   const state: OutputState = {
     uid: id,
+    parentId,
     uri,
     focusedIndex: -2,
     message: '',
