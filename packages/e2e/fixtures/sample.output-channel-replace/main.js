@@ -9,7 +9,7 @@ export const activate = async () => {
   vscode.registerCommand({
     id: 'xyz.sampleCommand',
     async execute() {
-      await channel.append('updated content')
+      await channel.replace('updated content')
     },
   })
 }
