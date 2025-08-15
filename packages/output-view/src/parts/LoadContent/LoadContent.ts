@@ -1,5 +1,6 @@
 import type { Option } from '../Option/Option.ts'
 import type { OutputState } from '../OutputState/OutputState.ts'
+import { createWatchId } from '../CreateWatchId/CreateWatchId.ts'
 import { getSelectedItem } from '../GetSelectedItem/GetSelectedItem.ts'
 import * as InputSource from '../InputSource/InputSource.ts'
 import { loadButtons } from '../LoadButtons/LoadButtons.ts'
@@ -33,7 +34,8 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
   }
   const { uri } = option
   const { lines, error, code } = await loadLines(uri)
-  await setupChangeListener(uri)
+  const watchId = createWatchId()
+  await setupChangeListener(watchId, uri)
   const buttons = loadButtons()
   return {
     ...state,
@@ -46,5 +48,6 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
     options,
     selectedOption: selectedId,
     buttons,
+    watchId,
   }
 }
