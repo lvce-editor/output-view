@@ -1,6 +1,6 @@
 const watchCallbacks = Object.create(null)
 
-export const registerWatchCallback = (id: number, fn: (watchId: number) => void): void => {
+export const registerWatchCallback = (id: number, fn: (watchId: number) => Promise<void>): void => {
   watchCallbacks[id] = fn
 }
 
