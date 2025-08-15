@@ -3,5 +3,5 @@ import type { ViewletCommand } from '../ViewletCommand/ViewletCommand.ts'
 import * as InputName from '../InputName/InputName.ts'
 
 export const renderFilterValue = (oldState: OutputState, newState: OutputState): ViewletCommand => {
-  return ['Viewlet.setValueByName', InputName.Filter, newState.filterValue]
+  return ['Viewlet.setValueByName', newState.parentId, InputName.Filter, newState.filterValue]
 }
