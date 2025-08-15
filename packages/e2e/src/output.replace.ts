@@ -9,7 +9,7 @@ export const test: Test = async ({ QuickPick, Command, FileSystem, Panel, Extens
   // arrange
   const tmpDir = await FileSystem.getTmpDir()
   await FileSystem.writeFile(`${tmpDir}/test.txt`, 'div')
-  const extensionUri = import.meta.resolve('../fixtures/sample.output-channel-live-update').toString()
+  const extensionUri = import.meta.resolve('../fixtures/sample.output-channel-replace').toString()
   await Extension.addWebExtension(extensionUri)
   await Panel.open('Output')
   await Command.execute('Panel.selectIndex', 1)
@@ -29,5 +29,5 @@ export const test: Test = async ({ QuickPick, Command, FileSystem, Panel, Extens
   await QuickPick.selectItem('Sample Command')
 
   // assert
-  await expect(text).toHaveText('test contentupdated content')
+  await expect(text).toHaveText('updated content')
 }
