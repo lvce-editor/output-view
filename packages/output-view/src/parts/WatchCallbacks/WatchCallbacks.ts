@@ -5,7 +5,7 @@ export const registerWatchCallback = (id: number, fn: (watchId: number) => void)
 }
 
 export const executeWatchCallBack = (id: number): void => {
-  watchCallbacks[id]()
+  watchCallbacks[id](id)
 }
 
 export const unregisterWatchCallback = (id: number): void => {
