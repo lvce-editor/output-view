@@ -1,6 +1,7 @@
 import type { VirtualDomNode } from '@lvce-editor/virtual-dom-worker'
 import { VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
 import * as DomEventListenerFunctions from '../DomEventListenerFunctions/DomEventListenerFunctions.ts'
+import * as InputName from '../InputName/InputName.ts'
 
 export const getFilterVirtualDom = (): readonly VirtualDomNode[] => {
   const placeholder = 'Filter'
@@ -16,6 +17,7 @@ export const getFilterVirtualDom = (): readonly VirtualDomNode[] => {
       childCount: 0,
       placeholder,
       onInput: DomEventListenerFunctions.HandleFilterInput,
+      name: InputName.Filter,
     },
   ]
 }
