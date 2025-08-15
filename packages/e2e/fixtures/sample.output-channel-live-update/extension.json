@@ -1,5 +1,11 @@
 {
   "browser": "main.js",
   "main": "main.js",
-  "activation": ["onOutput"]
+  "activation": ["onOutput", "onCommand:xyz.sampleCommand"],
+  "commands": [
+    {
+      "id": "xyz.sampleCommand",
+      "label": "Sample Command"
+    }
+  ]
 }

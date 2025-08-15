@@ -22,4 +22,10 @@ export const test: Test = async ({ Command, FileSystem, Panel, Extension, Locato
   await expect(select).toHaveValue('xyz')
   const text = Locator('.OutputContent')
   await expect(text).toHaveText('test content')
+
+  // act
+  await Command.execute('xyz.sampleCommand', 'new content')
+
+  // assert
+  await expect(text).toHaveText('test content\nnew content')
 }
