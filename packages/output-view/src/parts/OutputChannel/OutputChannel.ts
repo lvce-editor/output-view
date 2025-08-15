@@ -14,7 +14,7 @@ export class OutputChannel extends EventTarget {
   }
 
   public async open(): Promise<void> {
-    WatchCallbacks.registerWatchCallback(this.watchId, (): void => {
+    WatchCallbacks.registerWatchCallback(this.watchId, async (): Promise<void> => {
       // TODO
       // console.log('channel changed')
     })
