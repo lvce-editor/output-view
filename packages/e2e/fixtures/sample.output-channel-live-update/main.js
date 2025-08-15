@@ -3,13 +3,13 @@ const outputChannelProvider = {
   label: 'Xyz',
 }
 
-export const activate = () => {
+export const activate = async () => {
   const channel = vscode.registerOutputChannel(outputChannelProvider)
-  channel.append('test content')
+  await channel.append('test content')
   vscode.registerCommand({
     id: 'xyz.sampleCommand',
-    execute() {
-      console.log('executeing')
+    async execute() {
+      await channel.append('updated content')
     },
   })
 }
