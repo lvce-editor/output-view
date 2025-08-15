@@ -1,4 +1,5 @@
 import * as ViewletRegistry from '@lvce-editor/viewlet-registry'
+import * as Clear from '../Clear/Clear.ts'
 import { closeFindWidget } from '../CloseFindWidget/CloseFindWidget.ts'
 import * as Create from '../Create/Create.ts'
 import * as Diff2 from '../Diff2/Diff2.ts'
@@ -38,6 +39,7 @@ export const commandMap = {
   'Output.handleData': WrapCommand.wrapCommand(handleData),
   'Output.handleError': WrapCommand.wrapCommand(handleError),
   'Output.selectChannel': WrapCommand.wrapCommand(selectChannel),
+  'Output.clear': WrapCommand.wrapCommand(Clear.clear),
   'Output.handleFilterInput': WrapCommand.wrapCommand(handleFilterInput),
   'Output.handleSelect': WrapCommand.wrapCommand(handleSelect),
   'Output.initialize': Initialize.initialize,
