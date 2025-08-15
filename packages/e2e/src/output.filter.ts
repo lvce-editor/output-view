@@ -5,7 +5,7 @@ export const name = 'output.filter'
 export const skip = 1
 
 // TODO add page object
-export const test: Test = async ({ QuickPick, Command, FileSystem, Panel, Extension, Locator, expect }) => {
+export const test: Test = async ({ Command, FileSystem, Panel, Extension, Locator, expect }) => {
   // arrange
   const tmpDir = await FileSystem.getTmpDir()
   await FileSystem.writeFile(`${tmpDir}/test.txt`, 'div')
@@ -21,13 +21,9 @@ export const test: Test = async ({ QuickPick, Command, FileSystem, Panel, Extens
   const select = Locator('[name="output"]')
   await expect(select).toHaveValue('xyz')
   const text = Locator('.OutputContent')
-  await expect(text).toHaveText('test content')
+  await expect(text).toHaveText('test content atest content b')
 
   // act
-  await QuickPick.open()
-  await QuickPick.setValue('>Sample Command')
-  await QuickPick.selectItem('Sample Command')
-
-  // assert
-  await expect(text).toHaveText('test contentupdated content')
+  await Command.execute('Output.handleFiterInput', 'content b')
+  await expect(text).toHaveText('test content b')
 }
