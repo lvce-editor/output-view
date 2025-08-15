@@ -18,6 +18,8 @@ export const test: Test = async ({ Command, FileSystem, Panel, Extension, Locato
   await Command.execute('Output.selectChannel', 'xyz')
 
   // assert
-  const text = Locator('.Output .Message')
-  await expect(text).toHaveText('abc')
+  const select = Locator('[name="output"]')
+  await expect(select).toHaveValue('xyz')
+  const text = Locator('.OutputContent')
+  await expect(text).toHaveText('test content')
 }
