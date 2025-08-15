@@ -24,6 +24,6 @@ export const test: Test = async ({ Command, FileSystem, Panel, Extension, Locato
   await expect(text).toHaveText('test content atest content b')
 
   // act
-  await Command.execute('Output.handleFiterInput', 'content b')
+  await Command.execute('Output.handleFilterInput', 'content b', /* Script */ 2)
   await expect(text).toHaveText('test content b')
 }
