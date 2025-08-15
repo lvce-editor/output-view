@@ -1,4 +1,4 @@
-import { FileSystemWorker } from '@lvce-editor/rpc-registry'
+import { FileSystemWorker, RpcId } from '@lvce-editor/rpc-registry'
 import * as OutputStates from '../OutputStates/OutputStates.ts'
 import * as WatchCallbacks from '../WatchCallbacks/WatchCallbacks.ts'
 
@@ -13,10 +13,9 @@ const handleChange = (watchId: number): void => {
   }
 }
 
-export const setupChangeListener = async (uri: string): Promise<void> => {
+export const setupChangeListener = async (watchId: number, uri: string): Promise<void> => {
   try {
-    const watchId = Math.random()
-    const rpcId = 7001
+    const rpcId = RpcId.OutputWorker
     WatchCallbacks.registerWatchCallback(watchId, handleChange)
     // @ts-ignore
     await FileSystemWorker.invoke(/* OutputChannel.open */ 'FileSystem.watchFile', watchId, /* path */ uri, rpcId)
