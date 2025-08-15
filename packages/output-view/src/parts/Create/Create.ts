@@ -31,6 +31,7 @@ export const create = (id: number, uri: string, x: number, y: number, width: num
     buttons: [],
     filteredItems: [],
     platform,
+    watchId: 0,
   }
   OutputStates.set(id, state, state)
 }

@@ -25,6 +25,7 @@ export interface OutputState {
   readonly uri: string
   readonly width: number
   readonly workspaceUri: string
+  readonly watchId: number
   readonly x: number
   readonly y: number
 }
