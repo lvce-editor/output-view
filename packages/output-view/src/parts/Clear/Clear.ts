@@ -4,6 +4,7 @@ import { loadLines } from '../LoadLines/LoadLines.ts'
 
 export const clear = async (state: OutputState): Promise<OutputState> => {
   const { selectedOption, options } = state
+  // TODO make uri a property of state to make the code simpler
   const option = options.find((option) => option.id === selectedOption)
   if (!option) {
     return state
