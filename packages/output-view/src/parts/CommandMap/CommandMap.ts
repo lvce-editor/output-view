@@ -15,6 +15,7 @@ import { loadContent } from '../LoadContent/LoadContent.ts'
 import { openFindWidget } from '../OpenFindWidget/OpenFindWidget.ts'
 import { getActions } from '../OutputActions/OutputActions.ts'
 import * as WrapCommand from '../OutputStates/OutputStates.ts'
+import { refresh } from '../Refresh/Refresh.ts'
 import * as Render2 from '../Render2/Render2.ts'
 import { renderActions } from '../RenderActions/RenderActions.ts'
 import { renderEventListeners } from '../RenderEventListeners/RenderEventListeners.ts'
@@ -49,4 +50,5 @@ export const commandMap = {
   'Output.saveState': SaveState.saveState,
   'Output.setOutputChannel': WrapCommand.wrapCommand(setOutputChannel),
   'Output.terminate': ViewletRegistry.terminate,
+  'Output.refresh': WrapCommand.wrapCommand(refresh),
 }
