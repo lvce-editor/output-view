@@ -1,11 +1,13 @@
 import type { Option } from '../Option/Option.ts'
 import type { OutputState } from '../OutputState/OutputState.ts'
 import { createWatchId } from '../CreateWatchId/CreateWatchId.ts'
+import { filterItems } from '../FilterItems/FilterItems.ts'
 import { getSelectedItem } from '../GetSelectedItem/GetSelectedItem.ts'
 import * as InputSource from '../InputSource/InputSource.ts'
 import { loadButtons } from '../LoadButtons/LoadButtons.ts'
 import { loadLines } from '../LoadLines/LoadLines.ts'
 import { loadOptions } from '../LoadOptions/LoadOptions.ts'
+import { restoreState } from '../RestoreState/RestoreState.ts'
 import { setupChangeListener } from '../SetupChangeListener/SetupChangeListener.ts'
 
 const isString = (value: unknown): boolean => {
@@ -26,7 +28,8 @@ const getMatchingOpen = (options: readonly Option[], id: string): Option | undef
 export const loadContent = async (state: OutputState, savedState: any): Promise<OutputState> => {
   const { platform, watchId } = state
   const collapsedUris = getSavedCollapsedUris(savedState)
-  const selectedId = getSelectedItem(platform)
+  const { selectedOption, filterValue } = restoreState(savedState)
+  const selectedId = getSelectedItem(selectedOption, platform)
   const options = await loadOptions(platform)
   const option = getMatchingOpen(options, selectedId)
   if (!option) {
@@ -34,20 +37,22 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
   }
   const { uri } = option
   const { lines, error, code } = await loadLines(uri)
+  const filteredItems = filterItems(lines, filterValue)
   const newWatchId = createWatchId()
   await setupChangeListener(watchId, newWatchId, uri)
   const buttons = loadButtons()
   return {
     ...state,
+    buttons,
     collapsedUris,
     error,
     errorCode: code,
+    filteredItems,
+    filterValue,
     inputSource: InputSource.Script,
     listItems: lines,
-    filteredItems: lines,
     options,
     selectedOption: selectedId,
-    buttons,
     watchId: newWatchId,
   }
 }
