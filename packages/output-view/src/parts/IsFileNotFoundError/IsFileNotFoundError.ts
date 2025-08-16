@@ -1,3 +1,3 @@
 export const isFileNotFoundError = (error: any): boolean => {
-  return error.message.includes('File not found')
+  return error?.message?.includes('File not found') ?? false
 }

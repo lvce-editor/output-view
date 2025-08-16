@@ -17,3 +17,16 @@ test('isFileNotFoundError - false when message different', () => {
   const err = new FakeError('Permission denied')
   expect(isFileNotFoundError(err)).toBe(false)
 })
+
+test('isFileNotFoundError - false when error has no message property', () => {
+  const err = {}
+  expect(isFileNotFoundError(err)).toBe(false)
+})
+
+test('isFileNotFoundError - false when error is null', () => {
+  expect(isFileNotFoundError(null)).toBe(false)
+})
+
+test('isFileNotFoundError - false when error is undefined', () => {
+  expect(isFileNotFoundError(undefined)).toBe(false)
+})
