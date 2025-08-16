@@ -17,6 +17,7 @@ test('saveState should extract viewMode, filterValue, and collapsedUris from Out
   expect(result).toEqual({
     filterValue: 'test filter',
     collapsedUris: ['file:///test1.ts', 'file:///test2.ts'],
+    selectedOption: '',
   })
 })
 
@@ -32,6 +33,7 @@ test('saveState should handle empty state values', () => {
   expect(result).toEqual({
     filterValue: '',
     collapsedUris: [],
+    selectedOption: '',
   })
 })
 
@@ -60,6 +62,7 @@ test('saveState should preserve all other state properties but only return the r
   expect(result).toEqual({
     filterValue: 'complex filter',
     collapsedUris: ['file:///collapsed1.ts', 'file:///collapsed2.ts', 'file:///collapsed3.ts'],
+    selectedOption: '',
   })
 
   // Original state should remain unchanged
