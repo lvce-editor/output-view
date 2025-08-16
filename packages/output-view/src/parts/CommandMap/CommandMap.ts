@@ -7,6 +7,7 @@ import * as FocusIndex from '../FocusIndex/FocusIndex.ts'
 import * as GetCommandIds from '../GetCommandIds/GetCommandIds.ts'
 import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
 import { handleButtonClick } from '../HandleButtonClick/HandleButtonClick.ts'
+import { handleContextMenu } from '../HandleContextMenu/HandleContextMenu.ts'
 import { handleData } from '../HandleData/HandleData.ts'
 import { handleError } from '../HandleError/HandleError.ts'
 import { handleFilterInput } from '../HandleFilterInput/HandleFilterInput.ts'
@@ -28,6 +29,7 @@ import * as WatchCallback from '../WatchCallbacks/WatchCallbacks.ts'
 
 export const commandMap = {
   'Output.closeFindWidget': WrapCommand.wrapCommand(closeFindWidget),
+  'Output.handleContextMenu': WrapCommand.wrapCommand(handleContextMenu),
   'Output.create': Create.create,
   'Output.diff2': Diff2.diff2,
   'Output.executeWatchCallback': WatchCallback.executeWatchCallBack,
