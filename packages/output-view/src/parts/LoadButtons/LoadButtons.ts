@@ -16,7 +16,7 @@ export const loadButtons = (): readonly ActionButton[] => {
     {
       id: InputName.Settings,
       label: 'Settings',
-      icon: 'MaskIconListFlat',
+      icon: 'MaskIconSettingsGear',
     },
   ]
 }
