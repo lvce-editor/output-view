@@ -7,7 +7,7 @@ test('renderSelectedItem returns correct ViewletCommand when selectedOption chan
   const newState = {
     ...oldState,
     selectedOption: 'test-option',
-    parentId: 123
+    parentId: 123,
   }
 
   const result = renderSelectedItem(oldState, newState)
@@ -20,7 +20,7 @@ test('renderSelectedItem returns correct ViewletCommand with different selectedO
   const newState = {
     ...oldState,
     selectedOption: 'another-option',
-    parentId: 456
+    parentId: 456,
   }
 
   const result = renderSelectedItem(oldState, newState)
@@ -33,7 +33,7 @@ test('renderSelectedItem returns correct ViewletCommand with empty selectedOptio
   const newState = {
     ...oldState,
     selectedOption: '',
-    parentId: 789
+    parentId: 789,
   }
 
   const result = renderSelectedItem(oldState, newState)
@@ -46,7 +46,7 @@ test('renderSelectedItem returns correct ViewletCommand with numeric selectedOpt
   const newState = {
     ...oldState,
     selectedOption: '123',
-    parentId: 999
+    parentId: 999,
   }
 
   const result = renderSelectedItem(oldState, newState)
