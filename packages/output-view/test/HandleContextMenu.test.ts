@@ -7,9 +7,9 @@ test('handleContextMenu returns the same state for now', async () => {
   const x = 100
   const y = 200
   const button = 0
-  
+
   const result = await handleContextMenu(state, x, y, button)
-  
+
   expect(result).toBe(state)
 })
 
@@ -18,9 +18,9 @@ test('handleContextMenu handles different coordinates', async () => {
   const x = 500
   const y = 300
   const button = 1
-  
+
   const result = await handleContextMenu(state, x, y, button)
-  
+
   expect(result).toBe(state)
 })
 
@@ -29,9 +29,9 @@ test('handleContextMenu handles different button values', async () => {
   const x = 0
   const y = 0
   const button = 2
-  
+
   const result = await handleContextMenu(state, x, y, button)
-  
+
   expect(result).toBe(state)
 })
 
@@ -40,8 +40,8 @@ test('handleContextMenu handles negative coordinates', async () => {
   const x = -100
   const y = -200
   const button = 0
-  
+
   const result = await handleContextMenu(state, x, y, button)
-  
+
   expect(result).toBe(state)
 })
