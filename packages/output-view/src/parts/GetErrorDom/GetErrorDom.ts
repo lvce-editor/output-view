@@ -1,5 +1,6 @@
 import type { VirtualDomNode } from '@lvce-editor/virtual-dom-worker'
 import { text, VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
+import * as ClassNames from '../ClassNames/ClassNames.ts'
 import * as ErrorCode from '../ErrorCode/ErrorCode.ts'
 import { getLogFileNotFoundDom } from '../GetLogFileNotFoundDom/GetLogFileNotFoundDom.ts'
 
@@ -13,7 +14,7 @@ export const getErrorDom = (errorCode: number, error: string): readonly VirtualD
   return [
     {
       type: VirtualDomElements.Div,
-      className: 'Error',
+      className: ClassNames.Error,
       tabIndex: 0,
       childCount: 1,
     },
