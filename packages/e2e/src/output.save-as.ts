@@ -5,7 +5,7 @@ export const name = 'output.save-as'
 export const skip = 1
 
 // TODO add page object
-export const test: Test = async ({ QuickPick, Command, FileSystem, Panel, Extension, Locator, expect }) => {
+export const test: Test = async ({ Command, FileSystem, Panel, Extension, Locator, expect, Dialog }) => {
   // arrange
   const tmpDir = await FileSystem.getTmpDir()
   await FileSystem.writeFile(`${tmpDir}/test.txt`, 'div')
@@ -24,10 +24,15 @@ export const test: Test = async ({ QuickPick, Command, FileSystem, Panel, Extens
   await expect(text).toHaveText('test content')
 
   // act
-  await QuickPick.open()
-  await QuickPick.setValue('>Sample Command')
-  await QuickPick.selectItem('Sample Command')
+  await Dialog.mockSaveFilePicker(() => {
+    console.log('mock called')
+    return 'memfs://output.txt'
+  })
+  await Command.execute('Output.saveAs')
 
-  // assert
-  await expect(text).toHaveText('updated content')
+  // TODO add assertion for file system
+  const content = await FileSystem.readFile('memfs://output.txt')
+  if (content !== 'test content') {
+    throw new Error(`content did not match`)
+  }
 }
