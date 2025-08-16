@@ -24,7 +24,7 @@ const getMatchingOpen = (options: readonly Option[], id: string): Option | undef
 }
 
 export const loadContent = async (state: OutputState, savedState: any): Promise<OutputState> => {
-  const { platform } = state
+  const { platform, watchId } = state
   const collapsedUris = getSavedCollapsedUris(savedState)
   const selectedId = getSelectedItem(platform)
   const options = await loadOptions(platform)
@@ -34,8 +34,8 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
   }
   const { uri } = option
   const { lines, error, code } = await loadLines(uri)
-  const watchId = createWatchId()
-  await setupChangeListener(watchId, uri)
+  const newWatchId = createWatchId()
+  await setupChangeListener(watchId, newWatchId, uri)
   const buttons = loadButtons()
   return {
     ...state,
@@ -48,6 +48,6 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
     options,
     selectedOption: selectedId,
     buttons,
-    watchId,
+    watchId: newWatchId,
   }
 }
