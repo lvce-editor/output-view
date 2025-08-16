@@ -8,14 +8,14 @@ test('renderFilterValue returns correct ViewletCommand structure', () => {
   const newState = {
     ...createDefaultState(),
     filterValue: 'test-filter',
-    parentId: 'test-parent'
+    parentId: 123
   }
   
   const result = renderFilterValue(oldState, newState)
   
   expect(result).toEqual([
     'Viewlet.setValueByName',
-    'test-parent',
+    123,
     InputName.Filter,
     'test-filter'
   ])
@@ -26,14 +26,14 @@ test('renderFilterValue handles empty filter value', () => {
   const newState = {
     ...createDefaultState(),
     filterValue: '',
-    parentId: 'test-parent'
+    parentId: 456
   }
   
   const result = renderFilterValue(oldState, newState)
   
   expect(result).toEqual([
     'Viewlet.setValueByName',
-    'test-parent',
+    456,
     InputName.Filter,
     ''
   ])
@@ -44,12 +44,12 @@ test('renderFilterValue handles different parent IDs', () => {
   const newState = {
     ...createDefaultState(),
     filterValue: 'filter-value',
-    parentId: 'different-parent'
+    parentId: 789
   }
   
   const result = renderFilterValue(oldState, newState)
   
-  expect(result[1]).toBe('different-parent')
+  expect(result[1]).toBe(789)
   expect(result[3]).toBe('filter-value')
 })
 
@@ -57,20 +57,20 @@ test('renderFilterValue ignores oldState values', () => {
   const oldState = {
     ...createDefaultState(),
     filterValue: 'old-filter',
-    parentId: 'old-parent'
+    parentId: 111
   }
   
   const newState = {
     ...createDefaultState(),
     filterValue: 'new-filter',
-    parentId: 'new-parent'
+    parentId: 222
   }
   
   const result = renderFilterValue(oldState, newState)
   
   expect(result).toEqual([
     'Viewlet.setValueByName',
-    'new-parent',
+    222,
     InputName.Filter,
     'new-filter'
   ])
