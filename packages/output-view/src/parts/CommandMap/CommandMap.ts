@@ -3,6 +3,8 @@ import * as Clear from '../Clear/Clear.ts'
 import { closeFindWidget } from '../CloseFindWidget/CloseFindWidget.ts'
 import * as Create from '../Create/Create.ts'
 import * as Diff2 from '../Diff2/Diff2.ts'
+import { disableScrollLock } from '../DisableScrollLock/DisableScrollLock.ts'
+import { enableScrollLock } from '../EnableScrollLock/EnableScrollLock.ts'
 import * as FocusIndex from '../FocusIndex/FocusIndex.ts'
 import * as GetCommandIds from '../GetCommandIds/GetCommandIds.ts'
 import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
@@ -39,6 +41,8 @@ export const commandMap = {
   'Output.getCommandIds': GetCommandIds.getCommandIds,
   'Output.getKeyBindings': GetKeyBindings.getKeyBindings,
   'Output.handleButtonClick': WrapCommand.wrapCommand(handleButtonClick),
+  'Output.enableScrollLock': WrapCommand.wrapCommand(enableScrollLock),
+  'Output.disableScrollLock': WrapCommand.wrapCommand(disableScrollLock),
   'Output.handleContextMenu': WrapCommand.wrapCommand(handleContextMenu),
   'Output.handleData': WrapCommand.wrapCommand(handleData),
   'Output.handleError': WrapCommand.wrapCommand(handleError),
