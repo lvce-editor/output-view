@@ -1,6 +1,6 @@
 import { test, expect } from '@jest/globals'
-import { disableScrollLock } from '../src/parts/DisableScrollLock/DisableScrollLock.ts'
 import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
+import { disableScrollLock } from '../src/parts/DisableScrollLock/DisableScrollLock.ts'
 
 test('disableScrollLock - when scrollLockEnabled is true, sets it to false', async () => {
   const state = {
