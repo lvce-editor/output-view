@@ -18,7 +18,7 @@ test('initializeFileSystemWorker registers FileSystemWorker RPC', async () => {
   expect(invokeAndTransfer).toHaveBeenCalledTimes(1)
   expect(invokeAndTransfer).toHaveBeenCalledWith(
     'SendMessagePortToExtensionHostWorker.sendMessagePortToFileSystemWorker',
-    expect.anything(),
+    expect.any(MessagePort),
     'FileSystem.handleMessagePort',
     RpcRegistry.RpcId.OutputWorker,
   )
