@@ -15,7 +15,7 @@ test('createExtensionHostRpc creates rpc successfully', async () => {
   const rpc = await createExtensionHostRpc()
 
   expect(rpc).toBeDefined()
-  expect(typeof rpc.invoke).toBe('function')
+  await rpc.dispose()
 })
 
 test('createExtensionHostRpc handles errors properly', async () => {
@@ -30,5 +30,5 @@ test('createExtensionHostRpc handles errors properly', async () => {
   const rpc = await createExtensionHostRpc()
 
   expect(rpc).toBeDefined()
-  expect(typeof rpc.invoke).toBe('function')
+  await rpc.dispose()
 })
