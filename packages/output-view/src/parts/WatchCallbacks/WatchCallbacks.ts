@@ -12,6 +12,10 @@ export const unregisterWatchCallback = (id: number): void => {
   delete watchCallbacks[id]
 }
 
+export const hasWatchCallback = (id: number): boolean => {
+  return id in watchCallbacks
+}
+
 export const clearWatchCallbacks = (): void => {
   const keys = Object.keys(watchCallbacks)
   for (const key of keys) {
