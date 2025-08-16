@@ -29,6 +29,7 @@ export const createDefaultState = (): OutputState => {
     platform: 0,
     watchId: 0,
     parentId: 0,
+    scrollLockEnabled: false,
   }
   return state
 }

@@ -28,4 +28,5 @@ export interface OutputState {
   readonly watchId: number
   readonly x: number
   readonly y: number
+  readonly scrollLockEnabled: boolean
 }
