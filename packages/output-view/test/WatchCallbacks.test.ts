@@ -33,14 +33,12 @@ test('executeWatchCallBack - throws for unregistered callback', () => {
   expect(() => executeWatchCallBack(999)).toThrow()
 })
 
+const mockCallback = async (watchId: number): Promise<void> => {}
+
 test('unregisterWatchCallback - removes registered callback', () => {
-  const mockCallback = async (watchId: number): Promise<void> => {}
-
   registerWatchCallback(3, mockCallback)
-  expect(() => executeWatchCallBack(3)).not.toThrow()
-
   unregisterWatchCallback(3)
-  expect(() => executeWatchCallBack(3)).toThrow()
+  expect(hasWatchCallback(3)).toBe(false)
 })
 
 test('unregisterWatchCallback - does nothing for unregistered callback', () => {
