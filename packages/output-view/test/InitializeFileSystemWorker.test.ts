@@ -17,7 +17,12 @@ test('initializeFileSystemWorker registers FileSystemWorker RPC', async () => {
   RendererWorker.set(mockRpc)
   await initializeFileSystemWorker()
   expect(invokeAndTransfer).toHaveBeenCalledTimes(1)
-  expect(invokeAndTransfer).toHaveBeenCalledWith('FileSystemWorker', 'initialize', undefined)
+  expect(invokeAndTransfer).toHaveBeenCalledWith(
+    'SendMessagePortToExtensionHostWorker.sendMessagePortToFileSystemWorker',
+    expect.anything(),
+    'FileSystem.handleMessagePort',
+    7001,
+  )
   const rpc = RpcRegistry.get(RpcRegistry.RpcId.FileSystemWorker)
   expect(rpc).toBeDefined()
   await rpc.dispose()
