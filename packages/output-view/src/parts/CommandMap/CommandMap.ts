@@ -6,7 +6,6 @@ import * as Diff2 from '../Diff2/Diff2.ts'
 import { disableScrollLock } from '../DisableScrollLock/DisableScrollLock.ts'
 import { enableScrollLock } from '../EnableScrollLock/EnableScrollLock.ts'
 import * as FocusIndex from '../FocusIndex/FocusIndex.ts'
-import * as GetCommandIds from '../GetCommandIds/GetCommandIds.ts'
 import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
 import { handleButtonClick } from '../HandleButtonClick/HandleButtonClick.ts'
 import { handleContextMenu } from '../HandleContextMenu/HandleContextMenu.ts'
@@ -41,7 +40,7 @@ export const commandMap = {
   'Output.executeWatchCallback': WatchCallback.executeWatchCallBack,
   'Output.focusIndex': WrapCommand.wrapCommand(FocusIndex.focusIndex),
   'Output.getActions': getActions,
-  'Output.getCommandIds': GetCommandIds.getCommandIds,
+  'Output.getCommandIds': WrapCommand.getCommandIds,
   'Output.getKeyBindings': GetKeyBindings.getKeyBindings,
   'Output.handleButtonClick': WrapCommand.wrapCommand(handleButtonClick),
   'Output.handleContextMenu': WrapCommand.wrapCommand(handleContextMenu),
