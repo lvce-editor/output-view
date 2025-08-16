@@ -5,7 +5,6 @@ import { initializeFileSystemWorker } from '../src/parts/InitializeFileSystemWor
 import * as RendererWorker from '../src/parts/RendererWorker/RendererWorker.ts'
 
 test('initializeFileSystemWorker registers FileSystemWorker RPC', async () => {
-  // Create a mock RPC
   const invokeAndTransfer = jest.fn()
   const mockRpc = MockRpc.create({
     commandMap: {},
@@ -21,7 +20,7 @@ test('initializeFileSystemWorker registers FileSystemWorker RPC', async () => {
     'SendMessagePortToExtensionHostWorker.sendMessagePortToFileSystemWorker',
     expect.anything(),
     'FileSystem.handleMessagePort',
-    RpcRegistry.RpcId.FileSystemWorker,
+    RpcRegistry.RpcId.OutputWorker,
   )
   const rpc = RpcRegistry.get(RpcRegistry.RpcId.FileSystemWorker)
   expect(rpc).toBeDefined()
