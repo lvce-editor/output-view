@@ -27,6 +27,7 @@ import * as Resize from '../Resize/Resize.ts'
 import { saveOutputAs } from '../SaveOutputAs/SaveOutputAs.ts'
 import * as SaveState from '../SaveState/SaveState.ts'
 import { selectChannel } from '../SelectChannel/SelectChannel.ts'
+import { setLogLevel } from '../SetLogLevel/SetLogLevel.ts'
 import { setOutputChannel } from '../SetOutputChannel/SetOutputChannel.ts'
 import * as WatchCallback from '../WatchCallbacks/WatchCallbacks.ts'
 
@@ -35,14 +36,14 @@ export const commandMap = {
   'Output.closeFindWidget': WrapCommand.wrapCommand(closeFindWidget),
   'Output.create': Create.create,
   'Output.diff2': Diff2.diff2,
+  'Output.disableScrollLock': WrapCommand.wrapCommand(disableScrollLock),
+  'Output.enableScrollLock': WrapCommand.wrapCommand(enableScrollLock),
   'Output.executeWatchCallback': WatchCallback.executeWatchCallBack,
   'Output.focusIndex': WrapCommand.wrapCommand(FocusIndex.focusIndex),
   'Output.getActions': getActions,
   'Output.getCommandIds': GetCommandIds.getCommandIds,
   'Output.getKeyBindings': GetKeyBindings.getKeyBindings,
   'Output.handleButtonClick': WrapCommand.wrapCommand(handleButtonClick),
-  'Output.enableScrollLock': WrapCommand.wrapCommand(enableScrollLock),
-  'Output.disableScrollLock': WrapCommand.wrapCommand(disableScrollLock),
   'Output.handleContextMenu': WrapCommand.wrapCommand(handleContextMenu),
   'Output.handleData': WrapCommand.wrapCommand(handleData),
   'Output.handleError': WrapCommand.wrapCommand(handleError),
@@ -59,6 +60,7 @@ export const commandMap = {
   'Output.saveOutputAs': WrapCommand.wrapCommand(saveOutputAs),
   'Output.saveState': SaveState.saveState,
   'Output.selectChannel': WrapCommand.wrapCommand(selectChannel),
+  'Output.setLogLevel': setLogLevel,
   'Output.setOutputChannel': WrapCommand.wrapCommand(setOutputChannel),
   'Output.terminate': ViewletRegistry.terminate,
 }
