@@ -9,11 +9,11 @@ test('createExtensionHostRpc creates rpc successfully', async () => {
     invoke: () => {},
     invokeAndTransfer: () => {},
   })
-  
+
   RendererWorker.set(mockRpc)
-  
+
   const rpc = await createExtensionHostRpc()
-  
+
   expect(rpc).toBeDefined()
   expect(typeof rpc.invoke).toBe('function')
 })
@@ -24,11 +24,11 @@ test('createExtensionHostRpc handles errors properly', async () => {
     invoke: () => {},
     invokeAndTransfer: () => {},
   })
-  
+
   RendererWorker.set(mockRpc)
-  
+
   const rpc = await createExtensionHostRpc()
-  
+
   expect(rpc).toBeDefined()
   expect(typeof rpc.invoke).toBe('function')
 })
