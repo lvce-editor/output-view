@@ -1,5 +1,6 @@
-import { test } from '@jest/globals'
+import { expect, test } from '@jest/globals'
 import { mockWorkerGlobalRpc } from '@lvce-editor/rpc'
+import * as RpcRegistry from '@lvce-editor/rpc-registry'
 import { listen } from '../src/parts/Listen/Listen.ts'
 
 test('listen', async () => {
@@ -7,5 +8,6 @@ test('listen', async () => {
   const listenPromise = listen()
   start()
   await listenPromise
+  expect(RpcRegistry.get(RpcRegistry.RpcId.RendererWorker)).toBeDefined()
   dispose()
 })
