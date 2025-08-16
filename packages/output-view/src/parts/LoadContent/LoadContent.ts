@@ -28,7 +28,7 @@ const getMatchingOpen = (options: readonly Option[], id: string): Option | undef
 export const loadContent = async (state: OutputState, savedState: any): Promise<OutputState> => {
   const { platform, watchId } = state
   const collapsedUris = getSavedCollapsedUris(savedState)
-  const { selectedOption, filterValue } = restoreState(savedState)
+  const { selectedOption, filterValue, scrollLockEnabled } = restoreState(savedState)
   const selectedId = getSelectedItem(selectedOption, platform)
   const options = await loadOptions(platform)
   const option = getMatchingOpen(options, selectedId)
@@ -52,6 +52,7 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
     inputSource: InputSource.Script,
     listItems: lines,
     options,
+    scrollLockEnabled,
     selectedOption: selectedId,
     watchId: newWatchId,
   }
