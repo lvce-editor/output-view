@@ -8,17 +8,12 @@ test('renderFilterValue returns correct ViewletCommand structure', () => {
   const newState = {
     ...createDefaultState(),
     filterValue: 'test-filter',
-    parentId: 123
+    parentId: 123,
   }
-  
+
   const result = renderFilterValue(oldState, newState)
-  
-  expect(result).toEqual([
-    'Viewlet.setValueByName',
-    123,
-    InputName.Filter,
-    'test-filter'
-  ])
+
+  expect(result).toEqual(['Viewlet.setValueByName', 123, InputName.Filter, 'test-filter'])
 })
 
 test('renderFilterValue handles empty filter value', () => {
@@ -26,17 +21,12 @@ test('renderFilterValue handles empty filter value', () => {
   const newState = {
     ...createDefaultState(),
     filterValue: '',
-    parentId: 456
+    parentId: 456,
   }
-  
+
   const result = renderFilterValue(oldState, newState)
-  
-  expect(result).toEqual([
-    'Viewlet.setValueByName',
-    456,
-    InputName.Filter,
-    ''
-  ])
+
+  expect(result).toEqual(['Viewlet.setValueByName', 456, InputName.Filter, ''])
 })
 
 test('renderFilterValue handles different parent IDs', () => {
@@ -44,11 +34,11 @@ test('renderFilterValue handles different parent IDs', () => {
   const newState = {
     ...createDefaultState(),
     filterValue: 'filter-value',
-    parentId: 789
+    parentId: 789,
   }
-  
+
   const result = renderFilterValue(oldState, newState)
-  
+
   expect(result[1]).toBe(789)
   expect(result[3]).toBe('filter-value')
 })
@@ -57,21 +47,16 @@ test('renderFilterValue ignores oldState values', () => {
   const oldState = {
     ...createDefaultState(),
     filterValue: 'old-filter',
-    parentId: 111
+    parentId: 111,
   }
-  
+
   const newState = {
     ...createDefaultState(),
     filterValue: 'new-filter',
-    parentId: 222
+    parentId: 222,
   }
-  
+
   const result = renderFilterValue(oldState, newState)
-  
-  expect(result).toEqual([
-    'Viewlet.setValueByName',
-    222,
-    InputName.Filter,
-    'new-filter'
-  ])
+
+  expect(result).toEqual(['Viewlet.setValueByName', 222, InputName.Filter, 'new-filter'])
 })
