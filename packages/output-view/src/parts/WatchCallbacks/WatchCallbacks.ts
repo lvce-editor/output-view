@@ -12,7 +12,7 @@ export const unregisterWatchCallback = (id: number): void => {
   delete watchCallbacks[id]
 }
 
-export const has = (id: number): boolean => {
+export const hasWatchCallback = (id: number): boolean => {
   return id in watchCallbacks
 }
 

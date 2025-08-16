@@ -4,14 +4,13 @@ import {
   executeWatchCallBack,
   unregisterWatchCallback,
   clearWatchCallbacks,
+  hasWatchCallback,
 } from '../src/parts/WatchCallbacks/WatchCallbacks.ts'
 
 test('registerWatchCallback - registers a callback function', () => {
   const mockCallback = async (watchId: number): Promise<void> => {}
   registerWatchCallback(1, mockCallback)
-
-  // We can't directly test the internal state, but we can verify it doesn't throw
-  expect(() => executeWatchCallBack(1)).not.toThrow()
+  expect(hasWatchCallback(1)).toBe(true)
 })
 
 test('executeWatchCallBack - executes registered callback', async () => {
