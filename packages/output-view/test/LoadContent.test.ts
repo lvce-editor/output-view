@@ -24,3 +24,71 @@ test('loadContent returns a new state with expected properties', async () => {
     collapsedUris: [],
   })
 })
+
+test('loadContent handles savedState with collapsedUris', async () => {
+  FileSystemWorker.set(
+    MockRpc.create({
+      commandMap: {},
+      invoke() {
+        return 'test content'
+      },
+    }),
+  )
+  const state = createDefaultState()
+  const savedState = {
+    collapsedUris: ['uri1', 'uri2', 'uri3'],
+  }
+  const result = await loadContent(state, savedState)
+  expect(result.collapsedUris).toEqual(['uri1', 'uri2', 'uri3'])
+})
+
+test('loadContent handles savedState with invalid collapsedUris', async () => {
+  FileSystemWorker.set(
+    MockRpc.create({
+      commandMap: {},
+      invoke() {
+        return 'test content'
+      },
+    }),
+  )
+  const state = createDefaultState()
+  const savedState = {
+    collapsedUris: 'not an array',
+  }
+  const result = await loadContent(state, savedState)
+  expect(result.collapsedUris).toEqual([])
+})
+
+test('loadContent handles savedState with mixed collapsedUris', async () => {
+  FileSystemWorker.set(
+    MockRpc.create({
+      commandMap: {},
+      invoke() {
+        return 'test content'
+      },
+    }),
+  )
+  const state = createDefaultState()
+  const savedState = {
+    collapsedUris: ['uri1', 123, 'uri3'],
+  }
+  const result = await loadContent(state, savedState)
+  expect(result.collapsedUris).toEqual([])
+})
+
+test('loadContent handles savedState with null collapsedUris', async () => {
+  FileSystemWorker.set(
+    MockRpc.create({
+      commandMap: {},
+      invoke() {
+        return 'test content'
+      },
+    }),
+  )
+  const state = createDefaultState()
+  const savedState = {
+    collapsedUris: null,
+  }
+  const result = await loadContent(state, savedState)
+  expect(result.collapsedUris).toEqual([])
+})
