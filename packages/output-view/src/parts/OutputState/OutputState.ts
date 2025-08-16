@@ -13,20 +13,21 @@ export interface OutputState {
   readonly inputSource: number
   readonly itemHeight: number
   readonly listItems: readonly string[]
+  readonly logLevel: number
   readonly maxLineY: number
   readonly message: string
   readonly minLineY: number
   readonly options: readonly Option[]
   readonly parentId: number
   readonly platform: number
+  readonly scrollLockEnabled: boolean
   readonly selectedOption: string
   readonly smallWidthBreakPoint: number
   readonly uid: number
   readonly uri: string
+  readonly watchId: number
   readonly width: number
   readonly workspaceUri: string
-  readonly watchId: number
   readonly x: number
   readonly y: number
-  readonly scrollLockEnabled: boolean
 }
