@@ -13,6 +13,9 @@ test('getExtensionOptions - returns channels on success', async () => {
   const mockRendererRpc = MockRpc.create({
     commandMap: {},
     invoke: (method: string) => {
+      if (method === 'ExtensionHostManagement.activateByEvent') {
+        return undefined
+      }
       throw new Error(`unexpected method ${method}`)
     },
   })
@@ -27,24 +30,20 @@ test('getExtensionOptions - returns channels on success', async () => {
     },
   })
 
-  // Mock the activateByEvent method directly
-  const originalActivateByEvent = RendererWorker.activateByEvent
-  RendererWorker.activateByEvent = async () => undefined
-  
   RendererWorker.set(mockRendererRpc)
   ExtensionHostWorker.set(mockExtensionHostRpc)
 
   const result = await getExtensionOptions()
   expect(result).toEqual(mockChannels)
-  
-  // Restore the original method
-  RendererWorker.activateByEvent = originalActivateByEvent
 })
 
 test('getExtensionOptions - returns empty array on error', async () => {
   const mockRendererRpc = MockRpc.create({
     commandMap: {},
     invoke: (method: string) => {
+      if (method === 'ExtensionHostManagement.activateByEvent') {
+        return undefined
+      }
       throw new Error(`unexpected method ${method}`)
     },
   })
@@ -56,18 +55,11 @@ test('getExtensionOptions - returns empty array on error', async () => {
     },
   })
 
-  // Mock the activateByEvent method directly
-  const originalActivateByEvent = RendererWorker.activateByEvent
-  RendererWorker.activateByEvent = async () => undefined
-  
   RendererWorker.set(mockRendererRpc)
   ExtensionHostWorker.set(mockExtensionHostRpc)
 
   const result = await getExtensionOptions()
   expect(result).toEqual([])
-  
-  // Restore the original method
-  RendererWorker.activateByEvent = originalActivateByEvent
 })
 
 test('getExtensionOptions - calls activateByEvent with onOutput', async () => {
@@ -76,7 +68,12 @@ test('getExtensionOptions - calls activateByEvent with onOutput', async () => {
 
   const mockRendererRpc = MockRpc.create({
     commandMap: {},
-    invoke: (method: string) => {
+    invoke: (method: string, event?: string) => {
+      if (method === 'ExtensionHostManagement.activateByEvent') {
+        activateByEventCalled = true
+        activateByEventEvent = event || ''
+        return undefined
+      }
       throw new Error(`unexpected method ${method}`)
     },
   })
@@ -91,23 +88,12 @@ test('getExtensionOptions - calls activateByEvent with onOutput', async () => {
     },
   })
 
-  // Mock the activateByEvent method directly
-  const originalActivateByEvent = RendererWorker.activateByEvent
-  RendererWorker.activateByEvent = async (event: string) => {
-    activateByEventCalled = true
-    activateByEventEvent = event
-    return undefined
-  }
-  
   RendererWorker.set(mockRendererRpc)
   ExtensionHostWorker.set(mockExtensionHostRpc)
 
   await getExtensionOptions()
   expect(activateByEventCalled).toBe(true)
   expect(activateByEventEvent).toBe('onOutput')
-  
-  // Restore the original method
-  RendererWorker.activateByEvent = originalActivateByEvent
 })
 
 test('getExtensionOptions - calls ExtensionHostWorker.invoke with correct method', async () => {
@@ -116,6 +102,9 @@ test('getExtensionOptions - calls ExtensionHostWorker.invoke with correct method
   const mockRendererRpc = MockRpc.create({
     commandMap: {},
     invoke: (method: string) => {
+      if (method === 'ExtensionHostManagement.activateByEvent') {
+        return undefined
+      }
       throw new Error(`unexpected method ${method}`)
     },
   })
@@ -128,16 +117,9 @@ test('getExtensionOptions - calls ExtensionHostWorker.invoke with correct method
     },
   })
 
-  // Mock the activateByEvent method directly
-  const originalActivateByEvent = RendererWorker.activateByEvent
-  RendererWorker.activateByEvent = async () => undefined
-  
   RendererWorker.set(mockRendererRpc)
   ExtensionHostWorker.set(mockExtensionHostRpc)
 
   await getExtensionOptions()
   expect(invokeMethod).toBe('Output.getEnabledProviders')
-  
-  // Restore the original method
-  RendererWorker.activateByEvent = originalActivateByEvent
 })
