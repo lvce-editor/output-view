@@ -21,7 +21,7 @@ test('initializeFileSystemWorker registers FileSystemWorker RPC', async () => {
     'SendMessagePortToExtensionHostWorker.sendMessagePortToFileSystemWorker',
     expect.anything(),
     'FileSystem.handleMessagePort',
-    7001,
+    RpcRegistry.RpcId.FileSystemWorker,
   )
   const rpc = RpcRegistry.get(RpcRegistry.RpcId.FileSystemWorker)
   expect(rpc).toBeDefined()
