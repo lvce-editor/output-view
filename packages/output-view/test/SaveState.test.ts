@@ -16,6 +16,7 @@ test('saveState should extract viewMode, filterValue, and collapsedUris from Out
 
   expect(result).toEqual({
     filterValue: 'test filter',
+    scrollLockEnabled: false,
     collapsedUris: ['file:///test1.ts', 'file:///test2.ts'],
     selectedOption: '',
   })
@@ -34,6 +35,7 @@ test('saveState should handle empty state values', () => {
     filterValue: '',
     collapsedUris: [],
     selectedOption: '',
+    scrollLockEnabled: false,
   })
 })
 
@@ -49,6 +51,7 @@ test('saveState should preserve all other state properties but only return the r
     width: 300,
     height: 400,
     filterValue: 'complex filter',
+    scrollLockEnabled: false,
     inputSource: InputSource.Script,
     minLineY: 10,
     maxLineY: 20,
@@ -61,6 +64,7 @@ test('saveState should preserve all other state properties but only return the r
 
   expect(result).toEqual({
     filterValue: 'complex filter',
+    scrollLockEnabled: false,
     collapsedUris: ['file:///collapsed1.ts', 'file:///collapsed2.ts', 'file:///collapsed3.ts'],
     selectedOption: '',
   })
