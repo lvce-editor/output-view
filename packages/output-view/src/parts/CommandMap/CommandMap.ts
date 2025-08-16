@@ -58,7 +58,7 @@ export const commandMap = {
   'Output.renderEventListeners': renderEventListeners,
   'Output.resize': Resize.resize,
   'Output.saveOutputAs': WrapCommand.wrapCommand(saveOutputAs),
-  'Output.saveState': SaveState.saveState,
+  'Output.saveState': WrapCommand.wrapGetter(SaveState.saveState),
   'Output.selectChannel': WrapCommand.wrapCommand(selectChannel),
   'Output.setLogLevel': setLogLevel,
   'Output.setOutputChannel': WrapCommand.wrapCommand(setOutputChannel),
