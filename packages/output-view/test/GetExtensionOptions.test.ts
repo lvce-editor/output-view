@@ -1,8 +1,8 @@
 import { test, expect } from '@jest/globals'
-import { getExtensionOptions } from '../src/parts/GetExtensionOptions/GetExtensionOptions.ts'
 import { MockRpc } from '@lvce-editor/rpc'
-import * as RendererWorker from '../src/parts/RendererWorker/RendererWorker.ts'
 import * as ExtensionHostWorker from '../src/parts/ExtensionHostWorker/ExtensionHostWorker.ts'
+import { getExtensionOptions } from '../src/parts/GetExtensionOptions/GetExtensionOptions.ts'
+import * as RendererWorker from '../src/parts/RendererWorker/RendererWorker.ts'
 
 test('getExtensionOptions - returns channels on success', async () => {
   const mockChannels = [
