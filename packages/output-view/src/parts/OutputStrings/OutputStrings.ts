@@ -13,6 +13,10 @@ export const turnOffAutoScroll = (): string => {
   return I18NString.i18nString(UiStrings.TurnOffAutoScroll)
 }
 
+export const settings = (): string => {
+  return I18NString.i18nString(UiStrings.Settings)
+}
+
 export const openLogFile = (): string => {
   return I18NString.i18nString(UiStrings.OpenLogFile)
 }
