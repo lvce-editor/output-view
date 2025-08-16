@@ -17,6 +17,10 @@ export const openLogFile = (): string => {
   return I18NString.i18nString(UiStrings.OpenLogFile)
 }
 
+export const setLogLevel = (): string => {
+  return I18NString.i18nString(UiStrings.SetLogLevel)
+}
+
 export const logFileNotFound = (): string => {
   return I18NString.i18nString(UiStrings.LogFileNotFound)
 }
