@@ -20,7 +20,7 @@ test('should throw error with invalid diff result', () => {
 })
 
 test('should throw error with empty diff result', () => {
-  const uid = 777777 // Use another uid that doesn't exist
+  const uid = 777_777 // Use another uid that doesn't exist
   const diffResult: readonly number[] = []
 
   // The function should throw when trying to get a non-existent uid
