@@ -32,6 +32,7 @@ export const create = (id: number, uri: string, x: number, y: number, width: num
     filteredItems: [],
     platform,
     watchId: 0,
+    scrollLockEnabled: false,
   }
   OutputStates.set(id, state, state)
 }
