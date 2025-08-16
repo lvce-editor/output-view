@@ -1,6 +1,4 @@
 import { test, expect } from '@jest/globals'
-import type { OutputState } from '../src/parts/OutputState/OutputState.ts'
-import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import { render2 } from '../src/parts/Render2/Render2.ts'
 
 test('should throw error when uid not found in OutputStates', () => {
