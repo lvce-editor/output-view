@@ -1,5 +1,6 @@
 import type { VirtualDomNode } from '@lvce-editor/virtual-dom-worker'
 import { VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
+import * as ClassNames from '../ClassNames/ClassNames.ts'
 import { getLineDom } from '../GetLineDom/GetLineDom.ts'
 
 export const getContentDom = (lines: readonly string[], error: string): readonly VirtualDomNode[] => {
@@ -9,7 +10,7 @@ export const getContentDom = (lines: readonly string[], error: string): readonly
   return [
     {
       type: VirtualDomElements.Div,
-      className: 'OutputContent',
+      className: ClassNames.OutputContent,
       role: 'log',
       tabIndex: 0,
       childCount: lines.length,
