@@ -1,11 +1,5 @@
-import { test, expect } from '@jest/globals'
-import {
-  registerWatchCallback,
-  executeWatchCallBack,
-  unregisterWatchCallback,
-  clearWatchCallbacks,
-  hasWatchCallback,
-} from '../src/parts/WatchCallbacks/WatchCallbacks.ts'
+import { expect, test } from '@jest/globals'
+import { executeWatchCallBack, hasWatchCallback, registerWatchCallback, unregisterWatchCallback } from '../src/parts/WatchCallbacks/WatchCallbacks.ts'
 
 const mockCallback = async (watchId: number): Promise<void> => {}
 
