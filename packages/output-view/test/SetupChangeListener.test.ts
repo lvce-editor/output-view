@@ -7,9 +7,9 @@ import * as WatchCallbacks from '../src/parts/WatchCallbacks/WatchCallbacks.ts'
 test('should setup change listener with new watch id', async () => {
   const mockRpc = MockRpc.create({
     commandMap: {},
-    invoke: (method: string, ...args: any[]) => {
+    invoke: (method: string, ...args: readonly unknown[]) => {
       if (method === 'FileSystem.watchFile') {
-        return Promise.resolve()
+        return
       }
       throw new Error(`unexpected method ${method}`)
     },
@@ -28,12 +28,12 @@ test('should setup change listener with new watch id', async () => {
 test('should cleanup old watch id and setup new one', async () => {
   const mockRpc = MockRpc.create({
     commandMap: {},
-    invoke: (method: string, ...args: any[]) => {
+    invoke: (method: string, ...args: readonly unknown[]) => {
       if (method === 'FileSystem.unwatchFile') {
-        return Promise.resolve()
+        return
       }
       if (method === 'FileSystem.watchFile') {
-        return Promise.resolve()
+        return
       }
       throw new Error(`unexpected method ${method}`)
     },
@@ -57,7 +57,7 @@ test('should cleanup old watch id and setup new one', async () => {
 test('should handle errors gracefully', async () => {
   const mockRpc = MockRpc.create({
     commandMap: {},
-    invoke: (method: string, ...args: any[]) => {
+    invoke: (method: string, ...args: readonly unknown[]) => {
       throw new Error('FileSystem error')
     },
   })
