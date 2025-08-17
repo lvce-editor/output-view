@@ -2,8 +2,6 @@ import type { Test } from '@lvce-editor/test-with-playwright'
 
 export const name = 'output.clear'
 
-export const skip = 1
-
 // TODO add page object
 export const test: Test = async ({ Command, FileSystem, Panel, Extension, Locator, expect }) => {
   // arrange
