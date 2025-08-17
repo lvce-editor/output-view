@@ -2,7 +2,7 @@ import type { Test } from '@lvce-editor/test-with-playwright'
 
 export const name = 'output.live-update'
 
-export const skip = 1
+// export const skip = 1
 
 // TODO add page object
 export const test: Test = async ({ QuickPick, Command, FileSystem, Panel, Extension, Locator, expect }) => {
