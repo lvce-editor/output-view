@@ -2,6 +2,7 @@ import type { Option } from '../Option/Option.ts'
 import type { OutputState } from '../OutputState/OutputState.ts'
 import { createWatchId } from '../CreateWatchId/CreateWatchId.ts'
 import { filterItems } from '../FilterItems/FilterItems.ts'
+import { getLogsDir } from '../GetLogsDir/GetLogsDir.ts'
 import { getSelectedItem } from '../GetSelectedItem/GetSelectedItem.ts'
 import * as InputSource from '../InputSource/InputSource.ts'
 import { loadButtons } from '../LoadButtons/LoadButtons.ts'
@@ -28,9 +29,10 @@ const getMatchingOpen = (options: readonly Option[], id: string): Option | undef
 export const loadContent = async (state: OutputState, savedState: any): Promise<OutputState> => {
   const { platform, watchId } = state
   const collapsedUris = getSavedCollapsedUris(savedState)
+  const logsFolderPath = await getLogsDir()
   const { selectedOption, filterValue, scrollLockEnabled } = restoreState(savedState)
   const selectedId = getSelectedItem(selectedOption, platform)
-  const options = await loadOptions(platform)
+  const options = await loadOptions(platform, logsFolderPath)
   const option = getMatchingOpen(options, selectedId)
   if (!option) {
     throw new Error('option not found')
