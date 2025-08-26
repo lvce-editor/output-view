@@ -14,7 +14,10 @@ test('serializeLines - single line text', () => {
 
 test('serializeLines - multiple lines and link', () => {
   const lines: readonly Line[] = [
-    [{ type: LinePartType.Text, value: 'see ' }, { type: LinePartType.Link, value: 'https://example.com' }],
+    [
+      { type: LinePartType.Text, value: 'see ' },
+      { type: LinePartType.Link, value: 'https://example.com' },
+    ],
     [{ type: LinePartType.Text, value: 'bye' }],
   ]
   expect(serializeLines(lines)).toBe('see https://example.com\nbye')

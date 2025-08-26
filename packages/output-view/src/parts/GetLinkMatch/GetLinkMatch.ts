@@ -1,7 +1,6 @@
-// Returns the first link match (http, https, or file URL) in the given text, or null
-// if none found.
+const RE_URL = /(?:https?:\/\/\S+|file:\/\/\S+)/
+
 export const getLinkMatch = (text: string): string | null => {
-  const urlRegex = /(?:https?:\/\/\S+|file:\/\/\S+)/
-  const m = text.match(urlRegex)
-  return m ? m[0] : null
+  const match = text.match(RE_URL)
+  return match ? match[0] : null
 }

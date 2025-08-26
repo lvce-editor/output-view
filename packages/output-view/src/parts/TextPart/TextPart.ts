@@ -4,5 +4,3 @@ export interface TextPart {
   readonly type: typeof LinePartType.Text
   readonly value: string
 }
-
-

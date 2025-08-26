@@ -4,5 +4,3 @@ export interface LinkPart {
   readonly type: typeof LinePartType.Link
   readonly value: string
 }
-
-
