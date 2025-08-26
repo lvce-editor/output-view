@@ -1,30 +1,27 @@
 import type { LinePart } from '../LinePart/LinePart.ts'
+import { getLinkMatch } from '../GetLinkMatch/GetLinkMatch.ts'
 import * as LinePartType from '../LinePartType/LinePartType.ts'
-
-const urlRegex = /(?:https?:\/\/\S+|file:\/\/\S+)/g
 
 export const parseLine = (line: string): readonly LinePart[] => {
 	const parts: LinePart[] = []
-	let lastIndex = 0
-	for (;;) {
-		const match = urlRegex.exec(line)
+	let rest = line
+	while (rest.length > 0) {
+		const match = getLinkMatch(rest)
 		if (!match) {
+			if (rest) {
+				parts.push({ type: LinePartType.Text, value: rest })
+			}
 			break
 		}
-		const start = match.index
-		if (start > lastIndex) {
-			parts.push({ type: LinePartType.Text, value: line.slice(lastIndex, start) })
+		const index = rest.indexOf(match)
+		if (index > 0) {
+			parts.push({ type: LinePartType.Text, value: rest.slice(0, index) })
 		}
-		parts.push({ type: LinePartType.Link, value: match[0] })
-		lastIndex = start + match[0].length
-	}
-	if (lastIndex < line.length) {
-		parts.push({ type: LinePartType.Text, value: line.slice(lastIndex) })
+		parts.push({ type: LinePartType.Link, value: match })
+		rest = rest.slice(index + match.length)
 	}
 	if (parts.length === 0) {
 		return [{ type: LinePartType.Text, value: '' }]
 	}
 	return parts
 }
-
-
