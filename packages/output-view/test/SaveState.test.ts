@@ -1,9 +1,9 @@
 import { test, expect } from '@jest/globals'
 import type { OutputState } from '../src/parts/OutputState/OutputState.ts'
 import type { SavedState } from '../src/parts/SavedState/SavedState.ts'
-import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as InputSource from '../src/parts/InputSource/InputSource.ts'
+import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 import { saveState } from '../src/parts/SaveState/SaveState.ts'
 
 test('saveState should extract viewMode, filterValue, and collapsedUris from OutputState', () => {

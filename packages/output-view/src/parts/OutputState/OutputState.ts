@@ -1,6 +1,6 @@
 import type { ActionButton } from '../ActionButton/ActionButton.ts'
-import type { Option } from '../Option/Option.ts'
 import type { Line } from '../Line/Line.ts'
+import type { Option } from '../Option/Option.ts'
 
 export interface OutputState {
   readonly buttons: readonly ActionButton[]

@@ -1,7 +1,7 @@
 import type { LoadLinesResult } from '../LoadLinesResult/LoadLinesResult.ts'
-import { parseLine } from '../ParseLine/ParseLine.ts'
 import * as FileSystemWorker from '../FileSystemWorker/FileSystemWorker.ts'
 import { isFileNotFoundError } from '../IsFileNotFoundError/IsFileNotFoundError.ts'
+import { parseLine } from '../ParseLine/ParseLine.ts'
 
 export const loadLines = async (uri: string): Promise<LoadLinesResult> => {
   try {

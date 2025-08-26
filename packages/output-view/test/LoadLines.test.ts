@@ -1,8 +1,8 @@
 import { test, expect } from '@jest/globals'
 import { MockRpc } from '@lvce-editor/rpc'
 import * as FileSystemWorker from '../src/parts/FileSystemWorker/FileSystemWorker.ts'
-import { loadLines } from '../src/parts/LoadLines/LoadLines.ts'
 import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
+import { loadLines } from '../src/parts/LoadLines/LoadLines.ts'
 
 test('loadLines - success', async () => {
   const mockRpc = MockRpc.create({

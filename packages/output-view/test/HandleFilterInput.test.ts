@@ -1,8 +1,8 @@
 import { test, expect } from '@jest/globals'
 import type { OutputState } from '../src/parts/OutputState/OutputState.ts'
 import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
-import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 import { handleFilterInput } from '../src/parts/HandleFilterInput/HandleFilterInput.ts'
+import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 
 test('handleFilterInput - updates filter and filteredItems', async () => {
   const state: OutputState = {

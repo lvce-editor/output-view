@@ -1,6 +1,6 @@
-import type { OutputState } from '../OutputState/OutputState.ts'
-import type { LinePart } from '../LinePart/LinePart.ts'
 import type { Line } from '../Line/Line.ts'
+import type { LinePart } from '../LinePart/LinePart.ts'
+import type { OutputState } from '../OutputState/OutputState.ts'
 import * as FileSystemWorker from '../FileSystemWorker/FileSystemWorker.ts'
 import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
 

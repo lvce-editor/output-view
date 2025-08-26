@@ -1,5 +1,5 @@
-import type { LinePart } from '../LinePart/LinePart.ts'
 import type { Line } from '../Line/Line.ts'
+import type { LinePart } from '../LinePart/LinePart.ts'
 
 const getTextFromParts = (parts: readonly LinePart[]): string => {
   let result = ''

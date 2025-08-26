@@ -1,8 +1,8 @@
 import type { VirtualDomNode } from '@lvce-editor/virtual-dom-worker'
 import { text, VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
 import type { LinePart } from '../LinePart/LinePart.ts'
-import * as LinePartType from '../LinePartType/LinePartType.ts'
 import * as ClassNames from '../ClassNames/ClassNames.ts'
+import * as LinePartType from '../LinePartType/LinePartType.ts'
 
 const parentNode: VirtualDomNode = {
   type: VirtualDomElements.Div,
