@@ -16,7 +16,7 @@ export const getLineDom = (parts: readonly LinePart[]): readonly VirtualDomNode[
     if (part.type === LinePartType.Text) {
       children.push(text(part.value))
     } else {
-      children.push({ type: VirtualDomElements.A, href: part.value, childCount: 1 }, text(part.value))
+      children.push({ type: VirtualDomElements.A, href: part.value, target: '_blank', rel: 'noopener noreferrer', childCount: 1 }, text(part.value))
     }
   }
   const lineNode: VirtualDomNode = { ...parentNode, childCount: children.length }

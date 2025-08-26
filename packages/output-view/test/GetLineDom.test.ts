@@ -29,6 +29,6 @@ test('getLineDom - renders link as anchor node with text', () => {
     childCount: 3,
   })
   expect(result[1]).toEqual({ type: 12, text: 'see ', childCount: 0 })
-  expect(result[2]).toEqual({ type: VirtualDomElements.A, href: 'https://example.com', childCount: 1 })
+  expect(result[2]).toEqual({ type: VirtualDomElements.A, href: 'https://example.com', target: '_blank', rel: 'noopener noreferrer', childCount: 1 })
   expect(result[3]).toEqual({ type: 12, text: 'https://example.com', childCount: 0 })
 })
