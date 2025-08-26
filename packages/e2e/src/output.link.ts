@@ -19,6 +19,6 @@ export const test: Test = async ({ Command, FileSystem, Panel, Extension, Locato
   await expect(link).toBeVisible()
   await expect(link).toHaveText('https://example.com')
   await expect(link).toHaveAttribute('target', '_blank')
-  await expect(link).toHaveAttribute('rel', 'noopener noreferer')
+  await expect(link).toHaveAttribute('rel', 'noopener noreferrer')
   await expect(link).toHaveAttribute('href', 'https://example.com')
 }
