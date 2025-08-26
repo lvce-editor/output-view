@@ -3,6 +3,7 @@ import { MockRpc } from '@lvce-editor/rpc'
 import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as ExtensionHostWorker from '../src/parts/ExtensionHostWorker/ExtensionHostWorker.ts'
 import * as FileSystemWorker from '../src/parts/FileSystemWorker/FileSystemWorker.ts'
+import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 import { loadContent } from '../src/parts/LoadContent/LoadContent.ts'
 import * as RendererWorker from '../src/parts/RendererWorker/RendererWorker.ts'
 
@@ -38,7 +39,7 @@ test('loadContent returns a new state with expected properties', async () => {
     message: expect.any(String),
     filterValue: '',
     inputSource: expect.any(Number),
-    listItems: ['test content'],
+    listItems: [[{ type: LinePartType.Text, value: 'test content' }]],
     collapsedUris: [],
   })
 })
