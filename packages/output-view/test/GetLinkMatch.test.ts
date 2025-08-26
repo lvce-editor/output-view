@@ -16,4 +16,3 @@ test.skip('getLinkMatch - https link', () => {
 test('getLinkMatch - file link', () => {
   expect(getLinkMatch('open file:///tmp/log.txt please')).toBe('file:///tmp/log.txt')
 })
-
