@@ -4,7 +4,6 @@ import type { OutputState } from '../src/parts/OutputState/OutputState.ts'
 import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as FileSystemWorker from '../src/parts/FileSystemWorker/FileSystemWorker.ts'
 import { handleSelect } from '../src/parts/HandleSelect/HandleSelect.ts'
-import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 import * as RendererWorker from '../src/parts/RendererWorker/RendererWorker.ts'
 
 test('handleSelect - no matching option returns same state', async () => {
@@ -31,7 +30,7 @@ test('handleSelect - loads lines and updates state', async () => {
     selectedOption: 'a',
   }
   const result = await handleSelect(state, 'a')
-  expect(result.listItems).toEqual([[{ type: LinePartType.Text, value: 'l1' }], [{ type: LinePartType.Text, value: 'l2' }]])
+  expect(result.listItems).toEqual(['l1', 'l2'])
   expect(result.error).toBe('')
   expect(result.errorCode).toBe(0)
 })
