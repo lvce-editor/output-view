@@ -1,14 +1,5 @@
-import * as LinePartType from '../LinePartType/LinePartType.ts'
-
-export interface TextPart {
-  readonly type: typeof LinePartType.Text
-  readonly value: string
-}
-
-export interface LinkPart {
-  readonly type: typeof LinePartType.Link
-  readonly value: string
-}
+import type { TextPart } from '../TextPart/TextPart.ts'
+import type { LinkPart } from '../LinkPart/LinkPart.ts'
 
 export type LinePart = TextPart | LinkPart
 

@@ -1,7 +1,7 @@
-import type { LinePart } from '../LinePart/LinePart.ts'
+import type { Line } from '../Line/Line.ts'
 
 export interface LoadLinesResult {
-  readonly lines: readonly (readonly LinePart[])[]
+  readonly lines: readonly Line[]
   readonly error: string
   readonly code: number
 }
