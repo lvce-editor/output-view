@@ -4,7 +4,6 @@ import type { OutputState } from '../src/parts/OutputState/OutputState.ts'
 import { clear } from '../src/parts/Clear/Clear.ts'
 import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as FileSystemWorker from '../src/parts/FileSystemWorker/FileSystemWorker.ts'
-import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 
 test('clear - no selected option returns same state', async () => {
   const state: OutputState = { ...createDefaultState(), options: [{ id: 'a', uri: 'file:///a', label: 'A' }], selectedOption: 'x' }
@@ -31,7 +30,7 @@ test('clear - clears file and reloads', async () => {
   const state: OutputState = { ...createDefaultState(), options: [{ id: 'a', uri: 'file:///a', label: 'A' }], selectedOption: 'a' }
   const result = await clear(state)
   expect(wroteContent).toBe('')
-  expect(result.listItems).toEqual([[{ type: LinePartType.Text, value: '' }]])
+  expect(result.listItems).toEqual([''])
   expect(result.error).toBe('')
   expect(result.errorCode).toBe(0)
 })
