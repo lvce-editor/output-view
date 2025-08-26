@@ -2,6 +2,7 @@ import { test, expect } from '@jest/globals'
 import { MockRpc } from '@lvce-editor/rpc'
 import * as FileSystemWorker from '../src/parts/FileSystemWorker/FileSystemWorker.ts'
 import { loadLines } from '../src/parts/LoadLines/LoadLines.ts'
+import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 
 test('loadLines - success', async () => {
   const mockRpc = MockRpc.create({
@@ -15,7 +16,7 @@ test('loadLines - success', async () => {
   })
   FileSystemWorker.set(mockRpc)
   const result = await loadLines('file:///x')
-  expect(result).toEqual({ error: '', lines: [[{ type: 'text', value: 'a' }], [{ type: 'text', value: 'b' }]], code: 0 })
+  expect(result).toEqual({ error: '', lines: [[{ type: LinePartType.Text, value: 'a' }], [{ type: LinePartType.Text, value: 'b' }]], code: 0 })
 })
 
 test('loadLines - file not found', async () => {

@@ -1,6 +1,7 @@
 import { test, expect } from '@jest/globals'
 import type { OutputState } from '../src/parts/OutputState/OutputState.ts'
 import type { SavedState } from '../src/parts/SavedState/SavedState.ts'
+import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as InputSource from '../src/parts/InputSource/InputSource.ts'
 import { saveState } from '../src/parts/SaveState/SaveState.ts'
@@ -55,7 +56,7 @@ test('saveState should preserve all other state properties but only return the r
     inputSource: InputSource.Script,
     minLineY: 10,
     maxLineY: 20,
-    listItems: [[{ type: 'text', value: '1' }]],
+    listItems: [[{ type: LinePartType.Text, value: '1' }]],
     collapsedUris: ['file:///collapsed1.ts', 'file:///collapsed2.ts', 'file:///collapsed3.ts'],
     smallWidthBreakPoint: 800,
   }

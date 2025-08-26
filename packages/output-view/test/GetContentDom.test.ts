@@ -1,9 +1,16 @@
 import { test, expect } from '@jest/globals'
 import { VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
 import { getContentDom } from '../src/parts/GetContentDom/GetContentDom.ts'
+import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 
 test('getContentDom - renders container and lines', () => {
-  const dom = getContentDom([[{ type: 'text', value: 'x' }], [{ type: 'text', value: 'y' }]], '')
+  const dom = getContentDom(
+    [
+      [{ type: LinePartType.Text, value: 'x' }],
+      [{ type: LinePartType.Text, value: 'y' }],
+    ],
+    '',
+  )
   expect(dom[0]).toEqual({
     type: VirtualDomElements.Div,
     className: 'OutputContent',
@@ -16,5 +23,5 @@ test('getContentDom - renders container and lines', () => {
 })
 
 test('getContentDom - returns empty when error present', () => {
-  expect(getContentDom([[{ type: 'text', value: 'a' }]], 'boom')).toEqual([])
+  expect(getContentDom([[{ type: LinePartType.Text, value: 'a' }]], 'boom')).toEqual([])
 })
