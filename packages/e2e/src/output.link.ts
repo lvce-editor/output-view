@@ -15,7 +15,7 @@ export const test: Test = async ({ Command, FileSystem, Panel, Extension, Locato
   await Command.execute('Output.selectChannel', 'xyz')
 
   // assert
-  const link = Locator('.OutputContent a')
+  const link = Locator('.OutputContent a') // TODO use link classname
   await expect(link).toBeVisible()
   await expect(link).toHaveText('https://example.com')
   await expect(link).toHaveAttribute('href', 'https://example.com')
