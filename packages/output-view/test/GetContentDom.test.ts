@@ -4,13 +4,7 @@ import { getContentDom } from '../src/parts/GetContentDom/GetContentDom.ts'
 import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 
 test('getContentDom - renders container and lines', () => {
-  const dom = getContentDom(
-    [
-      [{ type: LinePartType.Text, value: 'x' }],
-      [{ type: LinePartType.Text, value: 'y' }],
-    ],
-    '',
-  )
+  const dom = getContentDom([[{ type: LinePartType.Text, value: 'x' }], [{ type: LinePartType.Text, value: 'y' }]], '')
   expect(dom[0]).toEqual({
     type: VirtualDomElements.Div,
     className: 'OutputContent',
