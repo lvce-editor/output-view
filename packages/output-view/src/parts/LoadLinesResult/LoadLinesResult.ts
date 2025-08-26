@@ -1,7 +1,5 @@
-import type { Line } from '../Line/Line.ts'
-
 export interface LoadLinesResult {
-  readonly lines: readonly Line[]
+  readonly lines: readonly string[]
   readonly error: string
   readonly code: number
 }
