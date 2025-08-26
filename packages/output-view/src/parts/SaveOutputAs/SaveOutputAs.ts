@@ -1,5 +1,6 @@
 import type { OutputState } from '../OutputState/OutputState.ts'
 import type { LinePart } from '../LinePart/LinePart.ts'
+import type { Line } from '../Line/Line.ts'
 import * as FileSystemWorker from '../FileSystemWorker/FileSystemWorker.ts'
 import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
 
@@ -11,7 +12,7 @@ const serializeLineParts = (parts: readonly LinePart[]): string => {
   return parts.map(serializeLinePart).join('')
 }
 
-const serializeLines = (lines: readonly (readonly LinePart[])[]): readonly string => {
+const serializeLines = (lines: readonly Line[]): readonly string => {
   return lines.map(serializeLineParts).join('\n')
 }
 

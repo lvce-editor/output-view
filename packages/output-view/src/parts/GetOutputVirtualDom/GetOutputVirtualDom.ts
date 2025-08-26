@@ -3,9 +3,9 @@ import { mergeClassNames, VirtualDomElements } from '@lvce-editor/virtual-dom-wo
 import * as ClassNames from '../ClassNames/ClassNames.ts'
 import { getContentDom } from '../GetContentDom/GetContentDom.ts'
 import { getErrorDom } from '../GetErrorDom/GetErrorDom.ts'
-import type { LinePart } from '../LinePart/LinePart.ts'
+import type { Line } from '../Line/Line.ts'
 
-export const getOutputVirtualDom = (lines: readonly (readonly LinePart[])[], errorCode: number, error: string): readonly VirtualDomNode[] => {
+export const getOutputVirtualDom = (lines: readonly Line[], errorCode: number, error: string): readonly VirtualDomNode[] => {
   return [
     {
       type: VirtualDomElements.Div,

@@ -1,19 +1,19 @@
 import type { ActionButton } from '../ActionButton/ActionButton.ts'
 import type { Option } from '../Option/Option.ts'
-import type { LinePart } from '../LinePart/LinePart.ts'
+import type { Line } from '../Line/Line.ts'
 
 export interface OutputState {
   readonly buttons: readonly ActionButton[]
   readonly collapsedUris: readonly string[]
   readonly error: string
   readonly errorCode: number
-  readonly filteredItems: readonly (readonly LinePart[])[]
+  readonly filteredItems: readonly Line[]
   readonly filterValue: string
   readonly focusedIndex: number
   readonly height: number
   readonly inputSource: number
   readonly itemHeight: number
-  readonly listItems: readonly (readonly LinePart[])[]
+  readonly listItems: readonly Line[]
   readonly logLevel: number
   readonly maxLineY: number
   readonly message: string
