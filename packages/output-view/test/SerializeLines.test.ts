@@ -1,7 +1,7 @@
 import { test, expect } from '@jest/globals'
 import type { Line } from '../src/parts/Line/Line.ts'
-import { serializeLines } from '../src/parts/SerializeLines/SerializeLines.ts'
 import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
+import { serializeLines } from '../src/parts/SerializeLines/SerializeLines.ts'
 
 test('serializeLines - empty', () => {
   expect(serializeLines([])).toBe('')
