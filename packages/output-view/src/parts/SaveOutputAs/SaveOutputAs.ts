@@ -3,6 +3,7 @@ import type { LinePart } from '../LinePart/LinePart.ts'
 import type { OutputState } from '../OutputState/OutputState.ts'
 import * as FileSystemWorker from '../FileSystemWorker/FileSystemWorker.ts'
 import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
+import { serializeLines } from '../SerializeLines/SerializeLines.ts'
 
 const serializeLinePart = (part: LinePart): string => {
   return part.value
@@ -12,9 +13,7 @@ const serializeLineParts = (parts: readonly LinePart[]): string => {
   return parts.map(serializeLinePart).join('')
 }
 
-const serializeLines = (lines: readonly Line[]): readonly string => {
-  return lines.map(serializeLineParts).join('\n')
-}
+// moved to SerializeLines.ts
 
 export const saveOutputAs = async (state: OutputState): Promise<OutputState> => {
   // @ts-ignore
