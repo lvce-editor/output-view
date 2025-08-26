@@ -4,8 +4,15 @@ import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaul
 import { handleFilterInput } from '../src/parts/HandleFilterInput/HandleFilterInput.ts'
 
 test('handleFilterInput - updates filter and filteredItems', async () => {
-  const state: OutputState = { ...createDefaultState(), listItems: ['apple', 'banana', 'carrot'] }
+  const state: OutputState = {
+    ...createDefaultState(),
+    listItems: [[{ type: 'text', value: 'apple' }], [{ type: 'text', value: 'banana' }], [{ type: 'text', value: 'carrot' }]],
+  }
   const result = await handleFilterInput(state, 'a')
   expect(result.filterValue).toBe('a')
-  expect(result.filteredItems).toEqual(['apple', 'banana', 'carrot'])
+  expect(result.filteredItems).toEqual([
+    [{ type: 'text', value: 'apple' }],
+    [{ type: 'text', value: 'banana' }],
+    [{ type: 'text', value: 'carrot' }],
+  ])
 })

@@ -15,7 +15,7 @@ test('loadLines - success', async () => {
   })
   FileSystemWorker.set(mockRpc)
   const result = await loadLines('file:///x')
-  expect(result).toEqual({ error: '', lines: ['a', 'b'], code: 0 })
+  expect(result).toEqual({ error: '', lines: [[{ type: 'text', value: 'a' }], [{ type: 'text', value: 'b' }]], code: 0 })
 })
 
 test('loadLines - file not found', async () => {

@@ -1,4 +1,5 @@
 import type { LoadLinesResult } from '../LoadLinesResult/LoadLinesResult.ts'
+import { parseLine } from '../ParseLine/ParseLine.ts'
 import * as FileSystemWorker from '../FileSystemWorker/FileSystemWorker.ts'
 import { isFileNotFoundError } from '../IsFileNotFoundError/IsFileNotFoundError.ts'
 
@@ -6,7 +7,7 @@ export const loadLines = async (uri: string): Promise<LoadLinesResult> => {
   try {
     // TODO use log stream, updating the output when the file is changed
     const content = await FileSystemWorker.readFile(uri)
-    const lines = content.split('\n')
+    const lines = content.split('\n').map(parseLine)
     return {
       error: '',
       lines,

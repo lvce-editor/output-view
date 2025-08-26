@@ -1,6 +1,19 @@
 import type { OutputState } from '../OutputState/OutputState.ts'
+import type { LinePart } from '../LinePart/LinePart.ts'
 import * as FileSystemWorker from '../FileSystemWorker/FileSystemWorker.ts'
 import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
+
+const serializeLinePart = (part: LinePart): string => {
+  return part.value
+}
+
+const serializeLineParts = (parts: readonly LinePart[]): string => {
+  return parts.map(serializeLinePart).join('')
+}
+
+const serializeLines = (lines: readonly (readonly LinePart[])[]): readonly string => {
+  return lines.map(serializeLineParts).join('\n')
+}
 
 export const saveOutputAs = async (state: OutputState): Promise<OutputState> => {
   // @ts-ignore
@@ -9,7 +22,7 @@ export const saveOutputAs = async (state: OutputState): Promise<OutputState> => 
     return state
   }
   const { listItems } = state
-  const content = listItems.join('\n')
+  const content = serializeLines(listItems)
   await FileSystemWorker.writeFile(uri, content)
   // TODO if error occurs, show error dialog
   return state

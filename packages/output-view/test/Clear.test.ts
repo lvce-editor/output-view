@@ -30,7 +30,7 @@ test('clear - clears file and reloads', async () => {
   const state: OutputState = { ...createDefaultState(), options: [{ id: 'a', uri: 'file:///a', label: 'A' }], selectedOption: 'a' }
   const result = await clear(state)
   expect(wroteContent).toBe('')
-  expect(result.listItems).toEqual([''])
+  expect(result.listItems).toEqual([[{ type: 'text', value: '' }]])
   expect(result.error).toBe('')
   expect(result.errorCode).toBe(0)
 })

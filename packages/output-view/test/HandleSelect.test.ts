@@ -30,7 +30,7 @@ test('handleSelect - loads lines and updates state', async () => {
     selectedOption: 'a',
   }
   const result = await handleSelect(state, 'a')
-  expect(result.listItems).toEqual(['l1', 'l2'])
+  expect(result.listItems).toEqual([[{ type: 'text', value: 'l1' }], [{ type: 'text', value: 'l2' }]])
   expect(result.error).toBe('')
   expect(result.errorCode).toBe(0)
 })

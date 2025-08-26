@@ -2,8 +2,9 @@ import type { VirtualDomNode } from '@lvce-editor/virtual-dom-worker'
 import { VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
 import * as ClassNames from '../ClassNames/ClassNames.ts'
 import { getLineDom } from '../GetLineDom/GetLineDom.ts'
+import type { LinePart } from '../LinePart/LinePart.ts'
 
-export const getContentDom = (lines: readonly string[], error: string): readonly VirtualDomNode[] => {
+export const getContentDom = (lines: readonly (readonly LinePart[])[], error: string): readonly VirtualDomNode[] => {
   if (error) {
     return []
   }

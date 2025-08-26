@@ -38,7 +38,7 @@ test('loadContent returns a new state with expected properties', async () => {
     message: expect.any(String),
     filterValue: '',
     inputSource: expect.any(Number),
-    listItems: ['test content'],
+    listItems: [[{ type: 'text', value: 'test content' }]],
     collapsedUris: [],
   })
 })

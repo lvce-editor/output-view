@@ -55,7 +55,7 @@ test('saveState should preserve all other state properties but only return the r
     inputSource: InputSource.Script,
     minLineY: 10,
     maxLineY: 20,
-    listItems: ['1'],
+    listItems: [[{ type: 'text', value: '1' }]],
     collapsedUris: ['file:///collapsed1.ts', 'file:///collapsed2.ts', 'file:///collapsed3.ts'],
     smallWidthBreakPoint: 800,
   }
