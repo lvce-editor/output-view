@@ -2,8 +2,6 @@ import type { Test } from '@lvce-editor/test-with-playwright'
 
 export const name = 'output.link'
 
-export const skip = 1
-
 export const test: Test = async ({ Command, FileSystem, Panel, Extension, Locator, expect }) => {
   // arrange
   const tmpDir = await FileSystem.getTmpDir()
@@ -17,8 +15,8 @@ export const test: Test = async ({ Command, FileSystem, Panel, Extension, Locato
   await Command.execute('Output.selectChannel', 'xyz')
 
   // assert
-  const select = Locator('[name="output"]')
-  await expect(select).toHaveValue('xyz')
-  const text = Locator('.OutputContent')
-  await expect(text).toHaveText('test content')
+  const link = Locator('.OutputContent a')
+  await expect(link).toBeVisible()
+  await expect(link).toHaveText('https://example.com')
+  await expect(link).toHaveAttribute('href', 'https://example.com')
 }
