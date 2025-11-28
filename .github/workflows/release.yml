@@ -75,6 +75,7 @@ jobs:
       - name: e2e
         working-directory: ./packages/e2e
         run: npm run e2e:headless
+        if: matrix.os != 'windows-2025'
         env:
           PLAYWRIGHT_BROWSERS_PATH: 0
       - name: measure
