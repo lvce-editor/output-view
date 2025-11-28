@@ -5,7 +5,8 @@ export const name = 'output.clear'
 // TODO add page object
 export const test: Test = async ({ Output, FileSystem, Panel, Extension, Locator, expect }) => {
   // arrange
-  const tmpDir = await FileSystem.getTmpDir()
+  const tmpDir = await FileSystem.getTmpDir({ scheme: 'file' })
+
   await FileSystem.writeFile(`${tmpDir}/test.txt`, 'div')
   const extensionUri = import.meta.resolve('../fixtures/sample.output-channel-basic').toString()
   await Extension.addWebExtension(extensionUri)

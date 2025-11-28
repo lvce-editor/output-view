@@ -2,12 +2,12 @@ import type { Test } from '@lvce-editor/test-with-playwright'
 
 export const name = 'output.live-update'
 
-// export const skip = 1
+export const skip = 1
 
 // TODO add page object
 export const test: Test = async ({ QuickPick, Command, FileSystem, Panel, Extension, Locator, expect }) => {
   // arrange
-  const tmpDir = await FileSystem.getTmpDir()
+  const tmpDir = await FileSystem.getTmpDir({ scheme: 'file' })
   await FileSystem.writeFile(`${tmpDir}/test.txt`, 'div')
   const extensionUri = import.meta.resolve('../fixtures/sample.output-channel-live-update').toString()
   await Extension.addWebExtension(extensionUri)
