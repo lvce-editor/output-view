@@ -5,7 +5,7 @@ import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaul
 import * as FileSystemWorker from '../src/parts/FileSystemWorker/FileSystemWorker.ts'
 import { handleSelect } from '../src/parts/HandleSelect/HandleSelect.ts'
 import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
-import * as RendererWorker from '../src/parts/RendererWorker/RendererWorker.ts'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 
 test('handleSelect - no matching option returns same state', async () => {
   const state: OutputState = { ...createDefaultState(), options: [{ id: 'a', uri: 'file:///a', label: 'A' }] }

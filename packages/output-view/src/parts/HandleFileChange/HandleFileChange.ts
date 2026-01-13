@@ -1,5 +1,5 @@
 import * as OutputStates from '../OutputStates/OutputStates.ts'
-import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 
 export const handleFileChange = async (watchId: number): Promise<void> => {
   const keys = OutputStates.getKeys()

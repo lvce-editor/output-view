@@ -5,7 +5,7 @@ import * as ExtensionHostWorker from '../src/parts/ExtensionHostWorker/Extension
 import * as FileSystemWorker from '../src/parts/FileSystemWorker/FileSystemWorker.ts'
 import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 import { loadContent } from '../src/parts/LoadContent/LoadContent.ts'
-import * as RendererWorker from '../src/parts/RendererWorker/RendererWorker.ts'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 
 test('loadContent returns a new state with expected properties', async () => {
   FileSystemWorker.set(

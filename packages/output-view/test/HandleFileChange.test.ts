@@ -1,7 +1,7 @@
 import { test, expect } from '@jest/globals'
 import { MockRpc } from '@lvce-editor/rpc'
 import { handleFileChange } from '../src/parts/HandleFileChange/HandleFileChange.ts'
-import * as RendererWorker from '../src/parts/RendererWorker/RendererWorker.ts'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 
 test('should handle file change without throwing error', async () => {
   const mockRpc = MockRpc.create({
