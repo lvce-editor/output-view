@@ -26,8 +26,9 @@ test('handleSelect - loads lines and updates state', async () => {
   expect(result.listItems).toEqual([[{ type: LinePartType.Text, value: 'l1' }], [{ type: LinePartType.Text, value: 'l2' }]])
   expect(result.error).toBe('')
   expect(result.errorCode).toBe(0)
-  expect(mockFileSystemRpc.invocations).toHaveLength(2)
-  expect(mockFileSystemRpc.invocations[0]).toEqual(['FileSystem.readFile', 'file:///a'])
-  expect(mockFileSystemRpc.invocations[1]).toEqual(['FileSystem.watchFile', expect.any(Number), 'file:///a', expect.any(Number)])
+  expect(mockFileSystemRpc.invocations).toEqual([
+    ['FileSystem.readFile', 'file:///a'],
+    ['FileSystem.watchFile', expect.any(Number), 'file:///a', expect.any(Number)],
+  ])
   expect(mockRendererRpc.invocations).toEqual([])
 })

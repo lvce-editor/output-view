@@ -157,7 +157,9 @@ test('should handle file change with negative watchId', async () => {
 
 test('should handle file change when refresh throws error', async () => {
   const mockRpc = RendererWorker.registerMockRpc({
-    'Output.refresh': () => Promise.reject(new Error('Refresh failed')),
+    'Output.refresh': () => {
+      throw new Error('Refresh failed')
+    },
   })
 
   // Create a state with a specific watchId
