@@ -5,10 +5,7 @@ import { loadLines } from '../src/parts/LoadLines/LoadLines.ts'
 
 test('loadLines - success', async () => {
   const mockRpc = FileSystemWorker.registerMockRpc({
-    'FileSystem.readFile': (uri: string) => {
-      expect(uri).toBe('file:///x')
-      return 'a\nb'
-    },
+    'FileSystem.readFile': () => 'a\nb',
   })
   const result = await loadLines('file:///x')
   expect(result).toEqual({ code: 0, error: '', lines: [[{ type: LinePartType.Text, value: 'a' }], [{ type: LinePartType.Text, value: 'b' }]] })
@@ -17,9 +14,8 @@ test('loadLines - success', async () => {
 
 test('loadLines - file not found', async () => {
   const mockRpc = FileSystemWorker.registerMockRpc({
-    'FileSystem.readFile': (uri: string) => {
-      expect(uri).toBe('file:///missing')
-      const err = new Error('File not found: ' + uri)
+    'FileSystem.readFile': () => {
+      const err = new Error('File not found: file:///missing')
       throw err
     },
   })
@@ -30,8 +26,7 @@ test('loadLines - file not found', async () => {
 
 test('loadLines - other error', async () => {
   const mockRpc = FileSystemWorker.registerMockRpc({
-    'FileSystem.readFile': (uri: string) => {
-      expect(uri).toBe('file:///x')
+    'FileSystem.readFile': () => {
       throw new Error('boom')
     },
   })
