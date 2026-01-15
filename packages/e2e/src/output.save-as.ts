@@ -4,7 +4,7 @@ export const name = 'output.save-as'
 
 export const skip = 1
 
-export const test: Test = async ({ Command, expect, Extension, FileSystem, Locator, Output, Panel, QuickPick }) => {
+export const test: Test = async ({ Command, Dialog, expect, Extension, FileSystem, Locator, Output, Panel, QuickPick }) => {
   // arrange
   const tmpDir = await FileSystem.getTmpDir({ scheme: 'file' })
   await FileSystem.writeFile(`${tmpDir}/test.txt`, 'div')
