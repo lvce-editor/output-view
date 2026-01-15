@@ -2,13 +2,12 @@ import type { Test } from '@lvce-editor/test-with-playwright'
 
 export const name = 'output.clear'
 
-// TODO add page object
 export const test: Test = async ({ expect, Extension, FileSystem, Locator, Output, Panel }) => {
   // arrange
   const tmpDir = await FileSystem.getTmpDir({ scheme: 'file' })
 
   await FileSystem.writeFile(`${tmpDir}/test.txt`, 'div')
-  const extensionUri = import.meta.resolve('../fixtures/sample.output-channel-basic').toString()
+  const extensionUri = import.meta.resolve('../fixtures/sample.output-channel-basic')
   await Extension.addWebExtension(extensionUri)
   await Panel.open('Output')
   await Output.show()
