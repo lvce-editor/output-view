@@ -1,20 +1,12 @@
-import { test, expect, jest } from '@jest/globals'
-import { MockRpc } from '@lvce-editor/rpc'
-import * as RpcRegistry from '@lvce-editor/rpc-registry'
+import { test, expect } from '@jest/globals'
+import { FileSystemWorker } from '@lvce-editor/rpc-registry'
 import { setupChangeListener } from '../src/parts/SetupChangeListener/SetupChangeListener.ts'
 import * as WatchCallbacks from '../src/parts/WatchCallbacks/WatchCallbacks.ts'
 
 test('should setup change listener with new watch id', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, ...args: readonly unknown[]) => {
-      if (method === 'FileSystem.watchFile') {
-        return
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  const mockRpc = FileSystemWorker.registerMockRpc({
+    'FileSystem.watchFile': () => undefined,
   })
-  RpcRegistry.set(RpcRegistry.RpcId.FileSystemWorker, mockRpc)
 
   const oldWatchId = 0
   const newWatchId = 123
@@ -23,22 +15,14 @@ test('should setup change listener with new watch id', async () => {
   await setupChangeListener(oldWatchId, newWatchId, uri)
 
   expect(WatchCallbacks.hasWatchCallback(newWatchId)).toBe(true)
+  expect(mockRpc.invocations).toEqual([['FileSystem.watchFile', newWatchId, uri, expect.any(Number)]])
 })
 
 test('should cleanup old watch id and setup new one', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, ...args: readonly unknown[]) => {
-      if (method === 'FileSystem.unwatchFile') {
-        return
-      }
-      if (method === 'FileSystem.watchFile') {
-        return
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  const mockRpc = FileSystemWorker.registerMockRpc({
+    'FileSystem.unwatchFile': () => undefined,
+    'FileSystem.watchFile': () => undefined,
   })
-  RpcRegistry.set(RpcRegistry.RpcId.FileSystemWorker, mockRpc)
 
   const oldWatchId = 456
   const newWatchId = 789
@@ -52,16 +36,21 @@ test('should cleanup old watch id and setup new one', async () => {
 
   expect(WatchCallbacks.hasWatchCallback(oldWatchId)).toBe(false)
   expect(WatchCallbacks.hasWatchCallback(newWatchId)).toBe(true)
+  expect(mockRpc.invocations).toEqual([
+    ['FileSystem.unwatchFile', oldWatchId],
+    ['FileSystem.watchFile', newWatchId, uri, expect.any(Number)]
+  ])
 })
 
 test('should handle errors gracefully', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, ...args: readonly unknown[]) => {
+  const mockRpc = FileSystemWorker.registerMockRpc({
+    'FileSystem.unwatchFile': () => {
+      throw new Error('FileSystem error')
+    },
+    'FileSystem.watchFile': () => {
       throw new Error('FileSystem error')
     },
   })
-  RpcRegistry.set(RpcRegistry.RpcId.FileSystemWorker, mockRpc)
 
   const oldWatchId = 0
   const newWatchId = 123
@@ -69,15 +58,17 @@ test('should handle errors gracefully', async () => {
 
   // Should not throw
   await expect(setupChangeListener(oldWatchId, newWatchId, uri)).resolves.toBeUndefined()
+  expect(mockRpc.invocations).toEqual([
+    ['FileSystem.unwatchFile', oldWatchId],
+    ['FileSystem.watchFile', newWatchId, uri, expect.any(Number)]
+  ])
 })
 
 test('should call FileSystem methods with correct parameters', async () => {
-  const invokeSpy = jest.fn()
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: invokeSpy,
+  const mockRpc = FileSystemWorker.registerMockRpc({
+    'FileSystem.unwatchFile': () => undefined,
+    'FileSystem.watchFile': () => undefined,
   })
-  RpcRegistry.set(RpcRegistry.RpcId.FileSystemWorker, mockRpc)
 
   const oldWatchId = 456
   const newWatchId = 789
@@ -85,6 +76,8 @@ test('should call FileSystem methods with correct parameters', async () => {
 
   await setupChangeListener(oldWatchId, newWatchId, uri)
 
-  expect(invokeSpy).toHaveBeenCalledWith('FileSystem.unwatchFile', oldWatchId)
-  expect(invokeSpy).toHaveBeenCalledWith('FileSystem.watchFile', newWatchId, uri, RpcRegistry.RpcId.OutputWorker)
+  expect(mockRpc.invocations).toEqual([
+    ['FileSystem.unwatchFile', oldWatchId],
+    ['FileSystem.watchFile', newWatchId, uri, expect.any(Number)]
+  ])
 })
