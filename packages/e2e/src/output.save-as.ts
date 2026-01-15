@@ -4,12 +4,7 @@ export const name = 'output.save-as'
 
 export const skip = 1
 
-<<<<<<< HEAD
-// TODO add page object
-export const test: Test = async ({ Command, FileSystem, Panel, Extension, Locator, expect, Dialog }) => {
-=======
-export const test: Test = async ({ Command, expect, Extension, FileSystem, Locator, Panel, QuickPick }) => {
->>>>>>> origin/main
+export const test: Test = async ({ Command, Dialog, expect, Extension, FileSystem, Locator, Panel }) => {
   // arrange
   const tmpDir = await FileSystem.getTmpDir({ scheme: 'file' })
   await FileSystem.writeFile(`${tmpDir}/test.txt`, 'div')
@@ -29,7 +24,6 @@ export const test: Test = async ({ Command, expect, Extension, FileSystem, Locat
 
   // act
   await Dialog.mockSaveFilePicker(() => {
-    console.log('mock called')
     return 'memfs://output.txt'
   })
   await Command.execute('Output.saveAs')
