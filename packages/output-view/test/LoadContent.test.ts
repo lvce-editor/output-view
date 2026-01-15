@@ -7,11 +7,14 @@ import { loadContent } from '../src/parts/LoadContent/LoadContent.ts'
 test('loadContent returns a new state with expected properties', async () => {
   const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile': () => 'test content',
+    'FileSystem.watchFile': () => undefined,
   })
   const mockRendererRpc = RendererWorker.registerMockRpc({
+    'PlatformPaths.getLogsDir': () => '/tmp/logs',
     'OutputView.getOutputActions': () => [],
   })
   const mockExtensionHostRpc = ExtensionHost.registerMockRpc({
+    'ExtensionHostManagement.activateByEvent': () => undefined,
     'Extension.getOutputActions': () => [],
   })
   const state = createDefaultState()
@@ -24,19 +27,28 @@ test('loadContent returns a new state with expected properties', async () => {
     listItems: [[{ type: LinePartType.Text, value: 'test content' }]],
     message: expect.any(String),
   })
-  expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.readFile']])
-  expect(mockRendererRpc.invocations).toEqual([['OutputView.getOutputActions']])
-  expect(mockExtensionHostRpc.invocations).toEqual([['Extension.getOutputActions']])
+  expect(mockFileSystemRpc.invocations).toHaveLength(2)
+  expect(mockFileSystemRpc.invocations[0]).toEqual(['FileSystem.readFile', expect.any(String)])
+  expect(mockFileSystemRpc.invocations[1]).toEqual(['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)])
+  expect(mockRendererRpc.invocations).toHaveLength(2)
+  expect(mockRendererRpc.invocations[0]).toEqual(['PlatformPaths.getLogsDir'])
+  expect(mockRendererRpc.invocations[1]).toEqual(['OutputView.getOutputActions'])
+  expect(mockExtensionHostRpc.invocations).toHaveLength(2)
+  expect(mockExtensionHostRpc.invocations[0]).toEqual(['ExtensionHostManagement.activateByEvent', 'onOutput', undefined, undefined])
+  expect(mockExtensionHostRpc.invocations[1]).toEqual(['Extension.getOutputActions'])
 })
 
 test('loadContent handles savedState with collapsedUris', async () => {
   const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile': () => 'test content',
+    'FileSystem.watchFile': () => undefined,
   })
   const mockRendererRpc = RendererWorker.registerMockRpc({
+    'PlatformPaths.getLogsDir': () => '/tmp/logs',
     'OutputView.getOutputActions': () => [],
   })
   const mockExtensionHostRpc = ExtensionHost.registerMockRpc({
+    'ExtensionHostManagement.activateByEvent': () => undefined,
     'Extension.getOutputActions': () => [],
   })
   const state = createDefaultState()
@@ -45,19 +57,28 @@ test('loadContent handles savedState with collapsedUris', async () => {
   }
   const result = await loadContent(state, savedState)
   expect(result.collapsedUris).toEqual(['uri1', 'uri2', 'uri3'])
-  expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.readFile']])
-  expect(mockRendererRpc.invocations).toEqual([['OutputView.getOutputActions']])
-  expect(mockExtensionHostRpc.invocations).toEqual([['Extension.getOutputActions']])
+  expect(mockFileSystemRpc.invocations).toHaveLength(2)
+  expect(mockFileSystemRpc.invocations[0]).toEqual(['FileSystem.readFile', expect.any(String)])
+  expect(mockFileSystemRpc.invocations[1]).toEqual(['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)])
+  expect(mockRendererRpc.invocations).toHaveLength(2)
+  expect(mockRendererRpc.invocations[0]).toEqual(['PlatformPaths.getLogsDir'])
+  expect(mockRendererRpc.invocations[1]).toEqual(['OutputView.getOutputActions'])
+  expect(mockExtensionHostRpc.invocations).toHaveLength(2)
+  expect(mockExtensionHostRpc.invocations[0]).toEqual(['ExtensionHostManagement.activateByEvent', 'onOutput', undefined, undefined])
+  expect(mockExtensionHostRpc.invocations[1]).toEqual(['Extension.getOutputActions'])
 })
 
 test('loadContent handles savedState with invalid collapsedUris', async () => {
   const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile': () => 'test content',
+    'FileSystem.watchFile': () => undefined,
   })
   const mockRendererRpc = RendererWorker.registerMockRpc({
+    'PlatformPaths.getLogsDir': () => '/tmp/logs',
     'OutputView.getOutputActions': () => [],
   })
   const mockExtensionHostRpc = ExtensionHost.registerMockRpc({
+    'ExtensionHostManagement.activateByEvent': () => undefined,
     'Extension.getOutputActions': () => [],
   })
   const state = createDefaultState()
@@ -66,19 +87,28 @@ test('loadContent handles savedState with invalid collapsedUris', async () => {
   }
   const result = await loadContent(state, savedState)
   expect(result.collapsedUris).toEqual([])
-  expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.readFile']])
-  expect(mockRendererRpc.invocations).toEqual([['OutputView.getOutputActions']])
-  expect(mockExtensionHostRpc.invocations).toEqual([['Extension.getOutputActions']])
+  expect(mockFileSystemRpc.invocations).toHaveLength(2)
+  expect(mockFileSystemRpc.invocations[0]).toEqual(['FileSystem.readFile', expect.any(String)])
+  expect(mockFileSystemRpc.invocations[1]).toEqual(['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)])
+  expect(mockRendererRpc.invocations).toHaveLength(2)
+  expect(mockRendererRpc.invocations[0]).toEqual(['PlatformPaths.getLogsDir'])
+  expect(mockRendererRpc.invocations[1]).toEqual(['OutputView.getOutputActions'])
+  expect(mockExtensionHostRpc.invocations).toHaveLength(2)
+  expect(mockExtensionHostRpc.invocations[0]).toEqual(['ExtensionHostManagement.activateByEvent', 'onOutput', undefined, undefined])
+  expect(mockExtensionHostRpc.invocations[1]).toEqual(['Extension.getOutputActions'])
 })
 
 test('loadContent handles savedState with mixed collapsedUris', async () => {
   const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile': () => 'test content',
+    'FileSystem.watchFile': () => undefined,
   })
   const mockRendererRpc = RendererWorker.registerMockRpc({
+    'PlatformPaths.getLogsDir': () => '/tmp/logs',
     'OutputView.getOutputActions': () => [],
   })
   const mockExtensionHostRpc = ExtensionHost.registerMockRpc({
+    'ExtensionHostManagement.activateByEvent': () => undefined,
     'Extension.getOutputActions': () => [],
   })
   const state = createDefaultState()
@@ -87,19 +117,28 @@ test('loadContent handles savedState with mixed collapsedUris', async () => {
   }
   const result = await loadContent(state, savedState)
   expect(result.collapsedUris).toEqual([])
-  expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.readFile']])
-  expect(mockRendererRpc.invocations).toEqual([['OutputView.getOutputActions']])
-  expect(mockExtensionHostRpc.invocations).toEqual([['Extension.getOutputActions']])
+  expect(mockFileSystemRpc.invocations).toHaveLength(2)
+  expect(mockFileSystemRpc.invocations[0]).toEqual(['FileSystem.readFile', expect.any(String)])
+  expect(mockFileSystemRpc.invocations[1]).toEqual(['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)])
+  expect(mockRendererRpc.invocations).toHaveLength(2)
+  expect(mockRendererRpc.invocations[0]).toEqual(['PlatformPaths.getLogsDir'])
+  expect(mockRendererRpc.invocations[1]).toEqual(['OutputView.getOutputActions'])
+  expect(mockExtensionHostRpc.invocations).toHaveLength(2)
+  expect(mockExtensionHostRpc.invocations[0]).toEqual(['ExtensionHostManagement.activateByEvent', 'onOutput', undefined, undefined])
+  expect(mockExtensionHostRpc.invocations[1]).toEqual(['Extension.getOutputActions'])
 })
 
 test('loadContent handles savedState with null collapsedUris', async () => {
   const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile': () => 'test content',
+    'FileSystem.watchFile': () => undefined,
   })
   const mockRendererRpc = RendererWorker.registerMockRpc({
+    'PlatformPaths.getLogsDir': () => '/tmp/logs',
     'OutputView.getOutputActions': () => [],
   })
   const mockExtensionHostRpc = ExtensionHost.registerMockRpc({
+    'ExtensionHostManagement.activateByEvent': () => undefined,
     'Extension.getOutputActions': () => [],
   })
   const state = createDefaultState()
@@ -108,7 +147,13 @@ test('loadContent handles savedState with null collapsedUris', async () => {
   }
   const result = await loadContent(state, savedState)
   expect(result.collapsedUris).toEqual([])
-  expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.readFile']])
-  expect(mockRendererRpc.invocations).toEqual([['OutputView.getOutputActions']])
-  expect(mockExtensionHostRpc.invocations).toEqual([['Extension.getOutputActions']])
+  expect(mockFileSystemRpc.invocations).toHaveLength(2)
+  expect(mockFileSystemRpc.invocations[0]).toEqual(['FileSystem.readFile', expect.any(String)])
+  expect(mockFileSystemRpc.invocations[1]).toEqual(['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)])
+  expect(mockRendererRpc.invocations).toHaveLength(2)
+  expect(mockRendererRpc.invocations[0]).toEqual(['PlatformPaths.getLogsDir'])
+  expect(mockRendererRpc.invocations[1]).toEqual(['OutputView.getOutputActions'])
+  expect(mockExtensionHostRpc.invocations).toHaveLength(2)
+  expect(mockExtensionHostRpc.invocations[0]).toEqual(['ExtensionHostManagement.activateByEvent', 'onOutput', undefined, undefined])
+  expect(mockExtensionHostRpc.invocations[1]).toEqual(['Extension.getOutputActions'])
 })

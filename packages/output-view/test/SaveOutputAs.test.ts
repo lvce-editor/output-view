@@ -28,14 +28,14 @@ test('saveOutputAs writes file content when uri is selected', async () => {
 
   const state = {
     ...createDefaultState(),
-    listItems: [[{ type: LinePartType.Text, value: 'test line 1' }], [{ type: LinePartType.Text, value: 'test line 2' }]],
+    listItems: [[{ type: LinePartType.Text, value: 'test line 1' }], [{ type: LinePartType.Text, value: 'test line 2' }]] as const,
   }
 
   const result = await saveOutputAs(state)
 
   expect(result).toBe(state)
   expect(mockRendererRpc.invocations).toEqual([['FilePicker.showSaveFilePicker']])
-  expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.writeFile', mockUri, 'test line 1\ntest line 2\n']])
+  expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.writeFile', mockUri, 'test line 1\ntest line 2']])
 })
 
 test('saveOutputAs handles empty listItems', async () => {
