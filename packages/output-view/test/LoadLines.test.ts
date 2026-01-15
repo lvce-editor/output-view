@@ -15,8 +15,7 @@ test('loadLines - success', async () => {
 test('loadLines - file not found', async () => {
   const mockRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile': () => {
-      const err = new Error('File not found: file:///missing')
-      throw err
+      throw new Error('File not found: file:///missing')
     },
   })
   const result = await loadLines('file:///missing')
