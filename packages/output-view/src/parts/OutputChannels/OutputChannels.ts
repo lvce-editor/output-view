@@ -2,8 +2,8 @@ import * as ExtensionHostOutputChannel from '../ExtensionHostOutput/ExtensionHos
 
 const toExtensionHostOption = (outputChannel: any): any => {
   return {
-    name: outputChannel.id,
     file: outputChannel.path,
+    name: outputChannel.id,
   }
 }
 
@@ -14,12 +14,12 @@ export const getOptions = async (): Promise<readonly any[]> => {
   // TODO add a separate function getBuiltinOptions
   const options = [
     {
-      name: 'Main',
       file: '/tmp/log-main-process.txt',
+      name: 'Main',
     },
     {
-      name: 'Shared Process',
       file: '/tmp/log-shared-process.txt',
+      name: 'Shared Process',
     },
     ...channels.map(toExtensionHostOption),
   ]

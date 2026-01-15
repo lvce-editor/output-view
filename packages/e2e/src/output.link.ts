@@ -2,7 +2,7 @@ import type { Test } from '@lvce-editor/test-with-playwright'
 
 export const name = 'output.link'
 
-export const test: Test = async ({ Command, FileSystem, Panel, Extension, Locator, expect }) => {
+export const test: Test = async ({ Command, expect, Extension, FileSystem, Locator, Panel }) => {
   // arrange
   const tmpDir = await FileSystem.getTmpDir({ scheme: 'file' })
   await FileSystem.writeFile(`${tmpDir}/test.txt`, 'div')

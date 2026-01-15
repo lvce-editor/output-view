@@ -13,10 +13,10 @@ export const getErrorDom = (errorCode: number, error: string): readonly VirtualD
   }
   return [
     {
-      type: VirtualDomElements.Div,
+      childCount: 1,
       className: ClassNames.Error,
       tabIndex: 0,
-      childCount: 1,
+      type: VirtualDomElements.Div,
     },
     text(error),
   ]

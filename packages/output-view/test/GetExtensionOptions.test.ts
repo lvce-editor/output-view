@@ -6,8 +6,8 @@ import * as RendererWorker from '../src/parts/RendererWorker/RendererWorker.ts'
 
 test('getExtensionOptions - returns channels on success', async () => {
   const mockChannels = [
-    { id: 'channel1', uri: 'uri1', label: 'Channel 1' },
-    { id: 'channel2', uri: 'uri2', label: 'Channel 2' },
+    { id: 'channel1', label: 'Channel 1', uri: 'uri1' },
+    { id: 'channel2', label: 'Channel 2', uri: 'uri2' },
   ]
 
   const mockRendererRpc = MockRpc.create({

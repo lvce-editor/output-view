@@ -7,10 +7,10 @@ import { renderSelectedItem } from '../RenderSelectedItem/RenderSelectedItem.ts'
 
 export const getRenderer = (diffType: number): Renderer<OutputState> => {
   switch (diffType) {
-    case DiffType.RenderItems:
-      return RenderItems.renderItems
     case DiffType.RenderFilterValue:
       return renderFilterValue
+    case DiffType.RenderItems:
+      return RenderItems.renderItems
     case DiffType.RenderSelectedItem:
       return renderSelectedItem
     default:

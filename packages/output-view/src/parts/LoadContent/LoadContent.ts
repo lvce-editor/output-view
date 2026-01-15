@@ -30,7 +30,7 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
   const { platform, watchId } = state
   const collapsedUris = getSavedCollapsedUris(savedState)
   const logsFolderPath = await getLogsDir()
-  const { selectedOption, filterValue, scrollLockEnabled } = restoreState(savedState)
+  const { filterValue, scrollLockEnabled, selectedOption } = restoreState(savedState)
   const selectedId = getSelectedItem(selectedOption, platform)
   const options = await loadOptions(platform, logsFolderPath)
   const option = getMatchingOpen(options, selectedId)
@@ -38,7 +38,7 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
     throw new Error('option not found')
   }
   const { uri } = option
-  const { lines, error, code } = await loadLines(uri)
+  const { code, error, lines } = await loadLines(uri)
   const filteredItems = filterItems(lines, filterValue)
   const newWatchId = createWatchId()
   await setupChangeListener(watchId, newWatchId, uri)

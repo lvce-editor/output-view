@@ -5,19 +5,19 @@ import * as ClassNames from '../ClassNames/ClassNames.ts'
 import * as DomEventListenerFunctions from '../DomEventListenerFunctions/DomEventListenerFunctions.ts'
 
 export const getActionButtonVirtualDom = (button: ActionButton): readonly VirtualDomNode[] => {
-  const { id, label, icon } = button
+  const { icon, id, label } = button
   return [
     {
-      type: VirtualDomElements.Button,
+      childCount: 1,
       className: ClassNames.IconButton,
       name: id,
-      title: label,
-      childCount: 1,
       onClick: DomEventListenerFunctions.HandleButtonClick,
+      title: label,
+      type: VirtualDomElements.Button,
     },
     {
-      type: VirtualDomElements.Div,
       className: mergeClassNames(ClassNames.MaskIcon, icon),
+      type: VirtualDomElements.Div,
     },
   ]
 }

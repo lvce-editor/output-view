@@ -6,10 +6,10 @@ import * as OutputStrings from '../OutputStrings/OutputStrings.ts'
 export const getLogFileNotFoundDom = (): readonly VirtualDomNode[] => {
   return [
     {
-      type: VirtualDomElements.Div,
+      childCount: 1,
       className: ClassNames.Message,
       tabIndex: 0,
-      childCount: 1,
+      type: VirtualDomElements.Div,
     },
     text(OutputStrings.logFileNotFound()),
   ]
