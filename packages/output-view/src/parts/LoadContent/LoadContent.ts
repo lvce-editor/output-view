@@ -29,10 +29,9 @@ const getMatchingOpen = (options: readonly Option[], id: string): Option | undef
 export const loadContent = async (state: OutputState, savedState: any): Promise<OutputState> => {
   const { platform, watchId } = state
   const collapsedUris = getSavedCollapsedUris(savedState)
-  const logsFolderPath = await getLogsDir()
   const { filterValue, scrollLockEnabled, selectedOption } = restoreState(savedState)
   const selectedId = getSelectedItem(selectedOption, platform)
-  const options = await loadOptions(platform, logsFolderPath)
+  const options = await loadOptions(platform)
   const option = getMatchingOpen(options, selectedId)
   if (!option) {
     throw new Error('option not found')
