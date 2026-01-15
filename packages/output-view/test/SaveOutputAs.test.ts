@@ -1,8 +1,8 @@
 import { test, expect, jest } from '@jest/globals'
 import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as FileSystemWorker from '../src/parts/FileSystemWorker/FileSystemWorker.ts'
-import * as RendererWorker from '../src/parts/RendererWorker/RendererWorker.ts'
 import { saveOutputAs } from '../src/parts/SaveOutputAs/SaveOutputAs.ts'
 
 test('saveOutputAs returns the same state when no uri is selected', async () => {
