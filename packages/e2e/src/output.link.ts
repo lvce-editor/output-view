@@ -6,7 +6,7 @@ export const test: Test = async ({ Command, expect, Extension, FileSystem, Locat
   // arrange
   const tmpDir = await FileSystem.getTmpDir({ scheme: 'file' })
   await FileSystem.writeFile(`${tmpDir}/test.txt`, 'div')
-  const extensionUri = import.meta.resolve('../fixtures/sample.output-channel-link').toString()
+  const extensionUri = import.meta.resolve('../fixtures/sample.output-channel-link')
   await Extension.addWebExtension(extensionUri)
   await Panel.open('Output')
   await Command.execute('Panel.selectIndex', 1)

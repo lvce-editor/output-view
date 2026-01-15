@@ -1,6 +1,6 @@
 import { RendererWorker } from '@lvce-editor/rpc-registry'
+import { FileSystemWorker } from '@lvce-editor/rpc-registry'
 import type { OutputState } from '../OutputState/OutputState.ts'
-import * as FileSystemWorker from '../FileSystemWorker/FileSystemWorker.ts'
 import { serializeLines } from '../SerializeLines/SerializeLines.ts'
 
 export const saveOutputAs = async (state: OutputState): Promise<OutputState> => {

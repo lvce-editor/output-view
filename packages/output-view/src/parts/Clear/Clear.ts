@@ -1,5 +1,5 @@
+import { FileSystemWorker } from '@lvce-editor/rpc-registry'
 import type { OutputState } from '../OutputState/OutputState.ts'
-import * as FileSystemWorker from '../FileSystemWorker/FileSystemWorker.ts'
 import { filterItems } from '../FilterItems/FilterItems.ts'
 import { loadLines } from '../LoadLines/LoadLines.ts'
 
