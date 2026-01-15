@@ -28,7 +28,7 @@ test('should handle file change with empty states', async () => {
 
 test('should handle file change with matching watchId', async () => {
   const mockRpc = RendererWorker.registerMockRpc({
-    'Output.refresh': () => Promise.resolve(),
+    'Output.refresh': () => undefined,
   })
 
   // Create a state with a specific watchId
@@ -51,7 +51,7 @@ test('should handle file change with matching watchId', async () => {
 
 test('should handle file change with multiple states where one matches', async () => {
   const mockRpc = RendererWorker.registerMockRpc({
-    'Output.refresh': () => Promise.resolve(),
+    'Output.refresh': () => undefined,
   })
 
   // Create multiple states with different watchIds
@@ -81,7 +81,7 @@ test('should handle file change with multiple states where one matches', async (
 
 test('should handle file change with multiple matching watchIds', async () => {
   const mockRpc = RendererWorker.registerMockRpc({
-    'Output.refresh': () => Promise.resolve(),
+    'Output.refresh': () => undefined,
   })
 
   // Create multiple states with the same watchId
@@ -111,7 +111,7 @@ test('should handle file change with multiple matching watchIds', async () => {
 
 test('should handle file change with zero watchId', async () => {
   const mockRpc = RendererWorker.registerMockRpc({
-    'Output.refresh': () => Promise.resolve(),
+    'Output.refresh': () => undefined,
   })
 
   // Create a state with watchId 0
@@ -134,7 +134,7 @@ test('should handle file change with zero watchId', async () => {
 
 test('should handle file change with negative watchId', async () => {
   const mockRpc = RendererWorker.registerMockRpc({
-    'Output.refresh': () => Promise.resolve(),
+    'Output.refresh': () => undefined,
   })
 
   // Create a state with negative watchId
