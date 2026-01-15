@@ -1,8 +1,8 @@
 import { expect, jest, test } from '@jest/globals'
 import { MockRpc } from '@lvce-editor/rpc'
 import * as RpcRegistry from '@lvce-editor/rpc-registry'
-import { initializeFileSystemWorker } from '../src/parts/InitializeFileSystemWorker/InitializeFileSystemWorker.ts'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
+import { initializeFileSystemWorker } from '../src/parts/InitializeFileSystemWorker/InitializeFileSystemWorker.ts'
 
 test('initializeFileSystemWorker registers FileSystemWorker RPC', async () => {
   const invokeAndTransfer = jest.fn()
