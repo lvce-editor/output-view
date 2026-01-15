@@ -3,9 +3,10 @@ import { mergeClassNames, VirtualDomElements } from '@lvce-editor/virtual-dom-wo
 import * as ClassNames from '../ClassNames/ClassNames.ts'
 import * as DomEventListenerFunctions from '../DomEventListenerFunctions/DomEventListenerFunctions.ts'
 import * as InputName from '../InputName/InputName.ts'
+import * as OutputStrings from '../OutputStrings/OutputStrings.ts'
 
 export const getFilterVirtualDom = (): readonly VirtualDomNode[] => {
-  const placeholder = 'Filter'
+  const placeholder = OutputStrings.filter()
   return [
     {
       childCount: 1,
