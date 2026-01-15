@@ -59,8 +59,10 @@ test('getActions returns empty array for complex state', () => {
     ...createDefaultState(),
     error: 'Some error',
     errorCode: 400,
+    // @ts-ignore
     filteredItems: [[{ type: 'Text', value: 'filtered line' }]],
     filterValue: 'test',
+    // @ts-ignore
     listItems: [[{ type: 'Text', value: 'test line' }]],
     options: [
       { id: 'main', label: 'Main', uri: 'file:///main' },
