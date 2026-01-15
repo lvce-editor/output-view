@@ -4,12 +4,8 @@ export const name = 'output.open'
 
 // export const skip = 1
 
-<<<<<<< HEAD
 // TODO add page object
 export const test: Test = async ({ Command, expect, Extension, FileSystem, Locator, Output, Panel }) => {
-=======
-export const test: Test = async ({ Command, expect, Extension, FileSystem, Locator, Panel }) => {
->>>>>>> origin/main
   // arrange
   const tmpDir = await FileSystem.getTmpDir({ scheme: 'file' })
   await FileSystem.writeFile(`${tmpDir}/test.txt`, 'div')

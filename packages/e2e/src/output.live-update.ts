@@ -4,12 +4,8 @@ export const name = 'output.live-update'
 
 export const skip = 1
 
-<<<<<<< HEAD
 // TODO add page object
 export const test: Test = async ({ Command, expect, Extension, FileSystem, Locator, Output, Panel, QuickPick }) => {
-=======
-export const test: Test = async ({ Command, expect, Extension, FileSystem, Locator, Panel, QuickPick }) => {
->>>>>>> origin/main
   // arrange
   const tmpDir = await FileSystem.getTmpDir({ scheme: 'file' })
   await FileSystem.writeFile(`${tmpDir}/test.txt`, 'div')
