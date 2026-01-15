@@ -1,5 +1,5 @@
+import { FileSystemWorker } from '@lvce-editor/rpc-registry'
 import type { LoadLinesResult } from '../LoadLinesResult/LoadLinesResult.ts'
-import * as FileSystemWorker from '../FileSystemWorker/FileSystemWorker.ts'
 import { isFileNotFoundError } from '../IsFileNotFoundError/IsFileNotFoundError.ts'
 import { parseLine } from '../ParseLine/ParseLine.ts'
 
