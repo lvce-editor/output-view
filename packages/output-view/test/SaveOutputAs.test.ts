@@ -1,5 +1,5 @@
 import { test, expect } from '@jest/globals'
-import { RendererWorker } from '@lvce-editor/rpc-registry'
+import { FileSystemWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 import { saveOutputAs } from '../src/parts/SaveOutputAs/SaveOutputAs.ts'
@@ -20,7 +20,7 @@ test('saveOutputAs writes file content when uri is selected', async () => {
   const mockRendererRpc = RendererWorker.registerMockRpc({
     'FilePicker.showSaveFilePicker': () => mockUri,
   })
-  const mockFileSystemRpc = RpcRegistry.FileSystemWorker.registerMockRpc({
+  const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.writeFile': (uri: string, content: string) => {
       return undefined
     },
@@ -43,7 +43,7 @@ test('saveOutputAs handles empty listItems', async () => {
   const mockRendererRpc = RendererWorker.registerMockRpc({
     'FilePicker.showSaveFilePicker': () => mockUri,
   })
-  const mockFileSystemRpc = RpcRegistry.FileSystemWorker.registerMockRpc({
+  const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.writeFile': (uri: string, content: string) => {
       expect(uri).toBe(mockUri)
       expect(content).toBe('')
