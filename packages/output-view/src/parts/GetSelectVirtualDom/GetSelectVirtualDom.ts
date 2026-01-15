@@ -9,11 +9,11 @@ import * as InputName from '../InputName/InputName.ts'
 export const getSelectVirtualDom = (options: readonly Option[]): readonly VirtualDomNode[] => {
   return [
     {
-      type: VirtualDomElements.Select,
-      className: ClassNames.Select,
       childCount: options.length,
+      className: ClassNames.Select,
       name: InputName.Output,
       onChange: DomEventListenerFunctions.HandleSelect,
+      type: VirtualDomElements.Select,
     },
     ...options.flatMap(getOptionVirtualDom),
   ]

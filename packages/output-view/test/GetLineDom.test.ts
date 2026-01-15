@@ -7,14 +7,14 @@ test('getLineDom - returns parent div and text node', () => {
   const result = getLineDom([{ type: LinePartType.Text, value: 'hello' }])
 
   expect(result[0]).toEqual({
-    type: VirtualDomElements.Div,
-    className: 'Line',
     childCount: 1,
+    className: 'Line',
+    type: VirtualDomElements.Div,
   })
   expect(result[1]).toEqual({
-    type: 12,
-    text: 'hello',
     childCount: 0,
+    text: 'hello',
+    type: 12,
   })
 })
 
@@ -24,11 +24,11 @@ test('getLineDom - renders link as anchor node with text', () => {
     { type: LinePartType.Link, value: 'https://example.com' },
   ])
   expect(result[0]).toEqual({
-    type: VirtualDomElements.Div,
-    className: 'Line',
     childCount: 3,
+    className: 'Line',
+    type: VirtualDomElements.Div,
   })
-  expect(result[1]).toEqual({ type: 12, text: 'see ', childCount: 0 })
-  expect(result[2]).toEqual({ type: VirtualDomElements.A, href: 'https://example.com', target: '_blank', rel: 'noopener noreferrer', childCount: 1 })
-  expect(result[3]).toEqual({ type: 12, text: 'https://example.com', childCount: 0 })
+  expect(result[1]).toEqual({ childCount: 0, text: 'see ', type: 12 })
+  expect(result[2]).toEqual({ childCount: 1, href: 'https://example.com', rel: 'noopener noreferrer', target: '_blank', type: VirtualDomElements.A })
+  expect(result[3]).toEqual({ childCount: 0, text: 'https://example.com', type: 12 })
 })

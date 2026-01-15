@@ -3,12 +3,12 @@ import { VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
 import { getActionButtonVirtualDom } from '../src/parts/GetActionButtonVirtualDom/GetActionButtonVirtualDom.ts'
 
 test('getActionButtonVirtualDom - renders button and mask icon', () => {
-  const dom = getActionButtonVirtualDom({ id: 'clear', label: 'Clear', icon: 'IconClearAll' })
+  const dom = getActionButtonVirtualDom({ icon: 'IconClearAll', id: 'clear', label: 'Clear' })
   expect(dom[0]).toMatchObject({
-    type: VirtualDomElements.Button,
+    childCount: 1,
     name: 'clear',
     title: 'Clear',
-    childCount: 1,
+    type: VirtualDomElements.Button,
   })
   expect(dom[1].type).toBe(VirtualDomElements.Div)
 })

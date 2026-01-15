@@ -8,8 +8,8 @@ test('renderActions - returns virtual dom from options', () => {
   const state: OutputState = {
     ...base,
     options: [
-      { id: 'a', uri: 'file:///a', label: 'A' },
-      { id: 'b', uri: 'file:///b', label: 'B' },
+      { id: 'a', label: 'A', uri: 'file:///a' },
+      { id: 'b', label: 'B', uri: 'file:///b' },
     ],
   }
   const dom = renderActions(state)

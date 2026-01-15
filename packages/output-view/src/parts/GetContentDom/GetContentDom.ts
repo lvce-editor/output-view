@@ -10,11 +10,11 @@ export const getContentDom = (lines: readonly Line[], error: string): readonly V
   }
   return [
     {
-      type: VirtualDomElements.Div,
+      childCount: lines.length,
       className: ClassNames.OutputContent,
       role: 'log',
       tabIndex: 0,
-      childCount: lines.length,
+      type: VirtualDomElements.Div,
     },
     ...lines.flatMap(getLineDom),
   ]

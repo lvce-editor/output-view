@@ -7,9 +7,9 @@ export const getOptionVirtualDom = (option: Option): readonly VirtualDomNode[] =
   const { id, label } = option
   return [
     {
-      type: VirtualDomElements.Option,
-      className: ClassNames.Option,
       childCount: 1,
+      className: ClassNames.Option,
+      type: VirtualDomElements.Option,
       value: id,
     },
     text(label),
