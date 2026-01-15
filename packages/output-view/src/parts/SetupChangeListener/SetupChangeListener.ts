@@ -6,14 +6,12 @@ export const setupChangeListener = async (oldWatchId: number, newWatchId: number
   try {
     if (oldWatchId) {
       WatchCallbacks.unregisterWatchCallback(oldWatchId)
-      // @ts-ignore
-      await FileSystemWorker.invoke('FileSystem.unwatchFile', oldWatchId)
+      await FileSystemWorker.unwatchFile(oldWatchId)
     }
     // TODO dispose old watcher
     const rpcId = RpcId.OutputWorker
     WatchCallbacks.registerWatchCallback(newWatchId, handleFileChange)
-    // @ts-ignore
-    await FileSystemWorker.invoke('FileSystem.watchFile', newWatchId, /* path */ uri, rpcId)
+    await FileSystemWorker.watchFile(newWatchId, uri, rpcId)
   } catch {
     // ignore
   }
