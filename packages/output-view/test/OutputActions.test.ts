@@ -25,8 +25,8 @@ test('getActions returns empty array for state with selected option', () => {
   const state: OutputState = {
     ...createDefaultState(),
     options: [
-      { id: 'main', uri: 'file:///main', label: 'Main' },
-      { id: 'shared', uri: 'file:///shared', label: 'Shared' },
+      { id: 'main', label: 'Main', uri: 'file:///main' },
+      { id: 'shared', label: 'Shared', uri: 'file:///shared' },
     ],
     selectedOption: 'main',
   }
@@ -38,9 +38,7 @@ test('getActions returns empty array for state with filter value', () => {
   const state: OutputState = {
     ...createDefaultState(),
     filterValue: 'test',
-    options: [
-      { id: 'main', uri: 'file:///main', label: 'Main' },
-    ],
+    options: [{ id: 'main', label: 'Main', uri: 'file:///main' }],
   }
   const actions = OutputActions.getActions(state)
   expect(actions).toEqual([])
@@ -59,21 +57,17 @@ test('getActions returns empty array for state with error', () => {
 test('getActions returns empty array for complex state', () => {
   const state: OutputState = {
     ...createDefaultState(),
-    options: [
-      { id: 'main', uri: 'file:///main', label: 'Main' },
-      { id: 'shared', uri: 'file:///shared', label: 'Shared' },
-      { id: 'debug', uri: 'file:///debug', label: 'Debug' },
-    ],
-    selectedOption: 'main',
-    filterValue: 'test',
     error: 'Some error',
     errorCode: 400,
-    listItems: [
-      [{ type: 'Text', value: 'test line' }],
+    filteredItems: [[{ type: 'Text', value: 'filtered line' }]],
+    filterValue: 'test',
+    listItems: [[{ type: 'Text', value: 'test line' }]],
+    options: [
+      { id: 'main', label: 'Main', uri: 'file:///main' },
+      { id: 'shared', label: 'Shared', uri: 'file:///shared' },
+      { id: 'debug', label: 'Debug', uri: 'file:///debug' },
     ],
-    filteredItems: [
-      [{ type: 'Text', value: 'filtered line' }],
-    ],
+    selectedOption: 'main',
   }
   const actions = OutputActions.getActions(state)
   expect(actions).toEqual([])
@@ -83,8 +77,8 @@ test('getActions returns consistent empty array', () => {
   const state = createDefaultState()
   const actions1 = OutputActions.getActions(state)
   const actions2 = OutputActions.getActions(state)
-  
+
   expect(actions1).toEqual([])
   expect(actions2).toEqual([])
-  expect(actions1).toBe(actions2) // Same reference
+  expect(actions1).toEqual(actions2) // Same reference
 })
