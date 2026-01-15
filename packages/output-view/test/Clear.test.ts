@@ -1,9 +1,8 @@
 import { test, expect } from '@jest/globals'
-import { MockRpc } from '@lvce-editor/rpc'
+import { FileSystemWorker } from '@lvce-editor/rpc-registry'
 import type { OutputState } from '../src/parts/OutputState/OutputState.ts'
 import { clear } from '../src/parts/Clear/Clear.ts'
 import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
-import * as FileSystemWorker from '../src/parts/FileSystemWorker/FileSystemWorker.ts'
 import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 
 test('clear - no selected option returns same state', async () => {
@@ -13,25 +12,17 @@ test('clear - no selected option returns same state', async () => {
 })
 
 test('clear - clears file and reloads', async () => {
-  let wroteContent: string | undefined
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, uri: string, content?: string) => {
-      if (method === 'FileSystem.writeFile') {
-        wroteContent = content
-        return undefined
-      }
-      if (method === 'FileSystem.readFile') {
-        return ''
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  const mockRpc = FileSystemWorker.registerMockRpc({
+    'FileSystem.readFile': () => '',
+    'FileSystem.writeFile': () => undefined,
   })
-  FileSystemWorker.set(mockRpc)
   const state: OutputState = { ...createDefaultState(), options: [{ id: 'a', label: 'A', uri: 'file:///a' }], selectedOption: 'a' }
   const result = await clear(state)
-  expect(wroteContent).toBe('')
   expect(result.listItems).toEqual([[{ type: LinePartType.Text, value: '' }]])
   expect(result.error).toBe('')
   expect(result.errorCode).toBe(0)
+  expect(mockRpc.invocations).toEqual([
+    ['FileSystem.writeFile', 'file:///a', ''],
+    ['FileSystem.readFile', 'file:///a'],
+  ])
 })
