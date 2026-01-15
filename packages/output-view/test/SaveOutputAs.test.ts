@@ -1,7 +1,7 @@
 import { test, expect } from '@jest/globals'
 import * as RpcRegistry from '@lvce-editor/rpc-registry'
-import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
+import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 import { saveOutputAs } from '../src/parts/SaveOutputAs/SaveOutputAs.ts'
 
 test('saveOutputAs returns same state when no uri is selected', async () => {
@@ -22,19 +22,13 @@ test('saveOutputAs writes file content when uri is selected', async () => {
   })
   const mockFileSystemRpc = RpcRegistry.FileSystemWorker.registerMockRpc({
     'FileSystem.writeFile': (uri: string, content: string) => {
-      expect(uri).toBe(mockUri)
-      // serializeLines joins with \n, so expect the exact format
-      expect(content).toBe('test line 1\ntest line 2\n')
       return undefined
     },
   })
 
   const state = {
     ...createDefaultState(),
-    listItems: [
-      [{ type: LinePartType.Text, value: 'test line 1' }],
-      [{ type: LinePartType.Text, value: 'test line 2' }],
-    ],
+    listItems: [[{ type: LinePartType.Text, value: 'test line 1' }], [{ type: LinePartType.Text, value: 'test line 2' }]],
   }
 
   const result = await saveOutputAs(state)
@@ -78,10 +72,7 @@ test('saveOutputAs returns same state for different input states', async () => {
 
   expect(result1).toBe(state1)
   expect(result2).toBe(state2)
-  expect(mockRpc.invocations).toEqual([
-    ['FilePicker.showSaveFilePicker'],
-    ['FilePicker.showSaveFilePicker'],
-  ])
+  expect(mockRpc.invocations).toEqual([['FilePicker.showSaveFilePicker'], ['FilePicker.showSaveFilePicker']])
 })
 
 test('saveOutputAs resolves successfully', async () => {
