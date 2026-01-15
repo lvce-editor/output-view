@@ -1,7 +1,6 @@
 import { test, expect } from '@jest/globals'
-import { MockRpc } from '@lvce-editor/rpc'
-import { RendererWorker } from '@lvce-editor/rpc-registry'
-import * as ExtensionHostWorker from '../src/parts/ExtensionHostWorker/ExtensionHostWorker.ts'
+import { registerMockRpc } from '@lvce-editor/rpc-registry'
+import * as RpcRegistry from '@lvce-editor/rpc-registry'
 import { getExtensionOptions } from '../src/parts/GetExtensionOptions/GetExtensionOptions.ts'
 
 test('getExtensionOptions - returns channels on success', async () => {
@@ -10,7 +9,7 @@ test('getExtensionOptions - returns channels on success', async () => {
     { id: 'channel2', label: 'Channel 2', uri: 'uri2' },
   ]
 
-  const mockRendererRpc = MockRpc.create({
+  registerMockRpc(RpcRegistry.RpcId.RendererWorker, {
     commandMap: {},
     invoke: (method: string) => {
       if (method === 'ExtensionHostManagement.activateByEvent') {
@@ -20,7 +19,7 @@ test('getExtensionOptions - returns channels on success', async () => {
     },
   })
 
-  const mockExtensionHostRpc = MockRpc.create({
+  registerMockRpc(RpcRegistry.RpcId.ExtensionHostWorker, {
     commandMap: {},
     invoke: (method: string) => {
       if (method === 'Output.getEnabledProviders') {
@@ -30,15 +29,12 @@ test('getExtensionOptions - returns channels on success', async () => {
     },
   })
 
-  RendererWorker.set(mockRendererRpc)
-  ExtensionHostWorker.set(mockExtensionHostRpc)
-
   const result = await getExtensionOptions()
   expect(result).toEqual(mockChannels)
 })
 
 test('getExtensionOptions - returns empty array on error', async () => {
-  const mockRendererRpc = MockRpc.create({
+  registerMockRpc(RpcRegistry.RpcId.RendererWorker, {
     commandMap: {},
     invoke: (method: string) => {
       if (method === 'ExtensionHostManagement.activateByEvent') {
@@ -48,15 +44,12 @@ test('getExtensionOptions - returns empty array on error', async () => {
     },
   })
 
-  const mockExtensionHostRpc = MockRpc.create({
+  registerMockRpc(RpcRegistry.RpcId.ExtensionHostWorker, {
     commandMap: {},
     invoke: (method: string) => {
       throw new Error('Test error')
     },
   })
-
-  RendererWorker.set(mockRendererRpc)
-  ExtensionHostWorker.set(mockExtensionHostRpc)
 
   const result = await getExtensionOptions()
   expect(result).toEqual([])
@@ -66,7 +59,7 @@ test('getExtensionOptions - calls activateByEvent with onOutput', async () => {
   let activateByEventCalled = false
   let activateByEventEvent = ''
 
-  const mockRendererRpc = MockRpc.create({
+  registerMockRpc(RpcRegistry.RpcId.RendererWorker, {
     commandMap: {},
     invoke: (method: string, event?: string) => {
       if (method === 'ExtensionHostManagement.activateByEvent') {
@@ -78,7 +71,7 @@ test('getExtensionOptions - calls activateByEvent with onOutput', async () => {
     },
   })
 
-  const mockExtensionHostRpc = MockRpc.create({
+  registerMockRpc(RpcRegistry.RpcId.ExtensionHostWorker, {
     commandMap: {},
     invoke: (method: string) => {
       if (method === 'Output.getEnabledProviders') {
@@ -88,9 +81,6 @@ test('getExtensionOptions - calls activateByEvent with onOutput', async () => {
     },
   })
 
-  RendererWorker.set(mockRendererRpc)
-  ExtensionHostWorker.set(mockExtensionHostRpc)
-
   await getExtensionOptions()
   expect(activateByEventCalled).toBe(true)
   expect(activateByEventEvent).toBe('onOutput')
@@ -99,7 +89,7 @@ test('getExtensionOptions - calls activateByEvent with onOutput', async () => {
 test('getExtensionOptions - calls ExtensionHostWorker.invoke with correct method', async () => {
   let invokeMethod = ''
 
-  const mockRendererRpc = MockRpc.create({
+  registerMockRpc(RpcRegistry.RpcId.RendererWorker, {
     commandMap: {},
     invoke: (method: string) => {
       if (method === 'ExtensionHostManagement.activateByEvent') {
@@ -109,16 +99,13 @@ test('getExtensionOptions - calls ExtensionHostWorker.invoke with correct method
     },
   })
 
-  const mockExtensionHostRpc = MockRpc.create({
+  registerMockRpc(RpcRegistry.RpcId.ExtensionHostWorker, {
     commandMap: {},
     invoke: (method: string) => {
       invokeMethod = method
       return []
     },
   })
-
-  RendererWorker.set(mockRendererRpc)
-  ExtensionHostWorker.set(mockExtensionHostRpc)
 
   await getExtensionOptions()
   expect(invokeMethod).toBe('Output.getEnabledProviders')
