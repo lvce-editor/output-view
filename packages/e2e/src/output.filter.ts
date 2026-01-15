@@ -2,7 +2,8 @@ import type { Test } from '@lvce-editor/test-with-playwright'
 
 export const name = 'output.filter'
 
-export const test: Test = async ({ Command, expect, Extension, FileSystem, Locator, Panel }) => {
+// TODO add page object
+export const test: Test = async ({ Command, expect, Extension, FileSystem, Locator, Output, Panel }) => {
   // arrange
   const tmpDir = await FileSystem.getTmpDir({ scheme: 'file' })
   await FileSystem.writeFile(`${tmpDir}/test.txt`, 'div')
@@ -12,7 +13,7 @@ export const test: Test = async ({ Command, expect, Extension, FileSystem, Locat
   await Command.execute('Panel.selectIndex', 1)
 
   // act
-  await Command.execute('Output.selectChannel', 'xyz')
+  await Output.selectChannel('xyz')
 
   // assert
   const select = Locator('[name="output"]')
