@@ -4,13 +4,13 @@ import * as ClassNames from '../src/parts/ClassNames/ClassNames.ts'
 import { getOptionVirtualDom } from '../src/parts/GetOptionVirtualDom/GetOptionVirtualDom.ts'
 
 test('getOptionVirtualDom - renders option with text', () => {
-  const dom = getOptionVirtualDom({ id: 'main', uri: 'file:///main', label: 'Main' })
+  const dom = getOptionVirtualDom({ id: 'main', label: 'Main', uri: 'file:///main' })
 
   expect(dom[0]).toEqual({
-    type: VirtualDomElements.Option,
-    className: ClassNames.Option,
     childCount: 1,
+    className: ClassNames.Option,
+    type: VirtualDomElements.Option,
     value: 'main',
   })
-  expect(dom[1]).toEqual({ type: 12, text: 'Main', childCount: 0 })
+  expect(dom[1]).toEqual({ childCount: 0, text: 'Main', type: 12 })
 })

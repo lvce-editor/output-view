@@ -36,11 +36,11 @@ test('loadContent returns a new state with expected properties', async () => {
   const savedState = {}
   const result = await loadContent(state, savedState)
   expect(result).toMatchObject({
-    message: expect.any(String),
+    collapsedUris: [],
     filterValue: '',
     inputSource: expect.any(Number),
     listItems: [[{ type: LinePartType.Text, value: 'test content' }]],
-    collapsedUris: [],
+    message: expect.any(String),
   })
 })
 

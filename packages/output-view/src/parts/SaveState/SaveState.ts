@@ -2,11 +2,11 @@ import type { OutputState } from '../OutputState/OutputState.ts'
 import type { SavedState } from '../SavedState/SavedState.ts'
 
 export const saveState = (state: OutputState): SavedState => {
-  const { filterValue, collapsedUris, selectedOption, scrollLockEnabled } = state
+  const { collapsedUris, filterValue, scrollLockEnabled, selectedOption } = state
   return {
-    filterValue,
     collapsedUris,
-    selectedOption,
+    filterValue,
     scrollLockEnabled,
+    selectedOption,
   }
 }

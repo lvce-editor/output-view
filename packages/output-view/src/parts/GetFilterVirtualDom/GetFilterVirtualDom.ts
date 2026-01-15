@@ -8,17 +8,17 @@ export const getFilterVirtualDom = (): readonly VirtualDomNode[] => {
   const placeholder = 'Filter'
   return [
     {
-      type: VirtualDomElements.Div,
-      className: ClassNames.Filter,
       childCount: 1,
+      className: ClassNames.Filter,
+      type: VirtualDomElements.Div,
     },
     {
-      type: VirtualDomElements.Input,
-      className: mergeClassNames(ClassNames.InputBox, ClassNames.FilterInput),
       childCount: 0,
-      placeholder,
-      onInput: DomEventListenerFunctions.HandleFilterInput,
+      className: mergeClassNames(ClassNames.InputBox, ClassNames.FilterInput),
       name: InputName.Filter,
+      onInput: DomEventListenerFunctions.HandleFilterInput,
+      placeholder,
+      type: VirtualDomElements.Input,
     },
   ]
 }

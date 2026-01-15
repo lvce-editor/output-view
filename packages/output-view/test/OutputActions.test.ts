@@ -8,8 +8,8 @@ test.skip('getActions - builds actions from state options', () => {
   const state: OutputState = {
     ...createDefaultState(),
     options: [
-      { id: 'main', uri: 'file:///main', label: 'Main' },
-      { id: 'shared', uri: 'file:///shared', label: 'Shared' },
+      { id: 'main', label: 'Main', uri: 'file:///main' },
+      { id: 'shared', label: 'Shared', uri: 'file:///shared' },
     ],
   }
   const actions = OutputActions.getActions(state)

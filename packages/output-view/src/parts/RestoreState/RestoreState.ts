@@ -27,7 +27,7 @@ export const restoreState = (savedState: unknown): RestoredState => {
   const scrollLockEnabled = getSavedScrollLockEnabled(savedState)
   return {
     filterValue,
-    selectedOption,
     scrollLockEnabled,
+    selectedOption,
   }
 }

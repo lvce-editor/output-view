@@ -7,14 +7,14 @@ test('getBadgeVirtualDom returns correct virtual DOM structure', () => {
 
   expect(result).toHaveLength(2)
   expect(result[0]).toEqual({
-    type: VirtualDomElements.Div,
-    className: 'Badge error',
     childCount: 1,
+    className: 'Badge error',
+    type: VirtualDomElements.Div,
   })
   expect(result[1]).toEqual({
-    type: 12,
-    text: '5',
     childCount: 0,
+    text: '5',
+    type: 12,
   })
 })
 
@@ -23,14 +23,14 @@ test('getBadgeVirtualDom with zero count', () => {
 
   expect(result).toHaveLength(2)
   expect(result[0]).toEqual({
-    type: VirtualDomElements.Div,
-    className: 'Badge warning',
     childCount: 1,
+    className: 'Badge warning',
+    type: VirtualDomElements.Div,
   })
   expect(result[1]).toEqual({
-    type: 12,
-    text: '0',
     childCount: 0,
+    text: '0',
+    type: 12,
   })
 })
 
@@ -39,14 +39,14 @@ test('getBadgeVirtualDom with large count', () => {
 
   expect(result).toHaveLength(2)
   expect(result[0]).toEqual({
-    type: VirtualDomElements.Div,
-    className: 'Badge info',
     childCount: 1,
+    className: 'Badge info',
+    type: VirtualDomElements.Div,
   })
   expect(result[1]).toEqual({
-    type: 12,
-    text: '999',
     childCount: 0,
+    text: '999',
+    type: 12,
   })
 })
 
@@ -55,13 +55,13 @@ test('getBadgeVirtualDom with empty className', () => {
 
   expect(result).toHaveLength(2)
   expect(result[0]).toEqual({
-    type: VirtualDomElements.Div,
-    className: 'Badge ',
     childCount: 1,
+    className: 'Badge ',
+    type: VirtualDomElements.Div,
   })
   expect(result[1]).toEqual({
-    type: 12,
-    text: '3',
     childCount: 0,
+    text: '3',
+    type: 12,
   })
 })

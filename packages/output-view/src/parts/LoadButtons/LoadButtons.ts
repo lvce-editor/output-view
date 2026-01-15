@@ -5,19 +5,19 @@ import * as OutputStrings from '../OutputStrings/OutputStrings.ts'
 export const loadButtons = (): readonly ActionButton[] => {
   return [
     {
+      icon: 'MaskIconClearAll',
       id: InputName.Clear,
       label: OutputStrings.clearOutput(),
-      icon: 'MaskIconClearAll',
     },
     {
+      icon: 'MaskIconListFlat',
       id: InputName.ScrollLock,
       label: OutputStrings.turnOffAutoScroll(),
-      icon: 'MaskIconListFlat',
     },
     {
+      icon: 'MaskIconSettingsGear',
       id: InputName.Settings,
       label: OutputStrings.settings(),
-      icon: 'MaskIconSettingsGear',
     },
   ]
 }

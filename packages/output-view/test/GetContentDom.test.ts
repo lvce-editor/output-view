@@ -6,11 +6,11 @@ import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 test('getContentDom - renders container and lines', () => {
   const dom = getContentDom([[{ type: LinePartType.Text, value: 'x' }], [{ type: LinePartType.Text, value: 'y' }]], '')
   expect(dom[0]).toEqual({
-    type: VirtualDomElements.Div,
+    childCount: 2,
     className: 'OutputContent',
     role: 'log',
     tabIndex: 0,
-    childCount: 2,
+    type: VirtualDomElements.Div,
   })
   // container + two lines (each: parent + text)
   expect(dom.length).toBe(1 + 2 * 2)

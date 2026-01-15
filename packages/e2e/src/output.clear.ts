@@ -3,7 +3,7 @@ import type { Test } from '@lvce-editor/test-with-playwright'
 export const name = 'output.clear'
 
 // TODO add page object
-export const test: Test = async ({ Output, FileSystem, Panel, Extension, Locator, expect }) => {
+export const test: Test = async ({ expect, Extension, FileSystem, Locator, Output, Panel }) => {
   // arrange
   const tmpDir = await FileSystem.getTmpDir({ scheme: 'file' })
 
