@@ -5,9 +5,9 @@ import * as ClassNames from '../ClassNames/ClassNames.ts'
 import * as LinePartType from '../LinePartType/LinePartType.ts'
 
 const parentNode: VirtualDomNode = {
-  type: VirtualDomElements.Div,
-  className: ClassNames.Line,
   childCount: 1,
+  className: ClassNames.Line,
+  type: VirtualDomElements.Div,
 }
 
 export const getLineDom = (parts: readonly LinePart[]): readonly VirtualDomNode[] => {
@@ -16,7 +16,7 @@ export const getLineDom = (parts: readonly LinePart[]): readonly VirtualDomNode[
     if (part.type === LinePartType.Text) {
       children.push(text(part.value))
     } else {
-      children.push({ type: VirtualDomElements.A, href: part.value, target: '_blank', rel: 'noopener noreferrer', childCount: 1 }, text(part.value))
+      children.push({ childCount: 1, href: part.value, rel: 'noopener noreferrer', target: '_blank', type: VirtualDomElements.A }, text(part.value))
     }
   }
   const lineNode: VirtualDomNode = { ...parentNode, childCount: children.length }

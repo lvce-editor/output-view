@@ -30,10 +30,10 @@ test('should return same state when scroll lock already enabled', async () => {
 test('should preserve all other state properties when enabling scroll lock', async () => {
   const state: OutputState = {
     ...createDefaultState(),
-    scrollLockEnabled: false,
     error: 'test error',
-    focusedIndex: 5,
     filterValue: 'test filter',
+    focusedIndex: 5,
+    scrollLockEnabled: false,
   }
 
   const result = await enableScrollLock(state)

@@ -7,7 +7,7 @@ import * as FileSystemWorker from '../src/parts/FileSystemWorker/FileSystemWorke
 import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 
 test('clear - no selected option returns same state', async () => {
-  const state: OutputState = { ...createDefaultState(), options: [{ id: 'a', uri: 'file:///a', label: 'A' }], selectedOption: 'x' }
+  const state: OutputState = { ...createDefaultState(), options: [{ id: 'a', label: 'A', uri: 'file:///a' }], selectedOption: 'x' }
   const result = await clear(state)
   expect(result).toBe(state)
 })
@@ -28,7 +28,7 @@ test('clear - clears file and reloads', async () => {
     },
   })
   FileSystemWorker.set(mockRpc)
-  const state: OutputState = { ...createDefaultState(), options: [{ id: 'a', uri: 'file:///a', label: 'A' }], selectedOption: 'a' }
+  const state: OutputState = { ...createDefaultState(), options: [{ id: 'a', label: 'A', uri: 'file:///a' }], selectedOption: 'a' }
   const result = await clear(state)
   expect(wroteContent).toBe('')
   expect(result.listItems).toEqual([[{ type: LinePartType.Text, value: '' }]])

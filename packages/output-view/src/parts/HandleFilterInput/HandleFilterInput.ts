@@ -7,8 +7,8 @@ export const handleFilterInput = async (state: OutputState, value: string, input
   const filteredItems = filterItems(listItems, value)
   return {
     ...state,
-    filterValue: value,
     filteredItems: filteredItems,
+    filterValue: value,
     inputSource,
   }
 }

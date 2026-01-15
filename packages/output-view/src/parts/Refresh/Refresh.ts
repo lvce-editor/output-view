@@ -8,13 +8,13 @@ export const refresh = async (state: OutputState): Promise<OutputState> => {
   if (!matchingOption) {
     return state
   }
-  const { lines, error, code } = await loadLines(matchingOption.uri)
+  const { code, error, lines } = await loadLines(matchingOption.uri)
   const filteredItems = filterItems(lines, filterValue)
   return {
     ...state,
-    listItems: lines,
-    filteredItems,
     error,
     errorCode: code,
+    filteredItems,
+    listItems: lines,
   }
 }

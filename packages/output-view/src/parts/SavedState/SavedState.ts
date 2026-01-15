@@ -1,6 +1,6 @@
 export interface SavedState {
-  readonly filterValue: string
   readonly collapsedUris: readonly string[]
-  readonly selectedOption: string
+  readonly filterValue: string
   readonly scrollLockEnabled: boolean
+  readonly selectedOption: string
 }
