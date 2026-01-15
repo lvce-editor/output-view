@@ -1,11 +1,11 @@
 import { test, expect } from '@jest/globals'
-import { handleData } from '../src/parts/HandleData/HandleData.ts'
 import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
+import { handleData } from '../src/parts/HandleData/HandleData.ts'
 
 test('handleData returns the same state with all properties preserved', async () => {
   const state = createDefaultState()
   const result = await handleData(state)
-  
+
   expect(result).toEqual(state)
   expect(result).not.toBe(state) // Should be a new object
 })
@@ -13,18 +13,18 @@ test('handleData returns the same state with all properties preserved', async ()
 test('handleData preserves state properties with custom values', async () => {
   const state = {
     ...createDefaultState(),
-    uri: 'file:///test.log',
-    message: 'Test message',
     error: 'Test error',
     errorCode: 404,
     filterValue: 'test',
     focusedIndex: 5,
     height: 100,
-    width: 200,
+    message: 'Test message',
+    uri: 'file:///test.log',
     watchId: 123,
+    width: 200,
   }
   const result = await handleData(state)
-  
+
   expect(result).toEqual(state)
   expect(result).not.toBe(state)
 })
@@ -35,7 +35,7 @@ test('handleData preserves array properties', async () => {
     collapsedUris: ['uri1', 'uri2'],
   }
   const result = await handleData(state)
-  
+
   expect(result).toEqual(state)
   expect(result).not.toBe(state)
   expect(result.collapsedUris).toEqual(['uri1', 'uri2'])
@@ -69,7 +69,7 @@ test('handleData handles state with all properties set', async () => {
     y: 20,
   }
   const result = await handleData(state)
-  
+
   expect(result).toEqual(state)
   expect(result).not.toBe(state)
 })
@@ -77,7 +77,7 @@ test('handleData handles state with all properties set', async () => {
 test('handleData returns a promise', async () => {
   const state = createDefaultState()
   const result = handleData(state)
-  
+
   expect(result).toBeInstanceOf(Promise)
   const resolved = await result
   expect(resolved).toEqual(state)
@@ -86,7 +86,7 @@ test('handleData returns a promise', async () => {
 test('handleData handles empty state object', async () => {
   const state = createDefaultState()
   const result = await handleData(state)
-  
+
   // All default properties should be preserved
   expect(result.buttons).toEqual([])
   expect(result.collapsedUris).toEqual([])

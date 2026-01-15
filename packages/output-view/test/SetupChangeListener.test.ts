@@ -38,7 +38,7 @@ test('should cleanup old watch id and setup new one', async () => {
   expect(WatchCallbacks.hasWatchCallback(newWatchId)).toBe(true)
   expect(mockRpc.invocations).toEqual([
     ['FileSystem.unwatchFile', oldWatchId],
-    ['FileSystem.watchFile', newWatchId, uri, 7001]
+    ['FileSystem.watchFile', newWatchId, uri, 7001],
   ])
 })
 
@@ -50,15 +50,13 @@ test('should handle errors gracefully', async () => {
     'FileSystem.watchFile': () => undefined,
   })
 
-  const oldWatchId = 123  // Non-zero to trigger unwatchFile
+  const oldWatchId = 123 // Non-zero to trigger unwatchFile
   const newWatchId = 456
   const uri = '/test/path'
 
   // Should not throw, but watchFile won't be called due to error handling
   await expect(setupChangeListener(oldWatchId, newWatchId, uri)).resolves.toBeUndefined()
-  expect(mockRpc.invocations).toEqual([
-    ['FileSystem.unwatchFile', oldWatchId]
-  ])
+  expect(mockRpc.invocations).toEqual([['FileSystem.unwatchFile', oldWatchId]])
 })
 
 test('should call FileSystem methods with correct parameters', async () => {
@@ -75,6 +73,6 @@ test('should call FileSystem methods with correct parameters', async () => {
 
   expect(mockRpc.invocations).toEqual([
     ['FileSystem.unwatchFile', oldWatchId],
-    ['FileSystem.watchFile', newWatchId, uri, 7001]
+    ['FileSystem.watchFile', newWatchId, uri, 7001],
   ])
 })
