@@ -17,10 +17,10 @@ export const getActionsVirtualDom = (options: readonly Option[], buttons: readon
   const childCount = getChildCount(buttons.length)
   return [
     {
-      type: VirtualDomElements.Div,
+      childCount,
       className: ClassNames.Actions,
       role: AriaRoles.ToolBar,
-      childCount,
+      type: VirtualDomElements.Div,
     },
     ...getFilterVirtualDom(),
     ...getSelectVirtualDom(options),

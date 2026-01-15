@@ -1,4 +1,4 @@
 import * as ViewletRegistry from '@lvce-editor//viewlet-registry'
 import type { OutputState } from '../OutputState/OutputState.ts'
 
-export const { get, set, wrapCommand, wrapGetter, getKeys, getCommandIds, registerCommands, dispose } = ViewletRegistry.create<OutputState>()
+export const { dispose, get, getCommandIds, getKeys, registerCommands, set, wrapCommand, wrapGetter } = ViewletRegistry.create<OutputState>()

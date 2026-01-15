@@ -1,11 +1,11 @@
 import { test, expect } from '@jest/globals'
 import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as ExtensionHostWorker from '../src/parts/ExtensionHostWorker/ExtensionHostWorker.ts'
 import * as FileSystemWorker from '../src/parts/FileSystemWorker/FileSystemWorker.ts'
 import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 import { loadContent } from '../src/parts/LoadContent/LoadContent.ts'
-import * as RendererWorker from '../src/parts/RendererWorker/RendererWorker.ts'
 
 test('loadContent returns a new state with expected properties', async () => {
   FileSystemWorker.set(
@@ -36,11 +36,11 @@ test('loadContent returns a new state with expected properties', async () => {
   const savedState = {}
   const result = await loadContent(state, savedState)
   expect(result).toMatchObject({
-    message: expect.any(String),
+    collapsedUris: [],
     filterValue: '',
     inputSource: expect.any(Number),
     listItems: [[{ type: LinePartType.Text, value: 'test content' }]],
-    collapsedUris: [],
+    message: expect.any(String),
   })
 })
 

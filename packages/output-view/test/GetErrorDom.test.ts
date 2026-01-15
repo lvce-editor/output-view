@@ -10,20 +10,20 @@ test('getErrorDom - empty when no error', () => {
 test('getErrorDom - log file not found uses special message', () => {
   const dom = getErrorDom(ErrorCode.LogFileNotFound, 'log file not found')
   expect(dom[0]).toEqual({
-    type: VirtualDomElements.Div,
+    childCount: 1,
     className: 'Message',
     tabIndex: 0,
-    childCount: 1,
+    type: VirtualDomElements.Div,
   })
 })
 
 test('getErrorDom - generic error wraps text', () => {
   const dom = getErrorDom(0, 'oops')
   expect(dom[0]).toEqual({
-    type: VirtualDomElements.Div,
+    childCount: 1,
     className: 'Error',
     tabIndex: 0,
-    childCount: 1,
+    type: VirtualDomElements.Div,
   })
-  expect(dom[1]).toEqual({ type: 12, text: 'oops', childCount: 0 })
+  expect(dom[1]).toEqual({ childCount: 0, text: 'oops', type: 12 })
 })

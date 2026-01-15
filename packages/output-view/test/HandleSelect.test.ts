@@ -1,14 +1,14 @@
 import { test, expect } from '@jest/globals'
 import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { OutputState } from '../src/parts/OutputState/OutputState.ts'
 import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as FileSystemWorker from '../src/parts/FileSystemWorker/FileSystemWorker.ts'
 import { handleSelect } from '../src/parts/HandleSelect/HandleSelect.ts'
 import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
-import * as RendererWorker from '../src/parts/RendererWorker/RendererWorker.ts'
 
 test('handleSelect - no matching option returns same state', async () => {
-  const state: OutputState = { ...createDefaultState(), options: [{ id: 'a', uri: 'file:///a', label: 'A' }] }
+  const state: OutputState = { ...createDefaultState(), options: [{ id: 'a', label: 'A', uri: 'file:///a' }] }
   const result = await handleSelect(state, 'x')
   expect(result).toBe(state)
 })
@@ -27,7 +27,7 @@ test('handleSelect - loads lines and updates state', async () => {
   FileSystemWorker.set(mockRpc)
   const state: OutputState = {
     ...createDefaultState(),
-    options: [{ id: 'a', uri: 'file:///a', label: 'A' }],
+    options: [{ id: 'a', label: 'A', uri: 'file:///a' }],
     selectedOption: 'a',
   }
   const result = await handleSelect(state, 'a')

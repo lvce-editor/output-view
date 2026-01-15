@@ -1,13 +1,13 @@
 import { test, expect } from '@jest/globals'
 import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as ExtensionHostWorker from '../src/parts/ExtensionHostWorker/ExtensionHostWorker.ts'
 import { getExtensionOptions } from '../src/parts/GetExtensionOptions/GetExtensionOptions.ts'
-import * as RendererWorker from '../src/parts/RendererWorker/RendererWorker.ts'
 
 test('getExtensionOptions - returns channels on success', async () => {
   const mockChannels = [
-    { id: 'channel1', uri: 'uri1', label: 'Channel 1' },
-    { id: 'channel2', uri: 'uri2', label: 'Channel 2' },
+    { id: 'channel1', label: 'Channel 1', uri: 'uri1' },
+    { id: 'channel2', label: 'Channel 2', uri: 'uri2' },
   ]
 
   const mockRendererRpc = MockRpc.create({

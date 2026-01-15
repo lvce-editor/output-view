@@ -16,7 +16,7 @@ test('loadLines - success', async () => {
   })
   FileSystemWorker.set(mockRpc)
   const result = await loadLines('file:///x')
-  expect(result).toEqual({ error: '', lines: [[{ type: LinePartType.Text, value: 'a' }], [{ type: LinePartType.Text, value: 'b' }]], code: 0 })
+  expect(result).toEqual({ code: 0, error: '', lines: [[{ type: LinePartType.Text, value: 'a' }], [{ type: LinePartType.Text, value: 'b' }]] })
 })
 
 test('loadLines - file not found', async () => {
@@ -32,7 +32,7 @@ test('loadLines - file not found', async () => {
   })
   FileSystemWorker.set(mockRpc)
   const result = await loadLines('file:///missing')
-  expect(result).toEqual({ error: 'log file not found', lines: [], code: 1 })
+  expect(result).toEqual({ code: 1, error: 'log file not found', lines: [] })
 })
 
 test('loadLines - other error', async () => {
@@ -47,5 +47,5 @@ test('loadLines - other error', async () => {
   })
   FileSystemWorker.set(mockRpc)
   const result = await loadLines('file:///x')
-  expect(result).toEqual({ error: 'Error: boom', lines: [], code: 2 })
+  expect(result).toEqual({ code: 2, error: 'Error: boom', lines: [] })
 })

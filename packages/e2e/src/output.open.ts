@@ -5,7 +5,7 @@ export const name = 'output.open'
 // export const skip = 1
 
 // TODO add page object
-export const test: Test = async ({ Command, FileSystem, Panel, Extension, Locator, expect }) => {
+export const test: Test = async ({ Command, expect, Extension, FileSystem, Locator, Panel }) => {
   // arrange
   const tmpDir = await FileSystem.getTmpDir({ scheme: 'file' })
   await FileSystem.writeFile(`${tmpDir}/test.txt`, 'div')

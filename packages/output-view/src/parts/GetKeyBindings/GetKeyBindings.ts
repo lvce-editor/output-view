@@ -5,58 +5,58 @@ import * as WhenExpression from '../WhenExpression/WhenExpression.ts'
 export const getKeyBindings = (): readonly KeyBinding[] => {
   return [
     {
-      key: KeyCode.DownArrow,
       command: 'Problems.focusNext',
+      key: KeyCode.DownArrow,
       when: WhenExpression.FocusProblems,
     },
     {
-      key: KeyCode.UpArrow,
       command: 'Problems.focusPrevious',
+      key: KeyCode.UpArrow,
       when: WhenExpression.FocusProblems,
     },
     {
-      key: KeyCode.Home,
       command: 'Problems.focusFirst',
+      key: KeyCode.Home,
       when: WhenExpression.FocusProblems,
     },
     {
+      command: 'Problems.focusFirst',
       key: KeyCode.PageUp,
-      command: 'Problems.focusFirst',
       when: WhenExpression.FocusProblems,
     },
     {
+      command: 'Problems.focusLast',
       key: KeyCode.PageDown,
-      command: 'Problems.focusLast',
       when: WhenExpression.FocusProblems,
     },
     {
+      command: 'Problems.focusLast',
       key: KeyCode.End,
-      command: 'Problems.focusLast',
       when: WhenExpression.FocusProblems,
     },
     {
-      key: KeyCode.Space,
       command: 'Problems.selectCurrent',
+      key: KeyCode.Space,
       when: WhenExpression.FocusProblems,
     },
     {
-      key: KeyCode.Home,
       command: 'Problems.focusFirst',
+      key: KeyCode.Home,
       when: WhenExpression.FocusProblems,
     },
     {
-      key: KeyCode.End,
       command: 'Problems.focusLast',
+      key: KeyCode.End,
       when: WhenExpression.FocusProblems,
     },
     {
-      key: KeyCode.LeftArrow,
       command: 'Problems.handleArrowLeft',
+      key: KeyCode.LeftArrow,
       when: WhenExpression.FocusProblems,
     },
     {
-      key: KeyCode.RightArrow,
       command: 'Problems.handleArrowRight',
+      key: KeyCode.RightArrow,
       when: WhenExpression.FocusProblems,
     },
   ]

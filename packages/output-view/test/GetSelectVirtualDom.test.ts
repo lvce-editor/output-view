@@ -8,18 +8,18 @@ import * as InputName from '../src/parts/InputName/InputName.ts'
 
 test('getSelectVirtualDom - renders select with options', () => {
   const options: readonly Option[] = [
-    { id: 'a', uri: 'file:///a', label: 'A' },
-    { id: 'b', uri: 'file:///b', label: 'B' },
+    { id: 'a', label: 'A', uri: 'file:///a' },
+    { id: 'b', label: 'B', uri: 'file:///b' },
   ]
 
   const dom = getSelectVirtualDom(options)
 
   expect(dom[0]).toEqual({
-    type: VirtualDomElements.Select,
-    className: ClassNames.Select,
     childCount: options.length,
+    className: ClassNames.Select,
     name: InputName.Output,
     onChange: DomEventListenerFunctions.HandleSelect,
+    type: VirtualDomElements.Select,
   })
   // select + 2 nodes per option
   expect(dom.length).toBe(1 + 2 * options.length)

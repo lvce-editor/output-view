@@ -9,22 +9,22 @@ export const loadLines = async (uri: string): Promise<LoadLinesResult> => {
     const content = await FileSystemWorker.readFile(uri)
     const lines = content.split('\n').map(parseLine)
     return {
+      code: 0,
       error: '',
       lines,
-      code: 0,
     }
   } catch (error) {
     if (isFileNotFoundError(error)) {
       return {
+        code: 1,
         error: `log file not found`,
         lines: [],
-        code: 1,
       }
     }
     return {
+      code: 2,
       error: `${error}`,
       lines: [],
-      code: 2,
     }
   }
 }

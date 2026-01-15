@@ -4,13 +4,13 @@ import * as ClassNames from '../ClassNames/ClassNames.ts'
 
 export const getInputBoxVirtualDom = (name: string, onInput: string, placeholder: string): VirtualDomNode => {
   return {
-    type: VirtualDomElements.Input,
-    className: ClassNames.InputBox,
     autocapitalize: 'off',
     autocorrect: 'off',
+    className: ClassNames.InputBox,
     name,
     onInput: onInput,
     placeholder: placeholder,
     spellcheck: false,
+    type: VirtualDomElements.Input,
   }
 }

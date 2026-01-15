@@ -25,9 +25,9 @@ test('disableScrollLock - when scrollLockEnabled is false, returns same state', 
 test('disableScrollLock - preserves other state properties', async () => {
   const state = {
     ...createDefaultState(),
-    scrollLockEnabled: true,
     error: 'test error',
     filterValue: 'test filter',
+    scrollLockEnabled: true,
   }
   const result = await disableScrollLock(state)
   expect(result.error).toBe('test error')
