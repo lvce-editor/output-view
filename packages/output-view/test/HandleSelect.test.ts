@@ -28,7 +28,7 @@ test('handleSelect - loads lines and updates state', async () => {
   expect(result.errorCode).toBe(0)
   expect(mockFileSystemRpc.invocations).toEqual([
     ['FileSystem.readFile', 'file:///a'],
-    ['FileSystem.watchFile', expect.any(Number), 'file:///a', expect.any(Number)]
+    ['FileSystem.watchFile', expect.any(Number), 'file:///a', expect.any(Number)],
   ])
   expect(mockRendererRpc.invocations).toEqual([])
 })

@@ -30,15 +30,13 @@ test('loadContent returns a new state with expected properties', async () => {
   })
   expect(mockFileSystemRpc.invocations).toEqual([
     ['FileSystem.readFile', expect.any(String)],
-    ['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)]
+    ['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)],
   ])
   expect(mockRendererRpc.invocations).toEqual([
     ['ExtensionHostManagement.activateByEvent', 'onOutput', undefined, undefined],
-    ['PlatformPaths.getLogsDir']
+    ['PlatformPaths.getLogsDir'],
   ])
-  expect(mockExtensionHostRpc.invocations).toEqual([
-    ['Output.getEnabledProviders']
-  ])
+  expect(mockExtensionHostRpc.invocations).toEqual([['Output.getEnabledProviders']])
 })
 
 test('loadContent handles savedState with collapsedUris', async () => {
@@ -63,15 +61,13 @@ test('loadContent handles savedState with collapsedUris', async () => {
   expect(result.collapsedUris).toEqual(['uri1', 'uri2', 'uri3'])
   expect(mockFileSystemRpc.invocations).toEqual([
     ['FileSystem.readFile', expect.any(String)],
-    ['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)]
+    ['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)],
   ])
   expect(mockRendererRpc.invocations).toEqual([
     ['ExtensionHostManagement.activateByEvent', 'onOutput', undefined, undefined],
-    ['PlatformPaths.getLogsDir']
+    ['PlatformPaths.getLogsDir'],
   ])
-  expect(mockExtensionHostRpc.invocations).toEqual([
-    ['Output.getEnabledProviders']
-  ])
+  expect(mockExtensionHostRpc.invocations).toEqual([['Output.getEnabledProviders']])
 })
 
 test('loadContent handles savedState with invalid collapsedUris', async () => {
@@ -96,15 +92,13 @@ test('loadContent handles savedState with invalid collapsedUris', async () => {
   expect(result.collapsedUris).toEqual([])
   expect(mockFileSystemRpc.invocations).toEqual([
     ['FileSystem.readFile', expect.any(String)],
-    ['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)]
+    ['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)],
   ])
   expect(mockRendererRpc.invocations).toEqual([
     ['ExtensionHostManagement.activateByEvent', 'onOutput', undefined, undefined],
-    ['PlatformPaths.getLogsDir']
+    ['PlatformPaths.getLogsDir'],
   ])
-  expect(mockExtensionHostRpc.invocations).toEqual([
-    ['Output.getEnabledProviders']
-  ])
+  expect(mockExtensionHostRpc.invocations).toEqual([['Output.getEnabledProviders']])
 })
 
 test('loadContent handles savedState with mixed collapsedUris', async () => {
@@ -129,15 +123,13 @@ test('loadContent handles savedState with mixed collapsedUris', async () => {
   expect(result.collapsedUris).toEqual([])
   expect(mockFileSystemRpc.invocations).toEqual([
     ['FileSystem.readFile', expect.any(String)],
-    ['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)]
+    ['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)],
   ])
   expect(mockRendererRpc.invocations).toEqual([
     ['ExtensionHostManagement.activateByEvent', 'onOutput', undefined, undefined],
-    ['PlatformPaths.getLogsDir']
+    ['PlatformPaths.getLogsDir'],
   ])
-  expect(mockExtensionHostRpc.invocations).toEqual([
-    ['Output.getEnabledProviders']
-  ])
+  expect(mockExtensionHostRpc.invocations).toEqual([['Output.getEnabledProviders']])
 })
 
 test('loadContent handles savedState with null collapsedUris', async () => {
@@ -162,13 +154,11 @@ test('loadContent handles savedState with null collapsedUris', async () => {
   expect(result.collapsedUris).toEqual([])
   expect(mockFileSystemRpc.invocations).toEqual([
     ['FileSystem.readFile', expect.any(String)],
-    ['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)]
+    ['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)],
   ])
   expect(mockRendererRpc.invocations).toEqual([
     ['ExtensionHostManagement.activateByEvent', 'onOutput', undefined, undefined],
-    ['PlatformPaths.getLogsDir']
+    ['PlatformPaths.getLogsDir'],
   ])
-  expect(mockExtensionHostRpc.invocations).toEqual([
-    ['Output.getEnabledProviders']
-  ])
+  expect(mockExtensionHostRpc.invocations).toEqual([['Output.getEnabledProviders']])
 })
