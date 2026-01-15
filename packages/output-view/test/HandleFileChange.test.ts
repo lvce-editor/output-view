@@ -60,13 +60,13 @@ test('should handle file change with multiple states where one matches', async (
   const state3 = { ...createDefaultState(), watchId: 789 }
 
   // Register the states
-  const key1 = 'test-key-1'
-  const key2 = 'test-key-2'
-  const key3 = 'test-key-3'
+  const key1 = 1
+  const key2 = 2
+  const key3 = 3
 
-  OutputStates.set(key1, { newState: state1 })
-  OutputStates.set(key2, { newState: state2 })
-  OutputStates.set(key3, { newState: state3 })
+  OutputStates.set(key1, state1, state1)
+  OutputStates.set(key2, state2, state2)
+  OutputStates.set(key3, state3, state3)
 
   await handleFileChange(456)
 
@@ -90,13 +90,13 @@ test('should handle file change with multiple matching watchIds', async () => {
   const state3 = { ...createDefaultState(), watchId: 456 }
 
   // Register the states
-  const key1 = 'test-key-1'
-  const key2 = 'test-key-2'
-  const key3 = 'test-key-3'
+  const key1 = 4
+  const key2 = 5
+  const key3 = 6
 
-  OutputStates.set(key1, { newState: state1 })
-  OutputStates.set(key2, { newState: state2 })
-  OutputStates.set(key3, { newState: state3 })
+  OutputStates.set(key1, state1, state1)
+  OutputStates.set(key2, state2, state2)
+  OutputStates.set(key3, state3, state3)
 
   await handleFileChange(123)
 
@@ -121,8 +121,8 @@ test('should handle file change with zero watchId', async () => {
   }
 
   // Register the state
-  const key = 'test-key'
-  OutputStates.set(key, { newState: state })
+  const key = 8
+  OutputStates.set(key, state, state)
 
   await handleFileChange(0)
 
@@ -144,8 +144,8 @@ test('should handle file change with negative watchId', async () => {
   }
 
   // Register the state
-  const key = 'test-key'
-  OutputStates.set(key, { newState: state })
+  const key = 9
+  OutputStates.set(key, state, state)
 
   await handleFileChange(-1)
 
@@ -167,11 +167,11 @@ test('should handle file change when refresh throws error', async () => {
   }
 
   // Register the state
-  const key = 'test-key'
-  OutputStates.set(key, { newState: state })
+  const key = 10
+  OutputStates.set(key, state, state)
 
-  // The function should not throw even if refresh fails
-  await expect(handleFileChange(123)).resolves.toBeUndefined()
+  // The function will throw if refresh fails
+  await expect(handleFileChange(123)).rejects.toThrow('Refresh failed')
 
   expect(mockRpc.invocations).toEqual([['Output.refresh']])
 
