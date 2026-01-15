@@ -7,17 +7,17 @@ import { getActionsVirtualDom } from '../src/parts/GetActionsVirtualDom/GetActio
 
 test('getActionsVirtualDom - wraps select in actions container', () => {
   const options: readonly Option[] = [
-    { id: 'one', uri: 'file:///one', label: 'One' },
-    { id: 'two', uri: 'file:///two', label: 'Two' },
+    { id: 'one', label: 'One', uri: 'file:///one' },
+    { id: 'two', label: 'Two', uri: 'file:///two' },
   ]
 
   const buttons: readonly ActionButton[] = []
   const result = getActionsVirtualDom(options, buttons)
 
   expect(result[0]).toEqual({
-    type: VirtualDomElements.Div,
+    childCount: 2,
     className: ClassNames.Actions,
     role: 'toolbar',
-    childCount: 2,
+    type: VirtualDomElements.Div,
   })
 })

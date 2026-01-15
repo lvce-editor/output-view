@@ -4,12 +4,11 @@ export const name = 'output.replace'
 
 export const skip = 1
 
-// TODO add page object
-export const test: Test = async ({ QuickPick, Command, FileSystem, Panel, Extension, Locator, expect }) => {
+export const test: Test = async ({ Command, expect, Extension, FileSystem, Locator, Panel, QuickPick }) => {
   // arrange
-  const tmpDir = await FileSystem.getTmpDir()
+  const tmpDir = await FileSystem.getTmpDir({ scheme: 'file' })
   await FileSystem.writeFile(`${tmpDir}/test.txt`, 'div')
-  const extensionUri = import.meta.resolve('../fixtures/sample.output-channel-replace').toString()
+  const extensionUri = import.meta.resolve('../fixtures/sample.output-channel-replace')
   await Extension.addWebExtension(extensionUri)
   await Panel.open('Output')
   await Command.execute('Panel.selectIndex', 1)

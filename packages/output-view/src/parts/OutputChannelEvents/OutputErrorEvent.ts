@@ -1,5 +1,5 @@
 export interface OutputErrorEvent {
-  readonly type: 'error'
-  readonly seq: number
   readonly message: string
+  readonly seq: number
+  readonly type: 'error'
 }

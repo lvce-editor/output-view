@@ -2,20 +2,18 @@ import type { Test } from '@lvce-editor/test-with-playwright'
 
 export const name = 'output.clear'
 
-export const skip = 1
-
-// TODO add page object
-export const test: Test = async ({ Command, FileSystem, Panel, Extension, Locator, expect }) => {
+export const test: Test = async ({ expect, Extension, FileSystem, Locator, Output, Panel }) => {
   // arrange
-  const tmpDir = await FileSystem.getTmpDir()
+  const tmpDir = await FileSystem.getTmpDir({ scheme: 'file' })
+
   await FileSystem.writeFile(`${tmpDir}/test.txt`, 'div')
-  const extensionUri = import.meta.resolve('../fixtures/sample.output-channel-basic').toString()
+  const extensionUri = import.meta.resolve('../fixtures/sample.output-channel-basic')
   await Extension.addWebExtension(extensionUri)
   await Panel.open('Output')
-  await Command.execute('Panel.selectIndex', 1)
+  await Output.show()
 
   // act
-  await Command.execute('Output.selectChannel', 'xyz')
+  await Output.selectChannel('xyz')
 
   // assert
   const select = Locator('[name="output"]')
@@ -24,7 +22,7 @@ export const test: Test = async ({ Command, FileSystem, Panel, Extension, Locato
   await expect(text).toHaveText('test content')
 
   // act
-  await Command.execute('Output.clear')
+  await Output.clear()
 
   // assert
   await expect(text).toHaveText('')

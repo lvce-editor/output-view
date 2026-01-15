@@ -3,22 +3,23 @@ import { mergeClassNames, VirtualDomElements } from '@lvce-editor/virtual-dom-wo
 import * as ClassNames from '../ClassNames/ClassNames.ts'
 import * as DomEventListenerFunctions from '../DomEventListenerFunctions/DomEventListenerFunctions.ts'
 import * as InputName from '../InputName/InputName.ts'
+import * as OutputStrings from '../OutputStrings/OutputStrings.ts'
 
 export const getFilterVirtualDom = (): readonly VirtualDomNode[] => {
-  const placeholder = 'Filter'
+  const placeholder = OutputStrings.filter()
   return [
     {
-      type: VirtualDomElements.Div,
-      className: ClassNames.Filter,
       childCount: 1,
+      className: ClassNames.Filter,
+      type: VirtualDomElements.Div,
     },
     {
-      type: VirtualDomElements.Input,
-      className: mergeClassNames(ClassNames.InputBox, ClassNames.FilterInput),
       childCount: 0,
-      placeholder,
-      onInput: DomEventListenerFunctions.HandleFilterInput,
+      className: mergeClassNames(ClassNames.InputBox, ClassNames.FilterInput),
       name: InputName.Filter,
+      onInput: DomEventListenerFunctions.HandleFilterInput,
+      placeholder,
+      type: VirtualDomElements.Input,
     },
   ]
 }

@@ -4,12 +4,16 @@ export const name = 'output.save-as'
 
 export const skip = 1
 
+<<<<<<< HEAD
 // TODO add page object
 export const test: Test = async ({ Command, FileSystem, Panel, Extension, Locator, expect, Dialog }) => {
+=======
+export const test: Test = async ({ Command, expect, Extension, FileSystem, Locator, Panel, QuickPick }) => {
+>>>>>>> origin/main
   // arrange
-  const tmpDir = await FileSystem.getTmpDir()
+  const tmpDir = await FileSystem.getTmpDir({ scheme: 'file' })
   await FileSystem.writeFile(`${tmpDir}/test.txt`, 'div')
-  const extensionUri = import.meta.resolve('../fixtures/sample.output-channel-basic').toString()
+  const extensionUri = import.meta.resolve('../fixtures/sample.output-channel-basic')
   await Extension.addWebExtension(extensionUri)
   await Panel.open('Output')
   await Command.execute('Panel.selectIndex', 1)
