@@ -1,0 +1,18 @@
+{
+  "browser": "main.ts",
+  "id": "sample.extension-api-output-channel-live-update",
+  "isolated": true,
+  "activation": ["*", "onCommand:sample.extensionOutput.write"],
+  "commands": [
+    {
+      "id": "sample.extensionOutput.write",
+      "label": "Write Extension Output"
+    }
+  ],
+  "outputChannels": [
+    {
+      "id": "sample-extension-output-live",
+      "label": "Extension Output Live"
+    }
+  ]
+}
