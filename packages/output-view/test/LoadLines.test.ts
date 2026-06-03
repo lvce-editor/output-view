@@ -4,7 +4,7 @@ import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 import { loadLines } from '../src/parts/LoadLines/LoadLines.ts'
 
 test('loadLines - success', async () => {
-  const mockRpc = FileSystemWorker.registerMockRpc({
+  using mockRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile': () => 'a\nb',
   })
   const result = await loadLines('file:///x')
@@ -13,7 +13,7 @@ test('loadLines - success', async () => {
 })
 
 test('loadLines - file not found', async () => {
-  const mockRpc = FileSystemWorker.registerMockRpc({
+  using mockRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile': () => {
       throw new Error('File not found: file:///missing')
     },
@@ -24,7 +24,7 @@ test('loadLines - file not found', async () => {
 })
 
 test('loadLines - other error', async () => {
-  const mockRpc = FileSystemWorker.registerMockRpc({
+  using mockRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile': () => {
       throw new Error('boom')
     },

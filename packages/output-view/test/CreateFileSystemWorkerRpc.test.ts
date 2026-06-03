@@ -1,11 +1,11 @@
 import { expect, test } from '@jest/globals'
-import { MockRpc } from '@lvce-editor/rpc'
+import { createMockRpc } from '@lvce-editor/rpc'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
 import { VError } from '@lvce-editor/verror'
 import * as CreateFileSystemWorkerRpc from '../src/parts/CreateFileSystemWorkerRpc/CreateFileSystemWorkerRpc.ts'
 
 test('createFileSystemWorkerRpc - wraps error', async () => {
-  const mockRpc = MockRpc.create({
+  const mockRpc = createMockRpc({
     commandMap: {},
     // send will be used by TransferMessagePortRpcParent within create
     invoke: () => {
@@ -17,7 +17,7 @@ test('createFileSystemWorkerRpc - wraps error', async () => {
   })
   RendererWorker.set(mockRpc)
   await expect(CreateFileSystemWorkerRpc.createFileSystemWorkerRpc()).rejects.toBeInstanceOf(VError)
-  const fallbackRpc = MockRpc.create({
+  const fallbackRpc = createMockRpc({
     commandMap: {},
     invoke: (method: string) => {
       if (method === 'FileSystem.readFile') {

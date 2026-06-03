@@ -5,7 +5,7 @@ import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 import { saveOutputAs } from '../src/parts/SaveOutputAs/SaveOutputAs.ts'
 
 test('saveOutputAs returns same state when no uri is selected', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'FilePicker.showSaveFilePicker': () => null,
   })
   const state = createDefaultState()
@@ -17,10 +17,10 @@ test('saveOutputAs returns same state when no uri is selected', async () => {
 
 test('saveOutputAs writes file content when uri is selected', async () => {
   const mockUri = 'file:///test/output.txt'
-  const mockRendererRpc = RendererWorker.registerMockRpc({
+  using mockRendererRpc = RendererWorker.registerMockRpc({
     'FilePicker.showSaveFilePicker': () => mockUri,
   })
-  const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
+  using mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.writeFile': (uri: string, content: string) => {
       return undefined
     },
@@ -40,10 +40,10 @@ test('saveOutputAs writes file content when uri is selected', async () => {
 
 test('saveOutputAs handles empty listItems', async () => {
   const mockUri = 'file:///test/empty.txt'
-  const mockRendererRpc = RendererWorker.registerMockRpc({
+  using mockRendererRpc = RendererWorker.registerMockRpc({
     'FilePicker.showSaveFilePicker': () => mockUri,
   })
-  const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
+  using mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.writeFile': (uri: string, content: string) => {
       expect(uri).toBe(mockUri)
       expect(content).toBe('')
@@ -60,7 +60,7 @@ test('saveOutputAs handles empty listItems', async () => {
 })
 
 test('saveOutputAs returns same state for different input states', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'FilePicker.showSaveFilePicker': () => null,
   })
 
@@ -76,7 +76,7 @@ test('saveOutputAs returns same state for different input states', async () => {
 })
 
 test('saveOutputAs resolves successfully', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'FilePicker.showSaveFilePicker': () => null,
   })
 

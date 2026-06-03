@@ -1,12 +1,12 @@
 import { expect, jest, test } from '@jest/globals'
-import { MockRpc } from '@lvce-editor/rpc'
+import { createMockRpc } from '@lvce-editor/rpc'
 import * as RpcRegistry from '@lvce-editor/rpc-registry'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
 import { initializeFileSystemWorker } from '../src/parts/InitializeFileSystemWorker/InitializeFileSystemWorker.ts'
 
 test('initializeFileSystemWorker registers FileSystemWorker RPC', async () => {
   const invokeAndTransfer = jest.fn()
-  const mockRpc = MockRpc.create({
+  const mockRpc = createMockRpc({
     commandMap: {},
     invoke: (method: string) => {
       throw new Error(`unexpected method ${method}`)

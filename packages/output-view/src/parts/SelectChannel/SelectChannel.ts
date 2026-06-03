@@ -10,7 +10,7 @@ export const selectChannel = async (state: OutputState, id: string): Promise<Out
   if (!matchingOption) {
     return state
   }
-  // TODO potential race condtion when switching output channels fast
+  // TODO potential race condition when switching output channels fast
   const { code, error, lines } = await loadLines(matchingOption.uri)
 
   // TODO memory leak and race condition, need to dispose file watcher of previous uri
