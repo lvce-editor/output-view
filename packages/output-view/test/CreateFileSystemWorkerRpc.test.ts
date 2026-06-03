@@ -6,24 +6,17 @@ import * as CreateFileSystemWorkerRpc from '../src/parts/CreateFileSystemWorkerR
 
 test('createFileSystemWorkerRpc - wraps error', async () => {
   const mockRpc = createMockRpc({
-    commandMap: {},
-    // send will be used by TransferMessagePortRpcParent within create
-    invoke: () => {
-      throw new Error('no port')
-    },
-    invokeAndTransfer: () => {
-      throw new Error('no port')
+    commandMap: {
+      'SendMessagePortToExtensionHostWorker.sendMessagePortToFileSystemWorker': () => {
+        throw new Error('no port')
+      },
     },
   })
   RendererWorker.set(mockRpc)
   await expect(CreateFileSystemWorkerRpc.createFileSystemWorkerRpc()).rejects.toBeInstanceOf(VError)
   const fallbackRpc = createMockRpc({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'FileSystem.readFile') {
-        return ''
-      }
-      throw new Error(`unexpected method ${method}`)
+    commandMap: {
+      'FileSystem.readFile': () => '',
     },
   })
   RendererWorker.set(fallbackRpc)

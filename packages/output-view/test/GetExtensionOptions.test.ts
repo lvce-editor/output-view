@@ -8,11 +8,11 @@ test('getExtensionOptions - returns channels on success', async () => {
     { id: 'channel2', label: 'Channel 2', uri: 'uri2' },
   ]
 
-  const mockRendererRpc = RendererWorker.registerMockRpc({
+  using mockRendererRpc = RendererWorker.registerMockRpc({
     'ExtensionHostManagement.activateByEvent': () => undefined,
   })
 
-  const mockExtensionHostRpc = ExtensionHost.registerMockRpc({
+  using mockExtensionHostRpc = ExtensionHost.registerMockRpc({
     'Output.getEnabledProviders': () => mockChannels,
   })
 
@@ -23,11 +23,11 @@ test('getExtensionOptions - returns channels on success', async () => {
 })
 
 test('getExtensionOptions - returns empty array on error', async () => {
-  const mockRendererRpc = RendererWorker.registerMockRpc({
+  using mockRendererRpc = RendererWorker.registerMockRpc({
     'ExtensionHostManagement.activateByEvent': () => undefined,
   })
 
-  const mockExtensionHostRpc = ExtensionHost.registerMockRpc({
+  using mockExtensionHostRpc = ExtensionHost.registerMockRpc({
     'Output.getEnabledProviders': () => {
       throw new Error('Test error')
     },
@@ -40,11 +40,11 @@ test('getExtensionOptions - returns empty array on error', async () => {
 })
 
 test('getExtensionOptions - calls activateByEvent with onOutput', async () => {
-  const mockRendererRpc = RendererWorker.registerMockRpc({
+  using mockRendererRpc = RendererWorker.registerMockRpc({
     'ExtensionHostManagement.activateByEvent': () => undefined,
   })
 
-  const mockExtensionHostRpc = ExtensionHost.registerMockRpc({
+  using mockExtensionHostRpc = ExtensionHost.registerMockRpc({
     'Output.getEnabledProviders': () => [],
   })
 
@@ -54,11 +54,11 @@ test('getExtensionOptions - calls activateByEvent with onOutput', async () => {
 })
 
 test('getExtensionOptions - calls ExtensionHost.invoke with correct method', async () => {
-  const mockRendererRpc = RendererWorker.registerMockRpc({
+  using mockRendererRpc = RendererWorker.registerMockRpc({
     'ExtensionHostManagement.activateByEvent': () => undefined,
   })
 
-  const mockExtensionHostRpc = ExtensionHost.registerMockRpc({
+  using mockExtensionHostRpc = ExtensionHost.registerMockRpc({
     'Output.getEnabledProviders': () => [],
   })
 

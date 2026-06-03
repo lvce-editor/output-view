@@ -12,11 +12,11 @@ test('handleSelect - no matching option returns same state', async () => {
 })
 
 test('handleSelect - loads lines and updates state', async () => {
-  const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
+  using mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile': () => 'l1\nl2',
     'FileSystem.watchFile': () => undefined,
   })
-  const mockRendererRpc = RendererWorker.registerMockRpc({})
+  using mockRendererRpc = RendererWorker.registerMockRpc({})
   const state: OutputState = {
     ...createDefaultState(),
     options: [{ id: 'a', label: 'A', uri: 'file:///a' }],

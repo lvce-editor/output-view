@@ -29,5 +29,5 @@ export const test: Test = async ({ Command, expect, Extension, FileSystem, Locat
   await QuickPick.selectItem('Sample Command')
 
   // assert
-  await expect(text).toHaveText('test content updated content')
+  await expect(text).toHaveText('test content' + 'updated content')
 }

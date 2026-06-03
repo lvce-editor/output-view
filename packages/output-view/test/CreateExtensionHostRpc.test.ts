@@ -5,9 +5,9 @@ import { createExtensionHostRpc } from '../src/parts/CreateExtensionHostRpc/Crea
 
 test('createExtensionHostRpc creates rpc successfully', async () => {
   const mockRpc = createMockRpc({
-    commandMap: {},
-    invoke: () => {},
-    invokeAndTransfer: () => {},
+    commandMap: {
+      'SendMessagePortToExtensionHostWorker.sendMessagePortToExtensionHostWorker': () => undefined,
+    },
   })
 
   RendererWorker.set(mockRpc)
@@ -20,9 +20,9 @@ test('createExtensionHostRpc creates rpc successfully', async () => {
 
 test('createExtensionHostRpc handles errors properly', async () => {
   const mockRpc = createMockRpc({
-    commandMap: {},
-    invoke: () => {},
-    invokeAndTransfer: () => {},
+    commandMap: {
+      'SendMessagePortToExtensionHostWorker.sendMessagePortToExtensionHostWorker': () => undefined,
+    },
   })
 
   RendererWorker.set(mockRpc)

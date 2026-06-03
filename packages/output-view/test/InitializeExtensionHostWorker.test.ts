@@ -7,11 +7,9 @@ import { initializeExtensionHost } from '../src/parts/InitializeExtensionHostWor
 test('initializeExtensionHostWorker registers RPC', async () => {
   const invokeAndTransfer = jest.fn()
   const mockRpc = createMockRpc({
-    commandMap: {},
-    invoke: (method: string) => {
-      throw new Error(`unexpected method ${method}`)
+    commandMap: {
+      'SendMessagePortToExtensionHostWorker.sendMessagePortToExtensionHostWorker': invokeAndTransfer,
     },
-    invokeAndTransfer,
   })
   RendererWorker.set(mockRpc)
   await initializeExtensionHost()

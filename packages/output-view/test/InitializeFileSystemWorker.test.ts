@@ -7,11 +7,9 @@ import { initializeFileSystemWorker } from '../src/parts/InitializeFileSystemWor
 test('initializeFileSystemWorker registers FileSystemWorker RPC', async () => {
   const invokeAndTransfer = jest.fn()
   const mockRpc = createMockRpc({
-    commandMap: {},
-    invoke: (method: string) => {
-      throw new Error(`unexpected method ${method}`)
+    commandMap: {
+      'SendMessagePortToExtensionHostWorker.sendMessagePortToFileSystemWorker': invokeAndTransfer,
     },
-    invokeAndTransfer,
   })
   RendererWorker.set(mockRpc)
   await initializeFileSystemWorker()
