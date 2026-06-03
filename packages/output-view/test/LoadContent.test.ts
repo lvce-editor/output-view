@@ -5,16 +5,16 @@ import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 import { loadContent } from '../src/parts/LoadContent/LoadContent.ts'
 
 test('loadContent returns a new state with expected properties', async () => {
-  const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
+  using mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile': () => 'test content',
     'FileSystem.watchFile': () => undefined,
   })
-  const mockRendererRpc = RendererWorker.registerMockRpc({
+  using mockRendererRpc = RendererWorker.registerMockRpc({
     'ExtensionHostManagement.activateByEvent': () => undefined,
     'OutputView.getOutputActions': () => [],
     'PlatformPaths.getLogsDir': () => '/tmp/logs',
   })
-  const mockExtensionHostRpc = ExtensionHost.registerMockRpc({
+  using mockExtensionHostRpc = ExtensionHost.registerMockRpc({
     'Extension.getOutputActions': () => [],
     'Output.getEnabledProviders': () => [],
   })
@@ -40,16 +40,16 @@ test('loadContent returns a new state with expected properties', async () => {
 })
 
 test('loadContent handles savedState with collapsedUris', async () => {
-  const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
+  using mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile': () => 'test content',
     'FileSystem.watchFile': () => undefined,
   })
-  const mockRendererRpc = RendererWorker.registerMockRpc({
+  using mockRendererRpc = RendererWorker.registerMockRpc({
     'ExtensionHostManagement.activateByEvent': () => undefined,
     'OutputView.getOutputActions': () => [],
     'PlatformPaths.getLogsDir': () => '/tmp/logs',
   })
-  const mockExtensionHostRpc = ExtensionHost.registerMockRpc({
+  using mockExtensionHostRpc = ExtensionHost.registerMockRpc({
     'Extension.getOutputActions': () => [],
     'Output.getEnabledProviders': () => [],
   })
@@ -71,16 +71,16 @@ test('loadContent handles savedState with collapsedUris', async () => {
 })
 
 test('loadContent handles savedState with invalid collapsedUris', async () => {
-  const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
+  using mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile': () => 'test content',
     'FileSystem.watchFile': () => undefined,
   })
-  const mockRendererRpc = RendererWorker.registerMockRpc({
+  using mockRendererRpc = RendererWorker.registerMockRpc({
     'ExtensionHostManagement.activateByEvent': () => undefined,
     'OutputView.getOutputActions': () => [],
     'PlatformPaths.getLogsDir': () => '/tmp/logs',
   })
-  const mockExtensionHostRpc = ExtensionHost.registerMockRpc({
+  using mockExtensionHostRpc = ExtensionHost.registerMockRpc({
     'Extension.getOutputActions': () => [],
     'Output.getEnabledProviders': () => [],
   })
@@ -102,16 +102,16 @@ test('loadContent handles savedState with invalid collapsedUris', async () => {
 })
 
 test('loadContent handles savedState with mixed collapsedUris', async () => {
-  const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
+  using mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile': () => 'test content',
     'FileSystem.watchFile': () => undefined,
   })
-  const mockRendererRpc = RendererWorker.registerMockRpc({
+  using mockRendererRpc = RendererWorker.registerMockRpc({
     'ExtensionHostManagement.activateByEvent': () => undefined,
     'OutputView.getOutputActions': () => [],
     'PlatformPaths.getLogsDir': () => '/tmp/logs',
   })
-  const mockExtensionHostRpc = ExtensionHost.registerMockRpc({
+  using mockExtensionHostRpc = ExtensionHost.registerMockRpc({
     'Extension.getOutputActions': () => [],
     'Output.getEnabledProviders': () => [],
   })
@@ -133,16 +133,16 @@ test('loadContent handles savedState with mixed collapsedUris', async () => {
 })
 
 test('loadContent handles savedState with null collapsedUris', async () => {
-  const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
+  using mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile': () => 'test content',
     'FileSystem.watchFile': () => undefined,
   })
-  const mockRendererRpc = RendererWorker.registerMockRpc({
+  using mockRendererRpc = RendererWorker.registerMockRpc({
     'ExtensionHostManagement.activateByEvent': () => undefined,
     'OutputView.getOutputActions': () => [],
     'PlatformPaths.getLogsDir': () => '/tmp/logs',
   })
-  const mockExtensionHostRpc = ExtensionHost.registerMockRpc({
+  using mockExtensionHostRpc = ExtensionHost.registerMockRpc({
     'Extension.getOutputActions': () => [],
     'Output.getEnabledProviders': () => [],
   })

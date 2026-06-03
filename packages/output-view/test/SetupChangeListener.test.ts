@@ -4,7 +4,7 @@ import { setupChangeListener } from '../src/parts/SetupChangeListener/SetupChang
 import * as WatchCallbacks from '../src/parts/WatchCallbacks/WatchCallbacks.ts'
 
 test('should setup change listener with new watch id', async () => {
-  const mockRpc = FileSystemWorker.registerMockRpc({
+  using mockRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.watchFile': () => undefined,
   })
 
@@ -19,7 +19,7 @@ test('should setup change listener with new watch id', async () => {
 })
 
 test('should cleanup old watch id and setup new one', async () => {
-  const mockRpc = FileSystemWorker.registerMockRpc({
+  using mockRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.unwatchFile': () => undefined,
     'FileSystem.watchFile': () => undefined,
   })
@@ -43,7 +43,7 @@ test('should cleanup old watch id and setup new one', async () => {
 })
 
 test('should handle errors gracefully', async () => {
-  const mockRpc = FileSystemWorker.registerMockRpc({
+  using mockRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.unwatchFile': () => {
       throw new Error('FileSystem error')
     },
@@ -60,7 +60,7 @@ test('should handle errors gracefully', async () => {
 })
 
 test('should call FileSystem methods with correct parameters', async () => {
-  const mockRpc = FileSystemWorker.registerMockRpc({
+  using mockRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.unwatchFile': () => undefined,
     'FileSystem.watchFile': () => undefined,
   })

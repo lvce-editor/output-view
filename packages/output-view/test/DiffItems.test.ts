@@ -9,8 +9,8 @@ test('isEqual returns true when problems arrays are the same reference', () => {
   expect(isEqual(oldState, newState)).toBe(true)
 })
 
-test.skip('isEqual returns false when problems arrays are different', () => {
+test('isEqual returns false when problems arrays are different', () => {
   const oldState: OutputState = { ...createDefaultState() }
-  const newState: OutputState = { ...oldState }
+  const newState: OutputState = { ...oldState, listItems: [] }
   expect(isEqual(oldState, newState)).toBe(false)
 })

@@ -12,7 +12,7 @@ test('clear - no selected option returns same state', async () => {
 })
 
 test('clear - clears file and reloads', async () => {
-  const mockRpc = FileSystemWorker.registerMockRpc({
+  using mockRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile': () => '',
     'FileSystem.writeFile': () => undefined,
   })
