@@ -14,12 +14,10 @@ test('initializeExtensionHostWorker registers RPC', async () => {
   RendererWorker.set(mockRpc)
   await initializeExtensionHost()
   expect(invokeAndTransfer).toHaveBeenCalledTimes(1)
-  expect(invokeAndTransfer).toHaveBeenCalledWith(
-    'SendMessagePortToExtensionHostWorker.sendMessagePortToExtensionHostWorker',
-    expect.any(MessagePort),
-    'HandleMessagePort.handleMessagePort2',
-    0,
-  )
+  expect(mockRpc.invocations).toEqual([
+    ['SendMessagePortToExtensionHostWorker.sendMessagePortToExtensionHostWorker', expect.any(MessagePort), 'HandleMessagePort.handleMessagePort2', 0],
+  ])
+  expect(invokeAndTransfer).toHaveBeenCalledWith(expect.any(MessagePort), 'HandleMessagePort.handleMessagePort2', 0)
   const rpc = RpcRegistry.get(RpcRegistry.RpcId.ExtensionHostWorker)
   expect(rpc).toBeDefined()
   await rpc.dispose()
