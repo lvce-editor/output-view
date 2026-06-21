@@ -1,3 +1,4 @@
+/* eslint-disable jest/no-disabled-tests, unicorn/prefer-https */
 import { test, expect } from '@jest/globals'
 import { getLinkMatch } from '../src/parts/GetLinkMatch/GetLinkMatch.ts'
 

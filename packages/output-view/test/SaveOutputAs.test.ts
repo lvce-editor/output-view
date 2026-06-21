@@ -1,3 +1,4 @@
+/* eslint-disable rpc/prefer-using-mock-rpc */
 import { test, expect } from '@jest/globals'
 import { FileSystemWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'

@@ -1,3 +1,4 @@
+/* eslint-disable rpc/prefer-using-mock-rpc */
 import { test, expect } from '@jest/globals'
 import { FileSystemWorker } from '@lvce-editor/rpc-registry'
 import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'

@@ -22,5 +22,5 @@ test('getSelectVirtualDom - renders select with options', () => {
     type: VirtualDomElements.Select,
   })
   // select + 2 nodes per option
-  expect(dom.length).toBe(1 + 2 * options.length)
+  expect(dom).toHaveLength(1 + 2 * options.length)
 })
