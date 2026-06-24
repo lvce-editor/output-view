@@ -1,4 +1,4 @@
-import { readFile, readdir, writeFile } from 'node:fs/promises'
+import { access, readFile, readdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
@@ -25,6 +25,12 @@ const isCommitHash = (dirent) => {
 const dirents = await readdir(serverStaticPath)
 const commitHash = dirents.find(isCommitHash) || ''
 const rendererWorkerMainPath = join(serverStaticPath, commitHash, 'packages', 'renderer-worker', 'dist', 'rendererWorkerMain.js')
+
+try {
+  await access(rendererWorkerMainPath)
+} catch {
+  process.exit(0)
+}
 
 const content = await readFile(rendererWorkerMainPath, 'utf-8')
 

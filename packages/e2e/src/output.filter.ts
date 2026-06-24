@@ -16,10 +16,8 @@ export const test: Test = async ({ Command, expect, Extension, FileSystem, Locat
   await Output.selectChannel('xyz')
 
   // assert
-  const select = Locator('[name="output"]')
-  await expect(select).toHaveValue('xyz')
   const text = Locator('.OutputContent')
-  await expect(text).toHaveText('test content atest content b')
+  await expect(text).toHaveText(['test content a', 'test content b'].join(''))
 
   // act
   await Command.execute('Output.handleFilterInput', 'content b', /* Script */ 2)

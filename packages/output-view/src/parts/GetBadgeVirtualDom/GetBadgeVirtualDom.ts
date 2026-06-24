@@ -8,6 +8,6 @@ export const getBadgeVirtualDom = (className: string, count: number): readonly V
       className: `Badge ${className}`,
       type: VirtualDomElements.Div,
     },
-    text(`${count}`),
+    text(String(count)),
   ]
 }

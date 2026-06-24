@@ -17,13 +17,13 @@ export const loadLines = async (uri: string): Promise<LoadLinesResult> => {
     if (isFileNotFoundError(error)) {
       return {
         code: 1,
-        error: `log file not found`,
+        error: 'log file not found',
         lines: [],
       }
     }
     return {
       code: 2,
-      error: `${error}`,
+      error: String(error),
       lines: [],
     }
   }
