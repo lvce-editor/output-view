@@ -12,7 +12,7 @@ test('renderSelectedItem returns correct ViewletCommand when selectedOption chan
 
   const result = renderSelectedItem(oldState, newState)
 
-  expect(result).toEqual(['Viewlet.setValueByName', 123, 'output', 'test-option'])
+  expect(result).toEqual(['Viewlet.setValueByName', 'output', 'test-option'])
 })
 
 test('renderSelectedItem returns correct ViewletCommand with different selectedOption', () => {
@@ -25,7 +25,7 @@ test('renderSelectedItem returns correct ViewletCommand with different selectedO
 
   const result = renderSelectedItem(oldState, newState)
 
-  expect(result).toEqual(['Viewlet.setValueByName', 456, 'output', 'another-option'])
+  expect(result).toEqual(['Viewlet.setValueByName', 'output', 'another-option'])
 })
 
 test('renderSelectedItem returns correct ViewletCommand with empty selectedOption', () => {
@@ -38,7 +38,7 @@ test('renderSelectedItem returns correct ViewletCommand with empty selectedOptio
 
   const result = renderSelectedItem(oldState, newState)
 
-  expect(result).toEqual(['Viewlet.setValueByName', 789, 'output', ''])
+  expect(result).toEqual(['Viewlet.setValueByName', 'output', ''])
 })
 
 test('renderSelectedItem returns correct ViewletCommand with numeric selectedOption', () => {
@@ -51,5 +51,5 @@ test('renderSelectedItem returns correct ViewletCommand with numeric selectedOpt
 
   const result = renderSelectedItem(oldState, newState)
 
-  expect(result).toEqual(['Viewlet.setValueByName', 999, 'output', '123'])
+  expect(result).toEqual(['Viewlet.setValueByName', 'output', '123'])
 })
