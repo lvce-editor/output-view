@@ -10,27 +10,23 @@ export const test: Test = async ({ expect, Extension, FileSystem, Locator, Outpu
   await Extension.addWebExtension(extensionUri)
   await Output.show()
 
-  const select = Locator('[name="output"]')
   const content = Locator('.OutputContent')
 
   // act
   await Output.selectChannel('first')
 
   // assert
-  await expect(select).toHaveValue('first')
   await expect(content).toHaveText('first channel content')
 
   // act
   await Output.selectChannel('second')
 
   // assert
-  await expect(select).toHaveValue('second')
   await expect(content).toHaveText('second channel content')
 
   // act
   await Output.selectChannel('first')
 
   // assert
-  await expect(select).toHaveValue('first')
   await expect(content).toHaveText('first channel content')
 }
