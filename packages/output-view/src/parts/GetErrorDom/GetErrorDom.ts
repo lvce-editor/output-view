@@ -5,6 +5,13 @@ import * as ErrorCode from '../ErrorCode/ErrorCode.ts'
 import { getLogFileNotFoundDom } from '../GetLogFileNotFoundDom/GetLogFileNotFoundDom.ts'
 import * as TabIndex from '../TabIndex/TabIndex.ts'
 
+const errorNode: VirtualDomNode = {
+  childCount: 1,
+  className: ClassNames.Error,
+  tabIndex: TabIndex.Focusable,
+  type: VirtualDomElements.Div,
+}
+
 export const getErrorDom = (errorCode: number, error: string): readonly VirtualDomNode[] => {
   if (!error) {
     return []
@@ -12,13 +19,5 @@ export const getErrorDom = (errorCode: number, error: string): readonly VirtualD
   if (errorCode === ErrorCode.LogFileNotFound) {
     return getLogFileNotFoundDom()
   }
-  return [
-    {
-      childCount: 1,
-      className: ClassNames.Error,
-      tabIndex: TabIndex.Focusable,
-      type: VirtualDomElements.Div,
-    },
-    text(error),
-  ]
+  return [errorNode, text(error)]
 }
