@@ -9,4 +9,4 @@ export const instantiationsPath = join(root, 'packages', 'output-view')
 
 export const workerPath = join(root, '.tmp/dist/dist/outputViewWorkerMain.js')
 
-export const playwrightPath = new URL('../../e2e/node_modules/playwright/index.mjs', import.meta.url).toString()
+export const playwrightPath = new URL('../../../node_modules/playwright/index.mjs', import.meta.url).toString()
