@@ -1,7 +1,7 @@
 import { expect, test } from '@jest/globals'
 import { ExtensionHost, RendererWorker } from '@lvce-editor/rpc-registry'
-import * as PlatformType from '../src/parts/PlatformType/PlatformType.ts'
 import { loadOptions } from '../src/parts/LoadOptions/LoadOptions.ts'
+import * as PlatformType from '../src/parts/PlatformType/PlatformType.ts'
 
 test('loadOptions - electron', async () => {
   const mockRendererRpc = RendererWorker.registerMockRpc({
