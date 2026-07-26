@@ -22,6 +22,11 @@ export const loadOptions = async (platform: number): Promise<readonly Option[]> 
       label: 'Shared Process',
       uri: `${logsFolderUri}/log-shared-process.txt`,
     },
+    {
+      id: InputName.Window,
+      label: 'Window',
+      uri: `${logsFolderUri}/log-window.txt`,
+    },
     ...extensionOptions,
   ]
 }
