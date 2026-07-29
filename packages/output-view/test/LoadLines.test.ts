@@ -13,6 +13,41 @@ test('loadLines - success', async () => {
   expect(mockRpc.invocations).toEqual([['FileSystem.readFile', 'file:///x']])
 })
 
+test('loadLines - parses and aggregates structured Window logs', async () => {
+  const record = JSON.stringify({
+    category: 'Window',
+    level: 'error',
+    line: 42,
+    message: 'boom',
+    source: 'lvce://-/rendererWorkerMain.js',
+    timestamp: '2026-07-29T06:45:24.529Z',
+  })
+  const mockRpc = FileSystemWorker.registerMockRpc({
+    'FileSystem.readFile': () => `${record}\n${record}`,
+  })
+  const result = await loadLines('file:///log-window.txt')
+
+  expect(result).toEqual({
+    code: 0,
+    error: '',
+    lines: [
+      [
+        { type: LinePartType.RepeatCount, value: '2' },
+        { type: LinePartType.LogLevel, value: 'error' },
+        { type: LinePartType.Text, value: 'boom' },
+        { type: LinePartType.Text, value: ' ' },
+        {
+          className: 'OutputSourceLink',
+          label: 'rendererWorkerMain.js:42',
+          type: LinePartType.Link,
+          value: 'lvce://-/rendererWorkerMain.js:42',
+        },
+      ],
+    ],
+  })
+  expect(mockRpc.invocations).toEqual([['FileSystem.readFile', 'file:///log-window.txt']])
+})
+
 test('loadLines - file not found', async () => {
   const mockRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile': () => {

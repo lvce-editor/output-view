@@ -22,3 +22,15 @@ test('serializeLines - multiple lines and link', () => {
   ]
   expect(serializeLines(lines)).toBe('see https://example.com\nbye')
 })
+
+test('serializeLines - omits presentation metadata and uses shortened link label', () => {
+  const lines: readonly Line[] = [
+    [
+      { type: LinePartType.RepeatCount, value: '4' },
+      { type: LinePartType.LogLevel, value: 'warning' },
+      { type: LinePartType.Text, value: 'warning ' },
+      { label: 'main.js:7', type: LinePartType.Link, value: 'file:///workspace/main.js:7' },
+    ],
+  ]
+  expect(serializeLines(lines)).toBe('warning main.js:7')
+})
