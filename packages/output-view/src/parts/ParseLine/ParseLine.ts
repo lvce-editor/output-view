@@ -1,8 +1,13 @@
 import type { LinePart } from '../LinePart/LinePart.ts'
 import { getLinkMatch } from '../GetLinkMatch/GetLinkMatch.ts'
 import * as LinePartType from '../LinePartType/LinePartType.ts'
+import { parseStructuredLogLine } from '../ParseStructuredLogLine/ParseStructuredLogLine.ts'
 
 export const parseLine = (line: string): readonly LinePart[] => {
+  const structuredLine = parseStructuredLogLine(line)
+  if (structuredLine) {
+    return structuredLine
+  }
   const parts: LinePart[] = []
   let rest = line
   while (rest.length > 0) {
