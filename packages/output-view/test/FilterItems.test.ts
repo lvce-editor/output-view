@@ -29,3 +29,9 @@ test('filterItems - filters structured lines by message and shortened source', (
   expect(filterItems(items, 'main.js:7')).toEqual(items)
   expect(filterItems(items, '2026-07-29')).toEqual([])
 })
+
+test('filterItems - filters case insensitively', () => {
+  const matchingItem: Line = [{ type: LinePartType.Text, value: 'StatusBar.handleItemsChanged' }]
+  const items: readonly Line[] = [matchingItem, [{ type: LinePartType.Text, value: 'handleBlur instance not found' }]]
+  expect(filterItems(items, 'status')).toEqual([matchingItem])
+})

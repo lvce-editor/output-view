@@ -17,5 +17,6 @@ export const filterItems = (items: readonly Line[], filterValue: string): readon
   if (!filterValue) {
     return items
   }
-  return items.filter((parts) => getTextFromParts(parts).includes(filterValue))
+  const normalizedFilterValue = filterValue.toLowerCase()
+  return items.filter((parts) => getTextFromParts(parts).toLowerCase().includes(normalizedFilterValue))
 }
