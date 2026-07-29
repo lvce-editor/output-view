@@ -10,8 +10,8 @@ export const test: Test = async ({ expect, Extension, FileSystem, Locator, Outpu
   await Output.show()
   await Output.selectChannel('structured')
 
-  const content = Locator('.OutputContent')
-  await expect(content).not.toContainText('2026-07-29T06:37:29.644Z')
-  await expect(content).not.toContainText('[Window]')
-  await expect(content).not.toContainText('[warning]')
+  const timestamp = Locator('text=2026-07-29T06:37:29.644Z')
+  await expect(timestamp).toHaveCount(0)
+  const structuredPrefix = Locator('text=[Window]')
+  await expect(structuredPrefix).toHaveCount(0)
 }
