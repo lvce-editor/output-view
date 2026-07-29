@@ -16,3 +16,9 @@ test('filterItems - filters by substring', () => {
   ]
   expect(filterItems(items, 'a')).toEqual(items)
 })
+
+test('filterItems - filters case insensitively', () => {
+  const matchingItem: Line = [{ type: LinePartType.Text, value: 'StatusBar.handleItemsChanged' }]
+  const items: readonly Line[] = [matchingItem, [{ type: LinePartType.Text, value: 'handleBlur instance not found' }]]
+  expect(filterItems(items, 'status')).toEqual([matchingItem])
+})
