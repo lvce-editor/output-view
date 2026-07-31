@@ -2,6 +2,7 @@ import type { VirtualDomNode } from '@lvce-editor/virtual-dom-worker'
 import { mergeClassNames, text, VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
 import type { LinePart } from '../LinePart/LinePart.ts'
 import * as ClassNames from '../ClassNames/ClassNames.ts'
+import * as DomEventListenerFunctions from '../DomEventListenerFunctions/DomEventListenerFunctions.ts'
 import * as LinePartType from '../LinePartType/LinePartType.ts'
 
 interface LinePartDom {
@@ -20,6 +21,7 @@ const getLevel = (parts: readonly LinePart[]): string => {
 const getLinePartDom = (part: LinePart): LinePartDom => {
   switch (part.type) {
     case LinePartType.Link: {
+      const isSourceLink = part.className === ClassNames.OutputSourceLink
       const linkNode: VirtualDomNode = {
         childCount: 1,
         href: part.value,
@@ -27,6 +29,7 @@ const getLinePartDom = (part: LinePart): LinePartDom => {
         target: '_blank',
         type: VirtualDomElements.A,
         ...(part.className && { className: part.className }),
+        ...(isSourceLink && { onClick: DomEventListenerFunctions.HandleSourceLinkClick }),
       }
       return {
         childCount: 1,

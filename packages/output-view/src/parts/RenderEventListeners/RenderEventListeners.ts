@@ -31,6 +31,11 @@ export const renderEventListeners = (): readonly DomEventListener[] => {
       params: ['clearFilter'],
     },
     {
+      name: DomEventListenerFunctions.HandleSourceLinkClick,
+      params: ['handleSourceLinkClick', 'event.target.href'],
+      preventDefault: true,
+    },
+    {
       name: DomEventListenerFunctions.HandlePointerDown,
       params: ['handleClickAt', 'event.clientX', 'event.clientY'],
     },

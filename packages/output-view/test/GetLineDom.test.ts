@@ -1,5 +1,6 @@
 import { test, expect } from '@jest/globals'
 import { VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
+import * as DomEventListenerFunctions from '../src/parts/DomEventListenerFunctions/DomEventListenerFunctions.ts'
 import { getLineDom } from '../src/parts/GetLineDom/GetLineDom.ts'
 import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 
@@ -43,7 +44,7 @@ test('getLineDom - renders warning level, repeat count, and shortened source lin
       className: 'OutputSourceLink',
       label: 'rendererWorkerMain.js:4496',
       type: LinePartType.Link,
-      value: 'lvce://-/packages/renderer-worker/dist/rendererWorkerMain.js:4496',
+      value: 'lvce://-/packages/renderer-worker/dist/rendererWorkerMain.js',
     },
   ])
 
@@ -57,7 +58,8 @@ test('getLineDom - renders warning level, repeat count, and shortened source lin
     {
       childCount: 1,
       className: 'OutputSourceLink',
-      href: 'lvce://-/packages/renderer-worker/dist/rendererWorkerMain.js:4496',
+      href: 'lvce://-/packages/renderer-worker/dist/rendererWorkerMain.js',
+      onClick: DomEventListenerFunctions.HandleSourceLinkClick,
       rel: 'noopener noreferrer',
       target: '_blank',
       type: VirtualDomElements.A,

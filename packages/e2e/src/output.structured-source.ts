@@ -14,6 +14,6 @@ export const test: Test = async ({ expect, Extension, FileSystem, Locator, Outpu
   await expect(links).toHaveCount(2)
   const warningSource = links.first()
   await expect(warningSource).toHaveText('rendererWorkerMain.js:3455')
-  await expect(warningSource).toHaveAttribute('href', 'lvce://-/packages/renderer-worker/dist/rendererWorkerMain.js:3455')
+  await expect(warningSource).toHaveAttribute('href', 'lvce://-/packages/renderer-worker/dist/rendererWorkerMain.js')
   await expect(warningSource).toHaveAttribute('target', '_blank')
 }

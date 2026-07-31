@@ -53,10 +53,9 @@ export const parseStructuredLogLine = (line: string): Line | undefined => {
   if (!parsed.source) {
     return parts
   }
-  const href = parsed.line > 0 ? `${parsed.source}:${parsed.line}` : parsed.source
   return [
     ...parts,
     { type: LinePartType.Text, value: ' ' },
-    { className: ClassNames.OutputSourceLink, label: getSourceLabel(parsed.source, parsed.line), type: LinePartType.Link, value: href },
+    { className: ClassNames.OutputSourceLink, label: getSourceLabel(parsed.source, parsed.line), type: LinePartType.Link, value: parsed.source },
   ]
 }

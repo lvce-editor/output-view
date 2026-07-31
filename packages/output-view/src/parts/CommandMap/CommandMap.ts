@@ -13,6 +13,7 @@ import { handleData } from '../HandleData/HandleData.ts'
 import { handleError } from '../HandleError/HandleError.ts'
 import { handleFilterInput } from '../HandleFilterInput/HandleFilterInput.ts'
 import { handleSelect } from '../HandleSelect/HandleSelect.ts'
+import { handleSourceLinkClick } from '../HandleSourceLinkClick/HandleSourceLinkClick.ts'
 import * as Initialize from '../Initialize/Initialize.ts'
 import { loadContent } from '../LoadContent/LoadContent.ts'
 import { openFindWidget } from '../OpenFindWidget/OpenFindWidget.ts'
@@ -48,6 +49,7 @@ export const commandMap = {
   'Output.handleError': WrapCommand.wrapCommand(handleError),
   'Output.handleFilterInput': WrapCommand.wrapCommand(handleFilterInput),
   'Output.handleSelect': WrapCommand.wrapCommand(handleSelect),
+  'Output.handleSourceLinkClick': WrapCommand.wrapCommand(handleSourceLinkClick),
   'Output.initialize': Initialize.initialize,
   'Output.loadContent2': WrapCommand.wrapCommand(loadContent),
   'Output.openFindWidget': WrapCommand.wrapCommand(openFindWidget),
