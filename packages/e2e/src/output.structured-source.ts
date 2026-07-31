@@ -11,9 +11,12 @@ export const test: Test = async ({ expect, Extension, FileSystem, Locator, Outpu
   await Output.selectChannel('structured')
 
   const links = Locator('.OutputContent .OutputSourceLink')
-  await expect(links).toHaveCount(2)
+  await expect(links).toHaveCount(3)
   const warningSource = links.first()
   await expect(warningSource).toHaveText('rendererWorkerMain.js:3455')
   await expect(warningSource).toHaveAttribute('href', 'lvce://-/packages/renderer-worker/dist/rendererWorkerMain.js')
   await expect(warningSource).toHaveAttribute('target', '_blank')
+  const stackSource = links.nth(2)
+  await expect(stackSource).toHaveText('lvce://-/packages/renderer-process/dist/rendererProcessMain.js:8726:11')
+  await expect(stackSource).toHaveAttribute('href', 'lvce://-/packages/renderer-process/dist/rendererProcessMain.js')
 }
