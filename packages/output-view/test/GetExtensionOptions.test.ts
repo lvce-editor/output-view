@@ -1,68 +1,31 @@
-import { test, expect } from '@jest/globals'
-import { RendererWorker, ExtensionHost } from '@lvce-editor/rpc-registry'
+import { expect, test } from '@jest/globals'
+import { ExtensionManagementWorker } from '@lvce-editor/rpc-registry'
 import { getExtensionOptions } from '../src/parts/GetExtensionOptions/GetExtensionOptions.ts'
 
 test('getExtensionOptions - returns channels on success', async () => {
   const mockChannels = [
-    { id: 'channel1', label: 'Channel 1', uri: 'uri1' },
-    { id: 'channel2', label: 'Channel 2', uri: 'uri2' },
+    { id: 'channel1', label: 'Channel 1', uri: 'extension-output://extension/channel1' },
+    { id: 'channel2', label: 'Channel 2', uri: 'extension-output://extension/channel2' },
   ]
-
-  const mockRendererRpc = RendererWorker.registerMockRpc({
-    'ExtensionHostManagement.activateByEvent': () => undefined,
-  })
-
-  const mockExtensionHostRpc = ExtensionHost.registerMockRpc({
-    'Output.getEnabledProviders': () => mockChannels,
+  using mockRpc = ExtensionManagementWorker.registerMockRpc({
+    'Extensions.getOutputChannelProviders': () => mockChannels,
   })
 
   const result = await getExtensionOptions()
+
   expect(result).toEqual(mockChannels)
-  expect(mockRendererRpc.invocations).toEqual([['ExtensionHostManagement.activateByEvent', 'onOutput']])
-  expect(mockExtensionHostRpc.invocations).toEqual([['Output.getEnabledProviders']])
+  expect(mockRpc.invocations).toEqual([['Extensions.getOutputChannelProviders']])
 })
 
 test('getExtensionOptions - returns empty array on error', async () => {
-  const mockRendererRpc = RendererWorker.registerMockRpc({
-    'ExtensionHostManagement.activateByEvent': () => undefined,
-  })
-
-  const mockExtensionHostRpc = ExtensionHost.registerMockRpc({
-    'Output.getEnabledProviders': () => {
+  using mockRpc = ExtensionManagementWorker.registerMockRpc({
+    'Extensions.getOutputChannelProviders': () => {
       throw new Error('Test error')
     },
   })
 
   const result = await getExtensionOptions()
+
   expect(result).toEqual([])
-  expect(mockRendererRpc.invocations).toEqual([['ExtensionHostManagement.activateByEvent', 'onOutput']])
-  expect(mockExtensionHostRpc.invocations).toEqual([['Output.getEnabledProviders']])
-})
-
-test('getExtensionOptions - calls activateByEvent with onOutput', async () => {
-  const mockRendererRpc = RendererWorker.registerMockRpc({
-    'ExtensionHostManagement.activateByEvent': () => undefined,
-  })
-
-  const mockExtensionHostRpc = ExtensionHost.registerMockRpc({
-    'Output.getEnabledProviders': () => [],
-  })
-
-  await getExtensionOptions()
-  expect(mockRendererRpc.invocations).toEqual([['ExtensionHostManagement.activateByEvent', 'onOutput']])
-  expect(mockExtensionHostRpc.invocations).toEqual([['Output.getEnabledProviders']])
-})
-
-test('getExtensionOptions - calls ExtensionHost.invoke with correct method', async () => {
-  const mockRendererRpc = RendererWorker.registerMockRpc({
-    'ExtensionHostManagement.activateByEvent': () => undefined,
-  })
-
-  const mockExtensionHostRpc = ExtensionHost.registerMockRpc({
-    'Output.getEnabledProviders': () => [],
-  })
-
-  await getExtensionOptions()
-  expect(mockRendererRpc.invocations).toEqual([['ExtensionHostManagement.activateByEvent', 'onOutput']])
-  expect(mockExtensionHostRpc.invocations).toEqual([['Output.getEnabledProviders']])
+  expect(mockRpc.invocations).toEqual([['Extensions.getOutputChannelProviders']])
 })
