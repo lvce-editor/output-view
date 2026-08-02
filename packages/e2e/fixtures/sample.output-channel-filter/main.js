@@ -3,14 +3,18 @@ const outputChannelProvider = {
   label: 'Xyz',
 }
 
-export const activate = async () => {
-  const channel = vscode.registerOutputChannel(outputChannelProvider)
-  await channel.append('test content a')
+const main = async () => {
+  const channel = createOutputChannel(outputChannelProvider.id)
+  await activate()
+  await channel.appendLine('test content a')
   await channel.append('test content b')
-  vscode.registerCommand({
+  registerCommand({
     id: 'xyz.sampleCommand',
     async execute() {
       await channel.append('updated content')
     },
   })
 }
+
+await main()
+import { activate, createOutputChannel, registerCommand } from '@lvce-editor/api'

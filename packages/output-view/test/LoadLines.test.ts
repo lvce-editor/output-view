@@ -1,6 +1,6 @@
 /* eslint-disable rpc/prefer-using-mock-rpc */
 import { test, expect } from '@jest/globals'
-import { FileSystemWorker } from '@lvce-editor/rpc-registry'
+import { ExtensionManagementWorker, FileSystemWorker } from '@lvce-editor/rpc-registry'
 import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 import { loadLines } from '../src/parts/LoadLines/LoadLines.ts'
 
@@ -46,6 +46,22 @@ test('loadLines - parses and aggregates structured Window logs', async () => {
     ],
   })
   expect(mockRpc.invocations).toEqual([['FileSystem.readFile', 'file:///log-window.txt']])
+})
+
+test('loadLines - reads isolated extension output through extension management worker', async () => {
+  const uri = 'extension-output://test.extension/channel'
+  const mockRpc = ExtensionManagementWorker.registerMockRpc({
+    'Extensions.readOutputChannel': () => 'first\nsecond',
+  })
+
+  const result = await loadLines(uri)
+
+  expect(result).toEqual({
+    code: 0,
+    error: '',
+    lines: [[{ type: LinePartType.Text, value: 'first' }], [{ type: LinePartType.Text, value: 'second' }]],
+  })
+  expect(mockRpc.invocations).toEqual([['Extensions.readOutputChannel', uri]])
 })
 
 test('loadLines - file not found', async () => {

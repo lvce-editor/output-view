@@ -1,15 +1,14 @@
 import { expect, test } from '@jest/globals'
-import { ExtensionHost, RendererWorker } from '@lvce-editor/rpc-registry'
+import { ExtensionManagementWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import { loadOptions } from '../src/parts/LoadOptions/LoadOptions.ts'
 import * as PlatformType from '../src/parts/PlatformType/PlatformType.ts'
 
 test('loadOptions - electron', async () => {
   const mockRendererRpc = RendererWorker.registerMockRpc({
-    'ExtensionHostManagement.activateByEvent': () => undefined,
     'PlatformPaths.getLogsDir': () => 'file:///logs',
   })
-  const mockExtensionHostRpc = ExtensionHost.registerMockRpc({
-    'Output.getEnabledProviders': () => [{ id: 'Extension', label: 'Extension', uri: 'extension-output' }],
+  const mockExtensionManagementRpc = ExtensionManagementWorker.registerMockRpc({
+    'Extensions.getOutputChannelProviders': () => [{ id: 'Extension', label: 'Extension', uri: 'extension-output://extension/channel' }],
   })
 
   expect(await loadOptions(PlatformType.Electron)).toEqual([
@@ -31,22 +30,18 @@ test('loadOptions - electron', async () => {
     {
       id: 'Extension',
       label: 'Extension',
-      uri: 'extension-output',
+      uri: 'extension-output://extension/channel',
     },
   ])
-  expect(mockRendererRpc.invocations).toEqual([['ExtensionHostManagement.activateByEvent', 'onOutput'], ['PlatformPaths.getLogsDir']])
-  expect(mockExtensionHostRpc.invocations).toEqual([['Output.getEnabledProviders']])
+  expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getLogsDir']])
+  expect(mockExtensionManagementRpc.invocations).toEqual([['Extensions.getOutputChannelProviders']])
 })
 
 test('loadOptions - web', async () => {
-  const mockRendererRpc = RendererWorker.registerMockRpc({
-    'ExtensionHostManagement.activateByEvent': () => undefined,
-  })
-  const mockExtensionHostRpc = ExtensionHost.registerMockRpc({
-    'Output.getEnabledProviders': () => [{ id: 'Extension', label: 'Extension', uri: 'extension-output' }],
+  const mockExtensionManagementRpc = ExtensionManagementWorker.registerMockRpc({
+    'Extensions.getOutputChannelProviders': () => [{ id: 'Extension', label: 'Extension', uri: 'extension-output://extension/channel' }],
   })
 
-  expect(await loadOptions(PlatformType.Web)).toEqual([{ id: 'Extension', label: 'Extension', uri: 'extension-output' }])
-  expect(mockRendererRpc.invocations).toEqual([['ExtensionHostManagement.activateByEvent', 'onOutput']])
-  expect(mockExtensionHostRpc.invocations).toEqual([['Output.getEnabledProviders']])
+  expect(await loadOptions(PlatformType.Web)).toEqual([{ id: 'Extension', label: 'Extension', uri: 'extension-output://extension/channel' }])
+  expect(mockExtensionManagementRpc.invocations).toEqual([['Extensions.getOutputChannelProviders']])
 })

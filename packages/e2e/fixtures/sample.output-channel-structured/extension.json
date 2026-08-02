@@ -1,5 +1,12 @@
 {
-  "browser": "main.js",
-  "main": "main.js",
-  "activation": ["onOutput"]
+  "id": "sample.output-channel-structured",
+  "browser": "dist/main.js",
+  "isolated": true,
+  "activation": ["onOutput"],
+  "outputChannels": [
+    {
+      "id": "structured",
+      "label": "Structured"
+    }
+  ]
 }

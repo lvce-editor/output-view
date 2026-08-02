@@ -43,6 +43,32 @@ test('should cleanup old watch id and setup new one', async () => {
   ])
 })
 
+test('should not watch isolated extension output as a file', async () => {
+  const mockRpc = FileSystemWorker.registerMockRpc({
+    'FileSystem.watchFile': () => undefined,
+  })
+
+  const newWatchId = 9001
+  await setupChangeListener(0, newWatchId, 'extension-output://test.extension/channel')
+
+  expect(WatchCallbacks.hasWatchCallback(newWatchId)).toBe(false)
+  expect(mockRpc.invocations).toEqual([])
+})
+
+test('should clean up old file watcher when selecting isolated extension output', async () => {
+  const mockRpc = FileSystemWorker.registerMockRpc({
+    'FileSystem.unwatchFile': () => undefined,
+  })
+  WatchCallbacks.registerWatchCallback(456, async () => {})
+
+  const newWatchId = 9002
+  await setupChangeListener(456, newWatchId, 'extension-output://test.extension/channel')
+
+  expect(WatchCallbacks.hasWatchCallback(456)).toBe(false)
+  expect(WatchCallbacks.hasWatchCallback(newWatchId)).toBe(false)
+  expect(mockRpc.invocations).toEqual([['FileSystem.unwatchFile', 456]])
+})
+
 test('should handle errors gracefully', async () => {
   const mockRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.unwatchFile': () => {
