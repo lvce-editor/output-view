@@ -14,10 +14,11 @@ const createRecord = (level, message, source = '', line = 0) => {
   })
 }
 
-export const activate = () => {
-  const channel = vscode.registerOutputChannel(outputChannelProvider)
+const main = async () => {
+  const channel = createOutputChannel(outputChannelProvider.id)
+  await activate()
   const repeated = createRecord('info', 'cannot execute viewlet command StatusBar.handleItemsChanged: no active instance for StatusBar')
-  channel.append(
+  await channel.append(
     [
       repeated,
       repeated,
@@ -30,3 +31,6 @@ export const activate = () => {
     ].join('\n'),
   )
 }
+
+await main()
+import { activate, createOutputChannel } from '@lvce-editor/api'

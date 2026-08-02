@@ -3,7 +3,11 @@ const outputChannelProvider = {
   label: 'Xyz',
 }
 
-export const activate = () => {
-  const channel = vscode.registerOutputChannel(outputChannelProvider)
-  channel.append('test content')
+const main = async () => {
+  const channel = createOutputChannel(outputChannelProvider.id)
+  await activate()
+  await channel.appendLine('test content')
 }
+
+await main()
+import { activate, createOutputChannel } from '@lvce-editor/api'

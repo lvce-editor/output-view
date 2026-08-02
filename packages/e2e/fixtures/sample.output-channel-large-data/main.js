@@ -11,8 +11,12 @@ const getLine = (index) => {
   return `line ${index.toString().padStart(5, '0')}${suffix}`
 }
 
-export const activate = async () => {
-  const channel = vscode.registerOutputChannel(outputChannelProvider)
+const main = async () => {
+  const channel = createOutputChannel(outputChannelProvider.id)
+  await activate()
   const output = Array.from({ length: lineCount }, (_, index) => getLine(index)).join('\n')
-  await channel.append(output)
+  await channel.appendLine(output)
 }
+
+await main()
+import { activate, createOutputChannel } from '@lvce-editor/api'
