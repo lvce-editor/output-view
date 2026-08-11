@@ -10,7 +10,7 @@ test('renderEventListeners - prevents native navigation for source links', () =>
   const result = renderEventListeners()
   expect(result).toContainEqual({
     name: 'handleSourceLinkClick',
-    params: ['handleSourceLinkClick', 'event.target.href', 'event.target.dataset.lineNumber', 'event.target.dataset.columnNumber'],
+    params: ['handleSourceLinkClick', 'event.target.href', 'event.target.dataset.line', 'event.target.dataset.column'],
     preventDefault: true,
   })
 })

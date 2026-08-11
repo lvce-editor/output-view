@@ -59,7 +59,7 @@ test('getLineDom - renders warning level, repeat count, and shortened source lin
     {
       childCount: 1,
       className: 'OutputSourceLink',
-      'data-line-number': 4496,
+      'data-line': 4496,
       href: 'lvce://-/packages/renderer-worker/dist/rendererWorkerMain.js',
       onClick: DomEventListenerFunctions.HandleSourceLinkClick,
       rel: 'noopener noreferrer',

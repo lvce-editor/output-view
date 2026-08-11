@@ -29,8 +29,8 @@ const getLinePartDom = (part: LinePart): LinePartDom => {
         target: '_blank',
         type: VirtualDomElements.A,
         ...(part.className && { className: part.className }),
-        ...(part.columnNumber !== undefined && { 'data-column-number': part.columnNumber }),
-        ...(part.lineNumber !== undefined && { 'data-line-number': part.lineNumber }),
+        ...(part.columnNumber !== undefined && { 'data-column': part.columnNumber }),
+        ...(part.lineNumber !== undefined && { 'data-line': part.lineNumber }),
         ...(isSourceLink && { onClick: DomEventListenerFunctions.HandleSourceLinkClick }),
       }
       return {
