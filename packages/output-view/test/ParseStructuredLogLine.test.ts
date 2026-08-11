@@ -21,6 +21,7 @@ test('parseStructuredLogLine - parses a Window NDJSON record', () => {
     {
       className: 'OutputSourceLink',
       label: 'rendererWorkerMain.js:3455',
+      lineNumber: 3455,
       type: LinePartType.Link,
       value: 'lvce://-/d13c194/packages/renderer-worker/dist/rendererWorkerMain.js',
     },

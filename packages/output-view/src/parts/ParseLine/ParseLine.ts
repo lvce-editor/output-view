@@ -5,15 +5,20 @@ import * as LinePartType from '../LinePartType/LinePartType.ts'
 import { parseStructuredLogLine } from '../ParseStructuredLogLine/ParseStructuredLogLine.ts'
 
 const RE_SOURCE_LINK = /^lvce(?:-oss)?:\/\//
-const RE_SOURCE_LOCATION = /:\d+(?::\d+)?$/
+const RE_SOURCE_LOCATION = /:(\d+)(?::(\d+))?$/
 
 const getLinkPart = (match: string): LinePart => {
   if (RE_SOURCE_LINK.test(match)) {
+    const locationMatch = match.match(RE_SOURCE_LOCATION)
+    const lineNumber = locationMatch ? Number(locationMatch[1]) : undefined
+    const columnNumber = locationMatch?.[2] ? Number(locationMatch[2]) : undefined
     return {
       className: ClassNames.OutputSourceLink,
+      ...(columnNumber !== undefined && { columnNumber }),
       label: match,
+      ...(lineNumber !== undefined && { lineNumber }),
       type: LinePartType.Link,
-      value: match.replace(RE_SOURCE_LOCATION, ''),
+      value: locationMatch ? match.slice(0, -locationMatch[0].length) : match,
     }
   }
   return { type: LinePartType.Link, value: match }

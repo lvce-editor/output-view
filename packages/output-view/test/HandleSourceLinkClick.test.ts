@@ -9,6 +9,28 @@ test('handleSourceLinkClick - opens the source in the editor', async () => {
   })
   const state = createDefaultState()
 
+  await expect(handleSourceLinkClick(state, 'lvce://-/rendererWorkerMain.js', '3455')).resolves.toBe(state)
+  expect(mockRpc.invocations).toEqual([['Main.openUri', 'lvce://-/rendererWorkerMain.js', true, { selections: new Uint32Array([3454, 0, 3454, 0]) }]])
+})
+
+test('handleSourceLinkClick - opens the source at the given line and column', async () => {
+  using mockRpc = RendererWorker.registerMockRpc({
+    'Main.openUri': () => undefined,
+  })
+  const state = createDefaultState()
+
+  await expect(handleSourceLinkClick(state, 'lvce://-/rendererWorkerMain.js', 3455, 11)).resolves.toBe(state)
+  expect(mockRpc.invocations).toEqual([
+    ['Main.openUri', 'lvce://-/rendererWorkerMain.js', true, { selections: new Uint32Array([3454, 10, 3454, 10]) }],
+  ])
+})
+
+test('handleSourceLinkClick - opens the source without a selection when no line is available', async () => {
+  using mockRpc = RendererWorker.registerMockRpc({
+    'Main.openUri': () => undefined,
+  })
+  const state = createDefaultState()
+
   await expect(handleSourceLinkClick(state, 'lvce://-/rendererWorkerMain.js')).resolves.toBe(state)
   expect(mockRpc.invocations).toEqual([['Main.openUri', 'lvce://-/rendererWorkerMain.js']])
 })

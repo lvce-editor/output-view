@@ -43,6 +43,7 @@ test('getLineDom - renders warning level, repeat count, and shortened source lin
     {
       className: 'OutputSourceLink',
       label: 'rendererWorkerMain.js:4496',
+      lineNumber: 4496,
       type: LinePartType.Link,
       value: 'lvce://-/packages/renderer-worker/dist/rendererWorkerMain.js',
     },
@@ -58,6 +59,7 @@ test('getLineDom - renders warning level, repeat count, and shortened source lin
     {
       childCount: 1,
       className: 'OutputSourceLink',
+      'data-line': 4496,
       href: 'lvce://-/packages/renderer-worker/dist/rendererWorkerMain.js',
       onClick: DomEventListenerFunctions.HandleSourceLinkClick,
       rel: 'noopener noreferrer',

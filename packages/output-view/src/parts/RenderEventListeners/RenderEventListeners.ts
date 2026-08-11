@@ -32,7 +32,7 @@ export const renderEventListeners = (): readonly DomEventListener[] => {
     },
     {
       name: DomEventListenerFunctions.HandleSourceLinkClick,
-      params: ['handleSourceLinkClick', 'event.target.href'],
+      params: ['handleSourceLinkClick', 'event.target.href', 'event.target.dataset.line', 'event.target.dataset.column'],
       preventDefault: true,
     },
     {
