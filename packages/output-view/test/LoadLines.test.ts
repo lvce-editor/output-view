@@ -39,6 +39,7 @@ test('loadLines - parses and aggregates structured Window logs', async () => {
         {
           className: 'OutputSourceLink',
           label: 'rendererWorkerMain.js:42',
+          lineNumber: 42,
           type: LinePartType.Link,
           value: 'lvce://-/rendererWorkerMain.js',
         },

@@ -2,7 +2,7 @@ import type { Test } from '@lvce-editor/test-with-playwright'
 
 export const name = 'output.structured-source'
 
-export const test: Test = async ({ expect, Extension, FileSystem, Locator, Output }) => {
+export const test: Test = async ({ Command, Editor, expect, Extension, FileSystem, Locator, Output }) => {
   const tmpDir = await FileSystem.getTmpDir({ scheme: 'file' })
   await FileSystem.writeFile(`${tmpDir}/test.txt`, 'div')
   const extensionUri = import.meta.resolve('../fixtures/sample.output-channel-structured')
@@ -15,8 +15,13 @@ export const test: Test = async ({ expect, Extension, FileSystem, Locator, Outpu
   const warningSource = links.first()
   await expect(warningSource).toHaveText('rendererWorkerMain.js:3455')
   await expect(warningSource).toHaveAttribute('href', 'lvce://-/packages/renderer-worker/dist/rendererWorkerMain.js')
+  await expect(warningSource).toHaveAttribute('data-line-number', '3455')
   await expect(warningSource).toHaveAttribute('target', '_blank')
   const stackSource = links.nth(2)
   await expect(stackSource).toHaveText('lvce://-/packages/renderer-process/dist/rendererProcessMain.js:8726:11')
   await expect(stackSource).toHaveAttribute('href', 'lvce://-/packages/renderer-process/dist/rendererProcessMain.js')
+  await expect(stackSource).toHaveAttribute('data-line-number', '8726')
+  await expect(stackSource).toHaveAttribute('data-column-number', '11')
+  await Command.execute('Output.handleSourceLinkClick', 'lvce://-/packages/renderer-worker/dist/rendererWorkerMain.js', '3455')
+  await Editor.shouldHaveSelections(new Uint32Array([3454, 0, 3454, 0]))
 }

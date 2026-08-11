@@ -7,7 +7,9 @@ test('parseLine - renders an lvce stack frame as a source link', () => {
     { type: LinePartType.Text, value: '    at load$1 (' },
     {
       className: 'OutputSourceLink',
+      columnNumber: 11,
       label: 'lvce://-/537bcf0/packages/renderer-process/dist/rendererProcessMain.js:8726:11',
+      lineNumber: 8726,
       type: LinePartType.Link,
       value: 'lvce://-/537bcf0/packages/renderer-process/dist/rendererProcessMain.js',
     },
