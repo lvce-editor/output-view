@@ -12,6 +12,7 @@ import { handleContextMenu } from '../HandleContextMenu/HandleContextMenu.ts'
 import { handleData } from '../HandleData/HandleData.ts'
 import { handleError } from '../HandleError/HandleError.ts'
 import { handleFilterInput } from '../HandleFilterInput/HandleFilterInput.ts'
+import * as HandleMessagePort from '../HandleMessagePort/HandleMessagePort.ts'
 import { handleSelect } from '../HandleSelect/HandleSelect.ts'
 import { handleSourceLinkClick } from '../HandleSourceLinkClick/HandleSourceLinkClick.ts'
 import * as Initialize from '../Initialize/Initialize.ts'
@@ -48,6 +49,7 @@ export const commandMap = {
   'Output.handleData': WrapCommand.wrapCommand(handleData),
   'Output.handleError': WrapCommand.wrapCommand(handleError),
   'Output.handleFilterInput': WrapCommand.wrapCommand(handleFilterInput),
+  'Output.handleMessagePort': HandleMessagePort.handleMessagePort,
   'Output.handleSelect': WrapCommand.wrapCommand(handleSelect),
   'Output.handleSourceLinkClick': WrapCommand.wrapCommand(handleSourceLinkClick),
   'Output.initialize': Initialize.initialize,
