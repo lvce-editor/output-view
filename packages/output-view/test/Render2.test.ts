@@ -12,7 +12,7 @@ test('render2 returns renderer commands when no direct renderer is connected', (
   const newState = { ...oldState, filterValue: 'error', uid }
   OutputStates.set(uid, oldState, newState)
 
-  expect(Render2.render2(uid, [DiffType.RenderFilterValue])).toEqual([['Viewlet.setValueByName', 'filter', 'error']])
+  expect(Render2.render2(uid, [DiffType.RenderFilterValue])).toEqual([['Viewlet.setValueByName', uid, 'filter', 'error']])
 })
 
 test('render2 queues renderer commands and returns a lightweight commit marker', async () => {
@@ -25,6 +25,6 @@ test('render2 queues renderer commands and returns a lightweight commit marker',
 
   const result = await Render2.render2(uid, [DiffType.RenderFilterValue])
 
-  expect(queueCommands).toHaveBeenCalledWith(uid, [['Viewlet.setValueByName', 'filter', 'error']])
+  expect(queueCommands).toHaveBeenCalledWith(uid, [['Viewlet.setValueByName', uid, 'filter', 'error']])
   expect(result).toEqual([['Viewlet.commitPending', uid, 17]])
 })
