@@ -5,5 +5,5 @@ import { getOutputVirtualDom } from '../GetOutputVirtualDom/GetOutputVirtualDom.
 
 export const renderItems = (oldState: OutputState, newState: OutputState): ViewletCommand => {
   const dom: readonly VirtualDomNode[] = getOutputVirtualDom(newState.filteredItems, newState.errorCode, newState.error)
-  return ['Viewlet.setDom2', dom]
+  return ['Viewlet.setDom2', newState.uid, dom]
 }
