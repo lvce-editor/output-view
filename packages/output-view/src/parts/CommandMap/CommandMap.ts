@@ -32,6 +32,8 @@ import { setLogLevel } from '../SetLogLevel/SetLogLevel.ts'
 import { setOutputChannel } from '../SetOutputChannel/SetOutputChannel.ts'
 import * as WatchCallback from '../WatchCallbacks/WatchCallbacks.ts'
 
+const handleDirectMessagePort = (port: MessagePort): Promise<void> => HandleMessagePort.handleMessagePort(port, commandMap)
+
 export const commandMap = {
   'Output.clear': WrapCommand.wrapCommand(Clear.clear),
   'Output.closeFindWidget': WrapCommand.wrapCommand(closeFindWidget),
@@ -49,7 +51,7 @@ export const commandMap = {
   'Output.handleData': WrapCommand.wrapCommand(handleData),
   'Output.handleError': WrapCommand.wrapCommand(handleError),
   'Output.handleFilterInput': WrapCommand.wrapCommand(handleFilterInput),
-  'Output.handleMessagePort': HandleMessagePort.handleMessagePort,
+  'Output.handleMessagePort': handleDirectMessagePort,
   'Output.handleSelect': WrapCommand.wrapCommand(handleSelect),
   'Output.handleSourceLinkClick': WrapCommand.wrapCommand(handleSourceLinkClick),
   'Output.initialize': Initialize.initialize,
@@ -67,5 +69,3 @@ export const commandMap = {
   'Output.setOutputChannel': WrapCommand.wrapCommand(setOutputChannel),
   'Output.terminate': ViewletRegistry.terminate,
 }
-
-HandleMessagePort.setCommandMap(commandMap)
