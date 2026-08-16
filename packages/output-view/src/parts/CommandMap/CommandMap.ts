@@ -67,3 +67,5 @@ export const commandMap = {
   'Output.setOutputChannel': WrapCommand.wrapCommand(setOutputChannel),
   'Output.terminate': ViewletRegistry.terminate,
 }
+
+HandleMessagePort.setCommandMap(commandMap)
