@@ -11,7 +11,7 @@ export const loadOptions = async (platform: number): Promise<readonly Option[]> 
     return extensionOptions
   }
   const logsFolderUri = await getLogsDir()
-  const windowLogUri = await getWindowLogUri(logsFolderUri)
+  const windowLogUri = platform === PlatformType.Electron ? await getWindowLogUri(logsFolderUri) : `${logsFolderUri}/log-window.txt`
 
   return [
     {

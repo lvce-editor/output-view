@@ -50,3 +50,20 @@ test('loadOptions - web', async () => {
   expect(await loadOptions(PlatformType.Web)).toEqual([{ id: 'Extension', label: 'Extension', uri: 'extension-output://extension/channel' }])
   expect(mockExtensionManagementRpc.invocations).toEqual([['Extensions.getOutputChannelProviders']])
 })
+
+test('loadOptions - test platform uses legacy window log file', async () => {
+  const mockRendererRpc = RendererWorker.registerMockRpc({
+    'PlatformPaths.getLogsDir': () => 'file:///logs',
+  })
+  const mockExtensionManagementRpc = ExtensionManagementWorker.registerMockRpc({
+    'Extensions.getOutputChannelProviders': () => [],
+  })
+
+  expect(await loadOptions(PlatformType.Test)).toContainEqual({
+    id: 'Window',
+    label: 'Window',
+    uri: 'file:///logs/log-window.txt',
+  })
+  expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getLogsDir']])
+  expect(mockExtensionManagementRpc.invocations).toEqual([['Extensions.getOutputChannelProviders']])
+})

@@ -30,12 +30,10 @@ test('loadContent reads isolated extension output without creating a file watche
 
 test('loadContent returns a new state with expected properties', async () => {
   const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
-    'FileSystem.readDirWithFileTypes': () => [{ name: '123456789.txt', type: 1 }],
     'FileSystem.readFile': () => 'test content',
     'FileSystem.watchFile': () => undefined,
   })
   const mockRendererRpc = RendererWorker.registerMockRpc({
-    'GetWindowId.getWindowId': () => 42,
     'OutputView.getOutputActions': () => [],
     'PlatformPaths.getLogsDir': () => '/tmp/logs',
   })
@@ -53,22 +51,19 @@ test('loadContent returns a new state with expected properties', async () => {
     message: expect.any(String),
   })
   expect(mockFileSystemRpc.invocations).toEqual([
-    ['FileSystem.readDirWithFileTypes', '/tmp/logs/42'],
     ['FileSystem.readFile', expect.any(String)],
     ['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)],
   ])
-  expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getLogsDir'], ['GetWindowId.getWindowId']])
+  expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getLogsDir']])
   expect(mockExtensionManagementRpc.invocations).toEqual([['Extensions.getOutputChannelProviders']])
 })
 
 test('loadContent handles savedState with collapsedUris', async () => {
   const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
-    'FileSystem.readDirWithFileTypes': () => [{ name: '123456789.txt', type: 1 }],
     'FileSystem.readFile': () => 'test content',
     'FileSystem.watchFile': () => undefined,
   })
   const mockRendererRpc = RendererWorker.registerMockRpc({
-    'GetWindowId.getWindowId': () => 42,
     'OutputView.getOutputActions': () => [],
     'PlatformPaths.getLogsDir': () => '/tmp/logs',
   })
@@ -82,22 +77,19 @@ test('loadContent handles savedState with collapsedUris', async () => {
   const result = await loadContent(state, savedState)
   expect(result.collapsedUris).toEqual(['uri1', 'uri2', 'uri3'])
   expect(mockFileSystemRpc.invocations).toEqual([
-    ['FileSystem.readDirWithFileTypes', '/tmp/logs/42'],
     ['FileSystem.readFile', expect.any(String)],
     ['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)],
   ])
-  expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getLogsDir'], ['GetWindowId.getWindowId']])
+  expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getLogsDir']])
   expect(mockExtensionManagementRpc.invocations).toEqual([['Extensions.getOutputChannelProviders']])
 })
 
 test('loadContent handles savedState with invalid collapsedUris', async () => {
   const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
-    'FileSystem.readDirWithFileTypes': () => [{ name: '123456789.txt', type: 1 }],
     'FileSystem.readFile': () => 'test content',
     'FileSystem.watchFile': () => undefined,
   })
   const mockRendererRpc = RendererWorker.registerMockRpc({
-    'GetWindowId.getWindowId': () => 42,
     'OutputView.getOutputActions': () => [],
     'PlatformPaths.getLogsDir': () => '/tmp/logs',
   })
@@ -111,22 +103,19 @@ test('loadContent handles savedState with invalid collapsedUris', async () => {
   const result = await loadContent(state, savedState)
   expect(result.collapsedUris).toEqual([])
   expect(mockFileSystemRpc.invocations).toEqual([
-    ['FileSystem.readDirWithFileTypes', '/tmp/logs/42'],
     ['FileSystem.readFile', expect.any(String)],
     ['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)],
   ])
-  expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getLogsDir'], ['GetWindowId.getWindowId']])
+  expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getLogsDir']])
   expect(mockExtensionManagementRpc.invocations).toEqual([['Extensions.getOutputChannelProviders']])
 })
 
 test('loadContent handles savedState with mixed collapsedUris', async () => {
   const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
-    'FileSystem.readDirWithFileTypes': () => [{ name: '123456789.txt', type: 1 }],
     'FileSystem.readFile': () => 'test content',
     'FileSystem.watchFile': () => undefined,
   })
   const mockRendererRpc = RendererWorker.registerMockRpc({
-    'GetWindowId.getWindowId': () => 42,
     'OutputView.getOutputActions': () => [],
     'PlatformPaths.getLogsDir': () => '/tmp/logs',
   })
@@ -140,22 +129,19 @@ test('loadContent handles savedState with mixed collapsedUris', async () => {
   const result = await loadContent(state, savedState)
   expect(result.collapsedUris).toEqual([])
   expect(mockFileSystemRpc.invocations).toEqual([
-    ['FileSystem.readDirWithFileTypes', '/tmp/logs/42'],
     ['FileSystem.readFile', expect.any(String)],
     ['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)],
   ])
-  expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getLogsDir'], ['GetWindowId.getWindowId']])
+  expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getLogsDir']])
   expect(mockExtensionManagementRpc.invocations).toEqual([['Extensions.getOutputChannelProviders']])
 })
 
 test('loadContent handles savedState with null collapsedUris', async () => {
   const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
-    'FileSystem.readDirWithFileTypes': () => [{ name: '123456789.txt', type: 1 }],
     'FileSystem.readFile': () => 'test content',
     'FileSystem.watchFile': () => undefined,
   })
   const mockRendererRpc = RendererWorker.registerMockRpc({
-    'GetWindowId.getWindowId': () => 42,
     'OutputView.getOutputActions': () => [],
     'PlatformPaths.getLogsDir': () => '/tmp/logs',
   })
@@ -169,10 +155,9 @@ test('loadContent handles savedState with null collapsedUris', async () => {
   const result = await loadContent(state, savedState)
   expect(result.collapsedUris).toEqual([])
   expect(mockFileSystemRpc.invocations).toEqual([
-    ['FileSystem.readDirWithFileTypes', '/tmp/logs/42'],
     ['FileSystem.readFile', expect.any(String)],
     ['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)],
   ])
-  expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getLogsDir'], ['GetWindowId.getWindowId']])
+  expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getLogsDir']])
   expect(mockExtensionManagementRpc.invocations).toEqual([['Extensions.getOutputChannelProviders']])
 })
