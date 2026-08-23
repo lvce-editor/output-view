@@ -5,9 +5,18 @@ import { getLatestLogFileName, getWindowLogUri } from '../src/parts/GetWindowLog
 test('getLatestLogFileName', () => {
   expect(
     getLatestLogFileName([
-      { name: '100.txt', type: 1 },
+      { name: '2026-05-05T14-23-01.456Z.txt', type: 1 },
       { name: 'other.txt', type: 1 },
-      { name: '300.txt', type: 2 },
+      { name: '2026-05-05T16-23-01.456Z.txt', type: 2 },
+      { name: '2026-05-05T15-23-01.456Z.txt', type: 1 },
+    ]),
+  ).toBe('2026-05-05T15-23-01.456Z.txt')
+})
+
+test('getLatestLogFileName - supports legacy timestamp file names', () => {
+  expect(
+    getLatestLogFileName([
+      { name: '100.txt', type: 1 },
       { name: '200.txt', type: 1 },
     ]),
   ).toBe('200.txt')
@@ -23,12 +32,12 @@ test('getWindowLogUri', async () => {
   })
   const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readDirWithFileTypes': () => [
-      { name: '100.txt', type: 1 },
-      { name: '200.txt', type: 1 },
+      { name: '2026-05-05T14-23-01.456Z.txt', type: 1 },
+      { name: '2026-05-05T15-23-01.456Z.txt', type: 1 },
     ],
   })
 
-  expect(await getWindowLogUri('file:///logs')).toBe('file:///logs/42/200.txt')
+  expect(await getWindowLogUri('file:///logs')).toBe('file:///logs/42/2026-05-05T15-23-01.456Z.txt')
   expect(mockRendererRpc.invocations).toEqual([['GetWindowId.getWindowId']])
   expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.readDirWithFileTypes', 'file:///logs/42']])
 })
