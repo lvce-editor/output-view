@@ -11,5 +11,6 @@ export const test: Test = async ({ Command, expect, Extension, Locator, Panel })
   await Panel.open('Output')
   await Command.execute('Panel.selectIndex', 1)
 
-  await expect(Locator('[name="output"] option[value="sample-extension-output-visible"]')).toHaveText('Extension Output Visible')
+  const outputOption = Locator('[name="output"] option[value="sample-extension-output-visible"]')
+  await expect(outputOption).toHaveText('Extension Output Visible')
 }
