@@ -6,7 +6,7 @@ import { handleFileChange } from '../src/parts/HandleFileChange/HandleFileChange
 import * as OutputStates from '../src/parts/OutputStates/OutputStates.ts'
 
 test('should handle file change without throwing error', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({})
+  using mockRpc = RendererWorker.registerMockRpc({})
   // The function should complete without throwing an error
   // even if there are no matching watchIds
   await expect(handleFileChange(123)).resolves.toBeUndefined()
@@ -14,21 +14,21 @@ test('should handle file change without throwing error', async () => {
 })
 
 test('should handle file change with different watchId', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({})
+  using mockRpc = RendererWorker.registerMockRpc({})
   // Test with a different watchId
   await expect(handleFileChange(999)).resolves.toBeUndefined()
   expect(mockRpc.invocations).toEqual([])
 })
 
 test('should handle file change with empty states', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({})
+  using mockRpc = RendererWorker.registerMockRpc({})
   // Test with no output states
   await expect(handleFileChange(123)).resolves.toBeUndefined()
   expect(mockRpc.invocations).toEqual([])
 })
 
 test('should handle file change with matching watchId', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Output.refresh': () => undefined,
   })
 
@@ -51,7 +51,7 @@ test('should handle file change with matching watchId', async () => {
 })
 
 test('should handle file change with multiple states where one matches', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Output.refresh': () => undefined,
   })
 
@@ -81,7 +81,7 @@ test('should handle file change with multiple states where one matches', async (
 })
 
 test('should handle file change with multiple matching watchIds', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Output.refresh': () => undefined,
   })
 
@@ -111,7 +111,7 @@ test('should handle file change with multiple matching watchIds', async () => {
 })
 
 test('should handle file change with zero watchId', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Output.refresh': () => undefined,
   })
 
@@ -134,7 +134,7 @@ test('should handle file change with zero watchId', async () => {
 })
 
 test('should handle file change with negative watchId', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Output.refresh': () => undefined,
   })
 
@@ -157,7 +157,7 @@ test('should handle file change with negative watchId', async () => {
 })
 
 test('should handle file change when refresh throws error', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Output.refresh': () => {
       throw new Error('Refresh failed')
     },
