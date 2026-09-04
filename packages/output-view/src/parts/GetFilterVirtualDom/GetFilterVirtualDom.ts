@@ -5,14 +5,16 @@ import * as DomEventListenerFunctions from '../DomEventListenerFunctions/DomEven
 import * as InputName from '../InputName/InputName.ts'
 import * as OutputStrings from '../OutputStrings/OutputStrings.ts'
 
+const filterNode: VirtualDomNode = {
+  childCount: 1,
+  className: ClassNames.Filter,
+  type: VirtualDomElements.Div,
+}
+
 export const getFilterVirtualDom = (): readonly VirtualDomNode[] => {
   const placeholder = OutputStrings.filter()
   return [
-    {
-      childCount: 1,
-      className: ClassNames.Filter,
-      type: VirtualDomElements.Div,
-    },
+    filterNode,
     {
       childCount: 0,
       className: mergeClassNames(ClassNames.InputBox, ClassNames.FilterInput),

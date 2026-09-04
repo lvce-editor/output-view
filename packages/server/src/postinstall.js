@@ -1,4 +1,4 @@
-import { readFile, readdir, writeFile } from 'node:fs/promises'
+import { access, readFile, readdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
@@ -11,7 +11,7 @@ export const getRemoteUrl = (path) => {
   return `/remote/${url}`
 }
 
-const nodeModulesPath = join(root, 'packages', 'server', 'node_modules')
+const nodeModulesPath = join(root, 'node_modules')
 
 const workerPath = join(root, '.tmp', 'dist', 'dist', 'outputViewWorkerMain.js')
 
@@ -25,6 +25,12 @@ const isCommitHash = (dirent) => {
 const dirents = await readdir(serverStaticPath)
 const commitHash = dirents.find(isCommitHash) || ''
 const rendererWorkerMainPath = join(serverStaticPath, commitHash, 'packages', 'renderer-worker', 'dist', 'rendererWorkerMain.js')
+
+try {
+  await access(rendererWorkerMainPath)
+} catch {
+  process.exit(0)
+}
 
 const content = await readFile(rendererWorkerMainPath, 'utf-8')
 

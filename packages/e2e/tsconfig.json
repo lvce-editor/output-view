@@ -2,9 +2,10 @@
   "compilerOptions": {
     "target": "esnext",
     "lib": ["esnext", "WebWorker"],
-    "module": "nodenext",
+    "module": "esnext",
     "types": [],
-    "moduleResolution": "nodenext",
+    "moduleResolution": "node",
+    "ignoreDeprecations": "6.0",
     "rootDir": ".",
     "skipLibCheck": true,
     "noEmit": true,

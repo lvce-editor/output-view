@@ -12,7 +12,9 @@ import { handleContextMenu } from '../HandleContextMenu/HandleContextMenu.ts'
 import { handleData } from '../HandleData/HandleData.ts'
 import { handleError } from '../HandleError/HandleError.ts'
 import { handleFilterInput } from '../HandleFilterInput/HandleFilterInput.ts'
+import * as HandleMessagePort from '../HandleMessagePort/HandleMessagePort.ts'
 import { handleSelect } from '../HandleSelect/HandleSelect.ts'
+import { handleSourceLinkClick } from '../HandleSourceLinkClick/HandleSourceLinkClick.ts'
 import * as Initialize from '../Initialize/Initialize.ts'
 import { loadContent } from '../LoadContent/LoadContent.ts'
 import { openFindWidget } from '../OpenFindWidget/OpenFindWidget.ts'
@@ -29,6 +31,9 @@ import { selectChannel } from '../SelectChannel/SelectChannel.ts'
 import { setLogLevel } from '../SetLogLevel/SetLogLevel.ts'
 import { setOutputChannel } from '../SetOutputChannel/SetOutputChannel.ts'
 import * as WatchCallback from '../WatchCallbacks/WatchCallbacks.ts'
+
+const handleDirectMessagePort = (port: MessagePort, setAsRendererProcess = true): Promise<void> =>
+  HandleMessagePort.handleMessagePort(port, commandMap, setAsRendererProcess)
 
 export const commandMap = {
   'Output.clear': WrapCommand.wrapCommand(Clear.clear),
@@ -47,7 +52,9 @@ export const commandMap = {
   'Output.handleData': WrapCommand.wrapCommand(handleData),
   'Output.handleError': WrapCommand.wrapCommand(handleError),
   'Output.handleFilterInput': WrapCommand.wrapCommand(handleFilterInput),
+  'Output.handleMessagePort': handleDirectMessagePort,
   'Output.handleSelect': WrapCommand.wrapCommand(handleSelect),
+  'Output.handleSourceLinkClick': WrapCommand.wrapCommand(handleSourceLinkClick),
   'Output.initialize': Initialize.initialize,
   'Output.loadContent2': WrapCommand.wrapCommand(loadContent),
   'Output.openFindWidget': WrapCommand.wrapCommand(openFindWidget),

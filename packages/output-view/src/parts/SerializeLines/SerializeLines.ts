@@ -1,8 +1,12 @@
 import type { Line } from '../Line/Line.ts'
 import type { LinePart } from '../LinePart/LinePart.ts'
+import * as LinePartType from '../LinePartType/LinePartType.ts'
 
 const serializeLinePart = (part: LinePart): string => {
-  return part.value
+  if (part.type === LinePartType.LogLevel || part.type === LinePartType.RepeatCount) {
+    return ''
+  }
+  return part.type === LinePartType.Link ? part.label || part.value : part.value
 }
 
 const serializeLineParts = (parts: readonly LinePart[]): string => {

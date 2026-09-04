@@ -13,7 +13,7 @@ test('getContentDom - renders container and lines', () => {
     type: VirtualDomElements.Div,
   })
   // container + two lines (each: parent + text)
-  expect(dom.length).toBe(1 + 2 * 2)
+  expect(dom).toHaveLength(1 + 2 * 2)
 })
 
 test('getContentDom - returns empty when error present', () => {

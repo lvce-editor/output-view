@@ -1,6 +1,7 @@
 import type { OutputState } from '../OutputState/OutputState.ts'
 import { createWatchId } from '../CreateWatchId/CreateWatchId.ts'
 import { filterItems } from '../FilterItems/FilterItems.ts'
+import { isExtensionOutputUri } from '../IsExtensionOutputUri/IsExtensionOutputUri.ts'
 import { loadLines } from '../LoadLines/LoadLines.ts'
 import { setupChangeListener } from '../SetupChangeListener/SetupChangeListener.ts'
 
@@ -14,7 +15,7 @@ export const selectChannel = async (state: OutputState, id: string): Promise<Out
   const { code, error, lines } = await loadLines(matchingOption.uri)
 
   // TODO memory leak and race condition, need to dispose file watcher of previous uri
-  const newWatchId = createWatchId()
+  const newWatchId = isExtensionOutputUri(matchingOption.uri) ? 0 : createWatchId()
   await setupChangeListener(watchId, newWatchId, matchingOption.uri)
 
   const filteredItems = filterItems(lines, filterValue)

@@ -56,7 +56,7 @@ test('getBadgeVirtualDom with empty className', () => {
   expect(result).toHaveLength(2)
   expect(result[0]).toEqual({
     childCount: 1,
-    className: 'Badge ',
+    className: 'Badge',
     type: VirtualDomElements.Div,
   })
   expect(result[1]).toEqual({

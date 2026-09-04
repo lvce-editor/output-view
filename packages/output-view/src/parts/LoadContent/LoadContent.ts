@@ -4,6 +4,7 @@ import { createWatchId } from '../CreateWatchId/CreateWatchId.ts'
 import { filterItems } from '../FilterItems/FilterItems.ts'
 import { getSelectedItem } from '../GetSelectedItem/GetSelectedItem.ts'
 import * as InputSource from '../InputSource/InputSource.ts'
+import { isExtensionOutputUri } from '../IsExtensionOutputUri/IsExtensionOutputUri.ts'
 import { loadButtons } from '../LoadButtons/LoadButtons.ts'
 import { loadLines } from '../LoadLines/LoadLines.ts'
 import { loadOptions } from '../LoadOptions/LoadOptions.ts'
@@ -38,7 +39,7 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
   const { uri } = option
   const { code, error, lines } = await loadLines(uri)
   const filteredItems = filterItems(lines, filterValue)
-  const newWatchId = createWatchId()
+  const newWatchId = isExtensionOutputUri(uri) ? 0 : createWatchId()
   await setupChangeListener(watchId, newWatchId, uri)
   const buttons = loadButtons()
   return {

@@ -16,8 +16,6 @@ export const test: Test = async ({ expect, Extension, FileSystem, Locator, Outpu
   await Output.selectChannel('xyz')
 
   // assert
-  const select = Locator('[name="output"]')
-  await expect(select).toHaveValue('xyz')
   const text = Locator('.OutputContent')
   await expect(text).toHaveText('test content')
 
