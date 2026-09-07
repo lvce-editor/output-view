@@ -6,7 +6,7 @@ import * as DomEventListenerFunctions from '../DomEventListenerFunctions/DomEven
 import { getOptionVirtualDom } from '../GetOptionVirtualDom/GetOptionVirtualDom.ts'
 import * as InputName from '../InputName/InputName.ts'
 
-export const getSelectVirtualDom = (options: readonly Option[]): readonly VirtualDomNode[] => {
+export const getSelectVirtualDom = (options: readonly Option[], selectedOption = ''): readonly VirtualDomNode[] => {
   return [
     {
       childCount: options.length,
@@ -15,6 +15,6 @@ export const getSelectVirtualDom = (options: readonly Option[]): readonly Virtua
       onChange: DomEventListenerFunctions.HandleSelect,
       type: VirtualDomElements.Select,
     },
-    ...options.flatMap(getOptionVirtualDom),
+    ...options.flatMap((option) => getOptionVirtualDom(option, option.id === selectedOption)),
   ]
 }

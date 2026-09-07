@@ -16,3 +16,19 @@ test('renderActions - returns virtual dom from options', () => {
   expect(Array.isArray(dom)).toBe(true)
   expect(dom.length).toBeGreaterThan(0)
 })
+
+test('renderActions - selects the channel whose output is displayed', () => {
+  const state: OutputState = {
+    ...createDefaultState(),
+    options: [
+      { id: 'main-process', label: 'Main Process', uri: 'file:///main-process' },
+      { id: 'devcontainer', label: 'Dev Container', uri: 'extension-output://devcontainer' },
+    ],
+    selectedOption: 'devcontainer',
+  }
+
+  const dom = renderActions(state)
+  const selectedOptions = dom.filter((node) => node.selected)
+
+  expect(selectedOptions).toEqual([expect.objectContaining({ value: 'devcontainer' })])
+})

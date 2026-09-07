@@ -13,7 +13,11 @@ const getChildCount = (buttonsLength: number): number => {
   return buttonsLength + filterCount + selectLength
 }
 
-export const getActionsVirtualDom = (options: readonly Option[], buttons: readonly ActionButton[]): readonly VirtualDomNode[] => {
+export const getActionsVirtualDom = (
+  options: readonly Option[],
+  buttons: readonly ActionButton[],
+  selectedOption = '',
+): readonly VirtualDomNode[] => {
   const childCount = getChildCount(buttons.length)
   return [
     {
@@ -23,7 +27,7 @@ export const getActionsVirtualDom = (options: readonly Option[], buttons: readon
       type: VirtualDomElements.Div,
     },
     ...getFilterVirtualDom(),
-    ...getSelectVirtualDom(options),
+    ...getSelectVirtualDom(options, selectedOption),
     ...getActionButtonsVirtualDom(buttons),
   ]
 }

@@ -9,6 +9,7 @@ test('getOptionVirtualDom - renders option with text', () => {
   expect(dom[0]).toEqual({
     childCount: 1,
     className: ClassNames.Option,
+    selected: false,
     type: VirtualDomElements.Option,
     value: 'main',
   })
