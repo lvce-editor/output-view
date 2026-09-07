@@ -1,0 +1,8 @@
+{
+  "id": "sample.output-channel-auto-scroll",
+  "browser": "dist/main.js",
+  "isolated": true,
+  "activation": ["onOutput", "onCommand:auto-scroll.append"],
+  "commands": [{ "id": "auto-scroll.append", "label": "Append Output Line" }],
+  "outputChannels": [{ "id": "auto-scroll", "label": "Auto Scroll" }]
+}

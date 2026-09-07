@@ -2,10 +2,9 @@ import type { Test } from '@lvce-editor/test-with-playwright'
 
 export const name = 'output.large-data'
 
-const lineCount = 10_000
 const filterTarget = 'unique-filter-target'
 
-export const test: Test = async ({ expect, Extension, FileSystem, Locator, Output }) => {
+export const test: Test = async ({ Command, expect, Extension, FileSystem, Locator, Output }) => {
   // arrange
   const tmpDir = await FileSystem.getTmpDir({ scheme: 'file' })
   await FileSystem.writeFile(`${tmpDir}/test.txt`, 'div')
@@ -20,8 +19,20 @@ export const test: Test = async ({ expect, Extension, FileSystem, Locator, Outpu
   const output = Locator('.Output')
   await expect(output).toBeVisible()
   const lines = Locator('.OutputContent .Line')
-  await expect(lines).toHaveCount(lineCount + 1)
-  const lastDataLine = lines.nth(lineCount - 1)
+  const offscreenLine = lines.nth(100)
+  const thumb = Locator('.Output .ScrollBarThumb')
+  await expect(offscreenLine).toHaveCount(0)
+  await expect(thumb).toBeVisible()
+  const lastDataLine = Locator('.OutputContent .Line:nth-last-child(2)')
+  await expect(lastDataLine).toHaveText(`line 09999 ${filterTarget}`)
+
+  // Scroll back to the first rows through the DOM event listener.
+  // @ts-expect-error The locator accepts event initialization objects at runtime.
+  await Locator('.OutputContent').dispatchEvent('wheel', { bubbles: true, deltaMode: 0, deltaY: -1_000_000 })
+  await Command.execute('Output.refresh')
+  await expect(lines.first()).toHaveText('line 00000')
+  await expect(offscreenLine).toHaveCount(0)
+  await Command.execute('Output.handleKeyDown', 'End')
   await expect(lastDataLine).toHaveText(`line 09999 ${filterTarget}`)
 
   // act
@@ -31,4 +42,5 @@ export const test: Test = async ({ expect, Extension, FileSystem, Locator, Outpu
   await expect(lines).toHaveCount(1)
   await expect(lines.first()).toHaveText(`line 09999 ${filterTarget}`)
   await expect(output).toBeVisible()
+  await expect(thumb).toHaveCount(0)
 }

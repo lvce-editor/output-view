@@ -1,5 +1,6 @@
 import { test, expect } from '@jest/globals'
 import { VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
+import * as DomEventListenerFunctions from '../src/parts/DomEventListenerFunctions/DomEventListenerFunctions.ts'
 import { getContentDom } from '../src/parts/GetContentDom/GetContentDom.ts'
 import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 
@@ -8,6 +9,8 @@ test('getContentDom - renders container and lines', () => {
   expect(dom[0]).toEqual({
     childCount: 2,
     className: 'OutputContent',
+    onKeyDown: DomEventListenerFunctions.HandleKeyDown,
+    onWheel: DomEventListenerFunctions.HandleWheel,
     role: 'log',
     tabIndex: 0,
     type: VirtualDomElements.Div,

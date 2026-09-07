@@ -7,6 +7,7 @@ export const disableScrollLock = async (state: OutputState): Promise<OutputState
   }
   return {
     ...state,
+    followOutput: true,
     scrollLockEnabled: false,
   }
 }

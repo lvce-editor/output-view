@@ -4,6 +4,17 @@ import * as InputSource from '../InputSource/InputSource.ts'
 
 export const renderEventListeners = (): readonly DomEventListener[] => {
   return [
+    { name: DomEventListenerFunctions.HandleWheel, params: ['handleWheel', 'event.deltaMode', 'event.deltaY'], passive: true },
+    { name: DomEventListenerFunctions.HandleKeyDown, params: ['handleKeyDown', 'event.key'] },
+    {
+      name: DomEventListenerFunctions.HandleScrollBarPointerDown,
+      params: ['handleScrollBarClick', 'event.clientY'],
+      preventDefault: true,
+      stopPropagation: true,
+      trackPointerEvents: [DomEventListenerFunctions.HandleScrollBarMove, DomEventListenerFunctions.HandleScrollBarPointerCaptureLost],
+    } as DomEventListener,
+    { name: DomEventListenerFunctions.HandleScrollBarMove, params: ['handleScrollBarMove', 'event.clientY'] },
+    { name: DomEventListenerFunctions.HandleScrollBarPointerCaptureLost, params: ['handleScrollBarCaptureLost'] },
     {
       name: DomEventListenerFunctions.HandleBlur,
       params: ['handleBlur'],
