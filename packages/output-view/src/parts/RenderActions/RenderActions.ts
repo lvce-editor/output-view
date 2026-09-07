@@ -3,7 +3,7 @@ import type { OutputState } from '../OutputState/OutputState.ts'
 import * as GetActionsVirtualDom from '../GetActionsVirtualDom/GetActionsVirtualDom.ts'
 
 export const renderActions = (state: OutputState): readonly VirtualDomNode[] => {
-  const { buttons, options } = state
-  const dom = GetActionsVirtualDom.getActionsVirtualDom(options, buttons)
+  const { buttons, options, selectedOption } = state
+  const dom = GetActionsVirtualDom.getActionsVirtualDom(options, buttons, selectedOption)
   return dom
 }

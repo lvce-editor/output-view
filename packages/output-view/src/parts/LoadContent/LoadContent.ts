@@ -27,10 +27,10 @@ const getMatchingOpen = (options: readonly Option[], id: string): Option | undef
 }
 
 export const loadContent = async (state: OutputState, savedState: any): Promise<OutputState> => {
-  const { platform, watchId } = state
+  const { platform, uri: requestedChannel, watchId } = state
   const collapsedUris = getSavedCollapsedUris(savedState)
   const { filterValue, scrollLockEnabled, selectedOption } = restoreState(savedState)
-  const selectedId = getSelectedItem(selectedOption, platform)
+  const selectedId = getSelectedItem(requestedChannel || selectedOption, platform)
   const options = await loadOptions(platform)
   const option = getMatchingOpen(options, selectedId)
   if (!option) {
@@ -54,7 +54,7 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
     listItems: lines,
     options,
     scrollLockEnabled,
-    selectedOption: selectedId,
+    selectedOption: option.id,
     watchId: newWatchId,
   }
 }

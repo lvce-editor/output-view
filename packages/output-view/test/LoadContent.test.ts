@@ -21,7 +21,7 @@ test('loadContent reads isolated extension output without creating a file watche
 
   expect(result).toMatchObject({
     listItems: [[{ type: LinePartType.Text, value: 'extension output' }]],
-    selectedOption: '',
+    selectedOption: 'channel',
     watchId: 0,
   })
   expect(mockFileSystemRpc.invocations).toEqual([])
@@ -160,4 +160,24 @@ test('loadContent handles savedState with null collapsedUris', async () => {
   ])
   expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getLogsDir']])
   expect(mockExtensionManagementRpc.invocations).toEqual([['Extensions.getOutputChannelProviders']])
+})
+
+test('loadContent selects the requested channel before the first render', async () => {
+  const uri = 'extension-output://test.extension/second'
+  ExtensionManagementWorker.registerMockRpc({
+    'Extensions.getOutputChannelProviders': () => [
+      { id: 'first', label: 'First', uri: 'extension-output://test.extension/first' },
+      { id: 'second', label: 'Second', uri },
+    ],
+    'Extensions.readOutputChannel': (requestedUri: string) => {
+      expect(requestedUri).toBe(uri)
+      return 'second channel content'
+    },
+  })
+  const state = { ...createDefaultState(), platform: PlatformType.Web, uri: 'second' }
+
+  const result = await loadContent(state, { selectedOption: 'first' })
+
+  expect(result.selectedOption).toBe('second')
+  expect(result.listItems).toEqual([[{ type: LinePartType.Text, value: 'second channel content' }]])
 })
