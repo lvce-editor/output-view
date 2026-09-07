@@ -27,7 +27,8 @@ export const test: Test = async ({ Command, expect, Extension, FileSystem, Locat
   await expect(lastDataLine).toHaveText(`line 09999 ${filterTarget}`)
 
   // Scroll back to the first rows through the DOM event listener.
-  await Locator('.OutputContent').dispatchEvent('wheel', JSON.stringify({ deltaMode: 0, deltaY: -1_000_000 }))
+  // @ts-expect-error The locator accepts event initialization objects at runtime.
+  await Locator('.OutputContent').dispatchEvent('wheel', { deltaMode: 0, deltaY: -1_000_000 })
   await expect(lines.first()).toHaveText('line 00000')
   await expect(offscreenLine).toHaveCount(0)
   await Command.execute('Output.handleKeyDown', 'End')
