@@ -32,5 +32,6 @@ export const test: Test = async ({ Command, expect, Extension, FileSystem, Locat
   await QuickPick.setValue('>Append Output Line')
   await QuickPick.selectItem('Append Output Line')
   await expect(lastLine).toHaveText('line 1002')
-  await expect(Locator('.OutputContent .Line').nth(100)).toHaveCount(0)
+  const offscreenLine = Locator('.OutputContent .Line').nth(100)
+  await expect(offscreenLine).toHaveCount(0)
 }

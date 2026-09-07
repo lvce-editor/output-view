@@ -1,4 +1,6 @@
 import { expect, test } from '@jest/globals'
+import type { Line } from '../src/parts/Line/Line.ts'
+import type { OutputState } from '../src/parts/OutputState/OutputState.ts'
 import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import { diff2 } from '../src/parts/Diff2/Diff2.ts'
 import { disableScrollLock } from '../src/parts/DisableScrollLock/DisableScrollLock.ts'
@@ -13,9 +15,10 @@ import { renderCss } from '../src/parts/RenderCss/RenderCss.ts'
 import { renderItems } from '../src/parts/RenderItems/RenderItems.ts'
 import { updateVirtualList } from '../src/parts/UpdateVirtualList/UpdateVirtualList.ts'
 
-const createLines = (count: number) => Array.from({ length: count }, (_, index) => [{ type: LinePartType.Text, value: `line ${index}` }])
+const createLines = (count: number): readonly Line[] =>
+  Array.from({ length: count }, (_, index) => [{ type: LinePartType.Text, value: `line ${index}` }])
 
-const createState = () => updateVirtualList({ ...createDefaultState(), filteredItems: createLines(10_000), height: 180 })
+const createState = (): OutputState => updateVirtualList({ ...createDefaultState(), filteredItems: createLines(10_000), height: 180 })
 
 test('renders only the viewport at the end of a large output', () => {
   const state = createState()
@@ -54,7 +57,7 @@ test('scroll lock preserves position until disabled', async () => {
   expect(updateVirtualList(unlocked).minLineY).toBe(9991)
 })
 
-test('clamps cleared, shortened, hidden and invalid viewports', () => {
+test('clamps cleared, shortened, hidden and invalid viewport sizes', () => {
   const state = createState()
   expect(updateVirtualList({ ...state, filteredItems: [] })).toMatchObject({ deltaY: 0, maxLineY: 0, minLineY: 0, scrollBarHeight: 0 })
   expect(updateVirtualList({ ...state, filteredItems: createLines(2), followOutput: false })).toMatchObject({ deltaY: 0, maxLineY: 2, minLineY: 0 })
