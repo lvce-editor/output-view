@@ -4,6 +4,12 @@ import type { ViewletCommand } from '../ViewletCommand/ViewletCommand.ts'
 import { getOutputVirtualDom } from '../GetOutputVirtualDom/GetOutputVirtualDom.ts'
 
 export const renderItems = (oldState: OutputState, newState: OutputState): ViewletCommand => {
-  const dom: readonly VirtualDomNode[] = getOutputVirtualDom(newState.filteredItems, newState.errorCode, newState.error)
+  const dom: readonly VirtualDomNode[] = getOutputVirtualDom(
+    newState.filteredItems.slice(newState.minLineY, newState.maxLineY),
+    newState.errorCode,
+    newState.error,
+    newState.scrollBarHeight,
+    newState.scrollBarActive,
+  )
   return ['Viewlet.setDom2', newState.uid, dom]
 }

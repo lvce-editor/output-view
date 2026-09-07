@@ -9,6 +9,8 @@ test('getContentDom - renders container and lines', () => {
     childCount: 2,
     className: 'OutputContent',
     role: 'log',
+    onKeyDown: 'handleKeyDown',
+    onWheel: 'handleWheel',
     tabIndex: 0,
     type: VirtualDomElements.Div,
   })

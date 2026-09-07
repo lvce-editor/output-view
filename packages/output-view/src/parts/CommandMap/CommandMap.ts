@@ -12,9 +12,14 @@ import { handleContextMenu } from '../HandleContextMenu/HandleContextMenu.ts'
 import { handleData } from '../HandleData/HandleData.ts'
 import { handleError } from '../HandleError/HandleError.ts'
 import { handleFilterInput } from '../HandleFilterInput/HandleFilterInput.ts'
+import { handleKeyDown } from '../HandleKeyDown/HandleKeyDown.ts'
 import * as HandleMessagePort from '../HandleMessagePort/HandleMessagePort.ts'
+import { handleScrollBarCaptureLost } from '../HandleScrollBarCaptureLost/HandleScrollBarCaptureLost.ts'
+import { handleScrollBarClick } from '../HandleScrollBarClick/HandleScrollBarClick.ts'
+import { handleScrollBarMove } from '../HandleScrollBarMove/HandleScrollBarMove.ts'
 import { handleSelect } from '../HandleSelect/HandleSelect.ts'
 import { handleSourceLinkClick } from '../HandleSourceLinkClick/HandleSourceLinkClick.ts'
+import { handleWheel } from '../HandleWheel/HandleWheel.ts'
 import * as Initialize from '../Initialize/Initialize.ts'
 import { loadContent } from '../LoadContent/LoadContent.ts'
 import { openFindWidget } from '../OpenFindWidget/OpenFindWidget.ts'
@@ -28,6 +33,7 @@ import * as Resize from '../Resize/Resize.ts'
 import { saveOutputAs } from '../SaveOutputAs/SaveOutputAs.ts'
 import * as SaveState from '../SaveState/SaveState.ts'
 import { selectChannel } from '../SelectChannel/SelectChannel.ts'
+import { setDeltaY } from '../SetDeltaY/SetDeltaY.ts'
 import { setLogLevel } from '../SetLogLevel/SetLogLevel.ts'
 import { setOutputChannel } from '../SetOutputChannel/SetOutputChannel.ts'
 import * as WatchCallback from '../WatchCallbacks/WatchCallbacks.ts'
@@ -52,9 +58,14 @@ export const commandMap = {
   'Output.handleData': WrapCommand.wrapCommand(handleData),
   'Output.handleError': WrapCommand.wrapCommand(handleError),
   'Output.handleFilterInput': WrapCommand.wrapCommand(handleFilterInput),
+  'Output.handleKeyDown': WrapCommand.wrapCommand(handleKeyDown),
   'Output.handleMessagePort': handleDirectMessagePort,
+  'Output.handleScrollBarCaptureLost': WrapCommand.wrapCommand(handleScrollBarCaptureLost),
+  'Output.handleScrollBarClick': WrapCommand.wrapCommand(handleScrollBarClick),
+  'Output.handleScrollBarMove': WrapCommand.wrapCommand(handleScrollBarMove),
   'Output.handleSelect': WrapCommand.wrapCommand(handleSelect),
   'Output.handleSourceLinkClick': WrapCommand.wrapCommand(handleSourceLinkClick),
+  'Output.handleWheel': WrapCommand.wrapCommand(handleWheel),
   'Output.initialize': Initialize.initialize,
   'Output.loadContent2': WrapCommand.wrapCommand(loadContent),
   'Output.openFindWidget': WrapCommand.wrapCommand(openFindWidget),
@@ -62,10 +73,11 @@ export const commandMap = {
   'Output.render2': Render2.render2,
   'Output.renderActions': WrapCommand.wrapGetter(renderActions),
   'Output.renderEventListeners': renderEventListeners,
-  'Output.resize': Resize.resize,
+  'Output.resize': WrapCommand.wrapCommand(Resize.resize),
   'Output.saveAs': WrapCommand.wrapCommand(saveOutputAs),
   'Output.saveState': WrapCommand.wrapGetter(SaveState.saveState),
   'Output.selectChannel': WrapCommand.wrapCommand(selectChannel),
+  'Output.setDeltaY': WrapCommand.wrapCommand(setDeltaY),
   'Output.setLogLevel': setLogLevel,
   'Output.setOutputChannel': WrapCommand.wrapCommand(setOutputChannel),
   'Output.terminate': ViewletRegistry.terminate,

@@ -5,11 +5,15 @@ import type { Option } from '../Option/Option.ts'
 export interface OutputState {
   readonly buttons: readonly ActionButton[]
   readonly collapsedUris: readonly string[]
+  readonly deltaY: number
   readonly error: string
   readonly errorCode: number
   readonly filteredItems: readonly Line[]
   readonly filterValue: string
+  readonly finalDeltaY: number
   readonly focusedIndex: number
+  readonly followOutput: boolean
+  readonly handleOffset: number
   readonly height: number
   readonly inputSource: number
   readonly itemHeight: number
@@ -21,6 +25,8 @@ export interface OutputState {
   readonly options: readonly Option[]
   readonly parentId: number
   readonly platform: number
+  readonly scrollBarActive: boolean
+  readonly scrollBarHeight: number
   readonly scrollLockEnabled: boolean
   readonly selectedOption: string
   readonly smallWidthBreakPoint: number
