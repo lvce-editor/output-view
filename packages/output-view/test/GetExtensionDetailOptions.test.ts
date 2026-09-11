@@ -15,7 +15,7 @@ test('does not offer a channel before any errors are logged', async () => {
 })
 
 test.each(['Error: failed to load changelog', ''])('offers the channel when its log exists, including after clearing: %s', async (content) => {
-  using rpc = FileSystemWorker.registerMockRpc({
+  using _rpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile': () => content,
   })
   expect(await getExtensionDetailOptions()).toEqual([{ id: 'ExtensionDetail', label: 'Extension Detail', uri }])
