@@ -38,7 +38,10 @@ test('loadOptions - electron', async () => {
     },
   ])
   expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getLogsDir'], ['GetWindowId.getWindowId']])
-  expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.readDirWithFileTypes', 'file:///logs/42']])
+  expect(mockFileSystemRpc.invocations).toEqual([
+    ['FileSystem.readFile', 'memfs:///extension-detail-output.txt'],
+    ['FileSystem.readDirWithFileTypes', 'file:///logs/42'],
+  ])
   expect(mockExtensionManagementRpc.invocations).toEqual([['Extensions.getOutputChannelProviders']])
 })
 

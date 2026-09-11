@@ -1,4 +1,5 @@
 import type { Option } from '../Option/Option.ts'
+import { getExtensionDetailOptions } from '../GetExtensionDetailOptions/GetExtensionDetailOptions.ts'
 import { getExtensionOptions } from '../GetExtensionOptions/GetExtensionOptions.ts'
 import { getLogsDir } from '../GetLogsDir/GetLogsDir.ts'
 import { getWindowLogUri } from '../GetWindowLogUri/GetWindowLogUri.ts'
@@ -7,8 +8,9 @@ import * as PlatformType from '../PlatformType/PlatformType.ts'
 
 export const loadOptions = async (platform: number): Promise<readonly Option[]> => {
   const extensionOptions = await getExtensionOptions()
+  const detailOptions = await getExtensionDetailOptions()
   if (platform === PlatformType.Web) {
-    return extensionOptions
+    return [...detailOptions, ...extensionOptions]
   }
   const logsFolderUri = await getLogsDir()
   const windowLogUri = platform === PlatformType.Electron ? await getWindowLogUri(logsFolderUri) : `${logsFolderUri}/log-window.txt`
@@ -29,6 +31,7 @@ export const loadOptions = async (platform: number): Promise<readonly Option[]> 
       label: 'Window',
       uri: windowLogUri,
     },
+    ...detailOptions,
     ...extensionOptions,
   ]
 }
