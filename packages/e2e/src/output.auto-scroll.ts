@@ -2,7 +2,7 @@ import type { Test } from '@lvce-editor/test-with-playwright'
 
 export const name = 'output.auto-scroll'
 
-export const test: Test = async ({ Command, expect, Extension, FileSystem, Locator, Output, QuickPick }) => {
+export const test: Test = async ({ Command, expect, Extension, FileSystem, Locator, Output }) => {
   const tmpDir = await FileSystem.getTmpDir({ scheme: 'file' })
   await FileSystem.writeFile(`${tmpDir}/test.txt`, 'div')
   await Extension.addWebExtension(import.meta.resolve('../fixtures/sample.output-channel-auto-scroll'))
@@ -12,9 +12,7 @@ export const test: Test = async ({ Command, expect, Extension, FileSystem, Locat
   await expect(lastLine).toHaveText('line 999')
   await expect(lastLine).toBeVisible()
 
-  await QuickPick.open()
-  await QuickPick.setValue('>Append Output Line')
-  await QuickPick.selectItem('Append Output Line')
+  await Command.executeExtensionCommand('auto-scroll.append')
   // The test editor does not forward extension output change notifications yet.
   await Command.execute('Output.refresh')
   await expect(lastLine).toHaveText('line 1000')
@@ -23,18 +21,14 @@ export const test: Test = async ({ Command, expect, Extension, FileSystem, Locat
   await Command.execute('Output.handleKeyDown', 'Home')
   const firstLine = Locator('.OutputContent .Line').first()
   await expect(firstLine).toHaveText('line 0')
-  await QuickPick.open()
-  await QuickPick.setValue('>Append Output Line')
-  await QuickPick.selectItem('Append Output Line')
+  await Command.executeExtensionCommand('auto-scroll.append')
   // The test editor does not forward extension output change notifications yet.
   await Command.execute('Output.refresh')
   await expect(firstLine).toHaveText('line 0')
 
   await Command.execute('Output.handleKeyDown', 'End')
   await expect(lastLine).toHaveText('line 1001')
-  await QuickPick.open()
-  await QuickPick.setValue('>Append Output Line')
-  await QuickPick.selectItem('Append Output Line')
+  await Command.executeExtensionCommand('auto-scroll.append')
   // The test editor does not forward extension output change notifications yet.
   await Command.execute('Output.refresh')
   await expect(lastLine).toHaveText('line 1002')
