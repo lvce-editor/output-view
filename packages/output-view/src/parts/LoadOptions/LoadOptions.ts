@@ -1,5 +1,5 @@
-import type { Option } from '../Option/Option.ts'
 import { FileSystemWorker } from '@lvce-editor/rpc-registry'
+import type { Option } from '../Option/Option.ts'
 import { getExtensionDetailOptions } from '../GetExtensionDetailOptions/GetExtensionDetailOptions.ts'
 import { getExtensionOptions } from '../GetExtensionOptions/GetExtensionOptions.ts'
 import { getLogsDir } from '../GetLogsDir/GetLogsDir.ts'
