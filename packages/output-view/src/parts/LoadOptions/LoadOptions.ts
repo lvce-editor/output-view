@@ -1,4 +1,5 @@
 import type { Option } from '../Option/Option.ts'
+import { FileSystemWorker } from '@lvce-editor/rpc-registry'
 import { getExtensionDetailOptions } from '../GetExtensionDetailOptions/GetExtensionDetailOptions.ts'
 import { getExtensionOptions } from '../GetExtensionOptions/GetExtensionOptions.ts'
 import { getLogsDir } from '../GetLogsDir/GetLogsDir.ts'
@@ -13,6 +14,14 @@ export const loadOptions = async (platform: number): Promise<readonly Option[]> 
     return [...detailOptions, ...extensionOptions]
   }
   const logsFolderUri = await getLogsDir()
+  const previewSandboxLogUri = `${logsFolderUri}/log-preview-sandbox.txt`
+  try {
+    if (!(await FileSystemWorker.exists(previewSandboxLogUri))) {
+      await FileSystemWorker.writeFile(previewSandboxLogUri, '')
+    }
+  } catch {
+    // Keep the Output view usable if the preview log cannot be initialized.
+  }
   const windowLogUri = platform === PlatformType.Electron ? await getWindowLogUri(logsFolderUri) : `${logsFolderUri}/log-window.txt`
 
   return [
@@ -30,6 +39,11 @@ export const loadOptions = async (platform: number): Promise<readonly Option[]> 
       id: InputName.Window,
       label: 'Window',
       uri: windowLogUri,
+    },
+    {
+      id: InputName.PreviewSandbox,
+      label: 'Preview Sandbox',
+      uri: previewSandboxLogUri,
     },
     ...detailOptions,
     ...extensionOptions,

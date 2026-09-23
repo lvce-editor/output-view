@@ -52,6 +52,7 @@ test('loadContent returns a new state with expected properties', async () => {
   })
   expect(mockFileSystemRpc.invocations).toEqual([
     ['FileSystem.readFile', 'memfs:///extension-detail-output.txt'],
+    ['FileSystem.exists', expect.any(String)],
     ['FileSystem.readFile', expect.any(String)],
     ['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)],
   ])
@@ -79,6 +80,7 @@ test('loadContent handles savedState with collapsedUris', async () => {
   expect(result.collapsedUris).toEqual(['uri1', 'uri2', 'uri3'])
   expect(mockFileSystemRpc.invocations).toEqual([
     ['FileSystem.readFile', 'memfs:///extension-detail-output.txt'],
+    ['FileSystem.exists', expect.any(String)],
     ['FileSystem.readFile', expect.any(String)],
     ['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)],
   ])
@@ -106,6 +108,7 @@ test('loadContent handles savedState with invalid collapsedUris', async () => {
   expect(result.collapsedUris).toEqual([])
   expect(mockFileSystemRpc.invocations).toEqual([
     ['FileSystem.readFile', 'memfs:///extension-detail-output.txt'],
+    ['FileSystem.exists', expect.any(String)],
     ['FileSystem.readFile', expect.any(String)],
     ['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)],
   ])
@@ -133,6 +136,7 @@ test('loadContent handles savedState with mixed collapsedUris', async () => {
   expect(result.collapsedUris).toEqual([])
   expect(mockFileSystemRpc.invocations).toEqual([
     ['FileSystem.readFile', 'memfs:///extension-detail-output.txt'],
+    ['FileSystem.exists', expect.any(String)],
     ['FileSystem.readFile', expect.any(String)],
     ['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)],
   ])
@@ -160,6 +164,7 @@ test('loadContent handles savedState with null collapsedUris', async () => {
   expect(result.collapsedUris).toEqual([])
   expect(mockFileSystemRpc.invocations).toEqual([
     ['FileSystem.readFile', 'memfs:///extension-detail-output.txt'],
+    ['FileSystem.exists', expect.any(String)],
     ['FileSystem.readFile', expect.any(String)],
     ['FileSystem.watchFile', expect.any(Number), expect.any(String), expect.any(Number)],
   ])
