@@ -5,8 +5,10 @@ const applyComponentState = (currentState: OutputState, state: OutputState): Out
   if (!state || typeof state !== 'object' || Array.isArray(state)) {
     throw new TypeError('Output state must be an object')
   }
-  if (state.uid !== currentState.uid) {
-    throw new Error(`Output state uid must remain ${currentState.uid}`)
+  const { uid } = state
+  const { uid: currentUid } = currentState
+  if (uid !== currentUid) {
+    throw new Error(`Output state uid must remain ${currentUid}`)
   }
   return { ...state, watchId: currentState.watchId }
 }
