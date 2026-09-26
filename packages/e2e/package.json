@@ -7,10 +7,12 @@
   "scripts": {
     "e2e": "test-with-playwright --only-extension=. --test-path=.",
     "e2e:headless": "test-with-playwright --only-extension=. --test-path=. --headless",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "e2e:static": "node static/empty-web.js"
   },
   "devDependencies": {
     "@lvce-editor/api": "^8.79.0",
-    "@lvce-editor/test-with-playwright": "^22.17.0"
+    "@lvce-editor/test-with-playwright": "^22.17.0",
+    "playwright": "^1.61.1"
   }
 }
