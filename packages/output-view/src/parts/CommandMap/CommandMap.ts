@@ -6,6 +6,8 @@ import * as Diff2 from '../Diff2/Diff2.ts'
 import { disableScrollLock } from '../DisableScrollLock/DisableScrollLock.ts'
 import { enableScrollLock } from '../EnableScrollLock/EnableScrollLock.ts'
 import * as FocusIndex from '../FocusIndex/FocusIndex.ts'
+import { getComponentDom } from '../GetComponentDom/GetComponentDom.ts'
+import { getComponentState } from '../GetComponentState/GetComponentState.ts'
 import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
 import { handleButtonClick } from '../HandleButtonClick/HandleButtonClick.ts'
 import { handleContextMenu } from '../HandleContextMenu/HandleContextMenu.ts'
@@ -32,6 +34,7 @@ import { renderEventListeners } from '../RenderEventListeners/RenderEventListene
 import * as Resize from '../Resize/Resize.ts'
 import { saveOutputAs } from '../SaveOutputAs/SaveOutputAs.ts'
 import * as SaveState from '../SaveState/SaveState.ts'
+import { setComponentState } from '../SetComponentState/SetComponentState.ts'
 import { selectChannel } from '../SelectChannel/SelectChannel.ts'
 import { setDeltaY } from '../SetDeltaY/SetDeltaY.ts'
 import { setLogLevel } from '../SetLogLevel/SetLogLevel.ts'
@@ -52,6 +55,8 @@ export const commandMap = {
   'Output.focusIndex': WrapCommand.wrapCommand(FocusIndex.focusIndex),
   'Output.getActions': getActions,
   'Output.getCommandIds': WrapCommand.getCommandIds,
+  'Output.getComponentDom': getComponentDom,
+  'Output.getComponentState': getComponentState,
   'Output.getKeyBindings': GetKeyBindings.getKeyBindings,
   'Output.handleButtonClick': WrapCommand.wrapCommand(handleButtonClick),
   'Output.handleContextMenu': WrapCommand.wrapCommand(handleContextMenu),
@@ -78,6 +83,7 @@ export const commandMap = {
   'Output.saveState': WrapCommand.wrapGetter(SaveState.saveState),
   'Output.selectChannel': WrapCommand.wrapCommand(selectChannel),
   'Output.setDeltaY': WrapCommand.wrapCommand(setDeltaY),
+  'Output.setComponentState': setComponentState,
   'Output.setLogLevel': setLogLevel,
   'Output.setOutputChannel': WrapCommand.wrapCommand(setOutputChannel),
   'Output.terminate': ViewletRegistry.terminate,
