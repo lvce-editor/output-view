@@ -34,7 +34,22 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
   const options = await loadOptions(platform)
   const option = getMatchingOpen(options, selectedId)
   if (!option) {
-    throw new Error('option not found')
+    await setupChangeListener(watchId, 0, '')
+    const buttons = loadButtons()
+    return {
+      ...state,
+      buttons,
+      collapsedUris,
+      error: '',
+      errorCode: 0,
+      filteredItems: [],
+      filterValue,
+      listItems: [],
+      options,
+      scrollLockEnabled,
+      selectedOption: '',
+      watchId: 0,
+    }
   }
   const { uri } = option
   const { code, error, lines } = await loadLines(uri)

@@ -9,6 +9,9 @@ export const setupChangeListener = async (oldWatchId: number, newWatchId: number
       WatchCallbacks.unregisterWatchCallback(oldWatchId)
       await FileSystemWorker.unwatchFile(oldWatchId)
     }
+    if (!uri) {
+      return
+    }
     if (isExtensionOutputUri(uri)) {
       return
     }

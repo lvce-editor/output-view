@@ -28,6 +28,40 @@ test('loadContent reads isolated extension output without creating a file watche
   expect(mockExtensionManagementRpc.invocations).toEqual([['Extensions.getOutputChannelProviders'], ['Extensions.readOutputChannel', uri]])
 })
 
+test('loadContent returns an empty state when web has no output channels', async () => {
+  const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
+    'FileSystem.unwatchFile': () => undefined,
+  })
+  const mockExtensionManagementRpc = ExtensionManagementWorker.registerMockRpc({
+    'Extensions.getOutputChannelProviders': () => [],
+  })
+  const state = {
+    ...createDefaultState(),
+    platform: PlatformType.Web,
+    watchId: 456,
+  }
+
+  const result = await loadContent(state, { filterValue: 'warning', scrollLockEnabled: true, selectedOption: 'removed-channel' })
+
+  expect(result).toMatchObject({
+    error: '',
+    errorCode: 0,
+    filteredItems: [],
+    filterValue: 'warning',
+    listItems: [],
+    options: [],
+    scrollLockEnabled: true,
+    selectedOption: '',
+    watchId: 0,
+  })
+  expect(result.buttons).toHaveLength(3)
+  expect(mockFileSystemRpc.invocations).toEqual([
+    ['FileSystem.readFile', 'memfs:///extension-detail-output.txt'],
+    ['FileSystem.unwatchFile', 456],
+  ])
+  expect(mockExtensionManagementRpc.invocations).toEqual([['Extensions.getOutputChannelProviders']])
+})
+
 test('loadContent returns a new state with expected properties', async () => {
   const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile': () => 'test content',
