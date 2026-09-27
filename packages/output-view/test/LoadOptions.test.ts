@@ -89,9 +89,7 @@ test('loadOptions - test platform uses legacy window log file', async () => {
   expect(options).not.toContainEqual(expect.objectContaining({ id: 'PreviewSandbox' }))
   expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getLogsDir']])
   expect(mockExtensionManagementRpc.invocations).toEqual([['Extensions.getOutputChannelProviders']])
-  expect(mockFileSystemRpc.invocations).toEqual([
-    ['FileSystem.readFile', 'memfs:///extension-detail-output.txt'],
-  ])
+  expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.readFile', 'memfs:///extension-detail-output.txt']])
 })
 
 test('loadOptions omits the preview channel and does not create its log until a preview opens', async () => {
