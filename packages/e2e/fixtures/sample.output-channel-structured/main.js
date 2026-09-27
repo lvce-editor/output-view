@@ -1,3 +1,5 @@
+import { activate, createOutputChannel, getWorkspaceUri } from '@lvce-editor/api'
+
 const outputChannelProvider = {
   id: 'structured',
   label: 'Structured',
@@ -17,6 +19,9 @@ const createRecord = (level, message, source = '', line = 0) => {
 const main = async () => {
   const channel = createOutputChannel(outputChannelProvider.id)
   await activate()
+  const workspaceUri = await getWorkspaceUri()
+  const fileUri = `${workspaceUri}/test.txt`
+  const plainFileUri = `${workspaceUri}/plain.txt`
   const repeated = createRecord('info', 'cannot execute viewlet command StatusBar.handleItemsChanged: no active instance for StatusBar')
   await channel.append(
     [
@@ -28,9 +33,10 @@ const main = async () => {
       createRecord('error', 'request failed', 'lvce://-/packages/renderer-worker/dist/rendererWorkerMain.js', 77),
       createRecord('info', 'ready'),
       '    at load$1 (lvce://-/packages/renderer-process/dist/rendererProcessMain.js:8726:11)',
+      plainFileUri,
+      `    at load (${fileUri}:3:1)`,
     ].join('\n'),
   )
 }
 
 await main()
-import { activate, createOutputChannel } from '@lvce-editor/api'
