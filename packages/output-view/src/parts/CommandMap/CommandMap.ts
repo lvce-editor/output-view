@@ -1,3 +1,4 @@
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as ViewletRegistry from '@lvce-editor/viewlet-registry'
 import * as Clear from '../Clear/Clear.ts'
 import { closeFindWidget } from '../CloseFindWidget/CloseFindWidget.ts'
@@ -27,7 +28,10 @@ import { loadContent } from '../LoadContent/LoadContent.ts'
 import { openFindWidget } from '../OpenFindWidget/OpenFindWidget.ts'
 import { getActions } from '../OutputActions/OutputActions.ts'
 import * as WrapCommand from '../OutputStates/OutputStates.ts'
+import * as OutputStates from '../OutputStates/OutputStates.ts'
+import * as PreviewSandboxState from '../PreviewSandboxState/PreviewSandboxState.ts'
 import { refresh } from '../Refresh/Refresh.ts'
+import { refreshOptions } from '../RefreshOptions/RefreshOptions.ts'
 import * as Render2 from '../Render2/Render2.ts'
 import { renderActions } from '../RenderActions/RenderActions.ts'
 import { renderEventListeners } from '../RenderEventListeners/RenderEventListeners.ts'
@@ -43,6 +47,26 @@ import * as WatchCallback from '../WatchCallbacks/WatchCallbacks.ts'
 
 const handleDirectMessagePort = (port: MessagePort, setAsRendererProcess = true): Promise<void> =>
   HandleMessagePort.handleMessagePort(port, commandMap, setAsRendererProcess)
+
+const setPreviewSandboxActive = async (active: boolean): Promise<void> => {
+  if (PreviewSandboxState.isActive() === active) {
+    return
+  }
+  PreviewSandboxState.setActive(active)
+  for (const uid of OutputStates.getKeys()) {
+    const current = OutputStates.get(uid)
+    if (!current) {
+      continue
+    }
+    const updatedState = await refreshOptions(current.newState)
+    const latest = OutputStates.get(uid)
+    if (!latest) {
+      continue
+    }
+    OutputStates.set(uid, latest.oldState, { ...latest.newState, ...updatedState })
+    await RendererWorker.invoke('Viewlet.requestRender', uid)
+  }
+}
 
 export const commandMap = {
   'Output.clear': WrapCommand.wrapCommand(Clear.clear),
@@ -86,5 +110,6 @@ export const commandMap = {
   'Output.setDeltaY': WrapCommand.wrapCommand(setDeltaY),
   'Output.setLogLevel': setLogLevel,
   'Output.setOutputChannel': WrapCommand.wrapCommand(setOutputChannel),
+  'Output.setPreviewSandboxActive': setPreviewSandboxActive,
   'Output.terminate': ViewletRegistry.terminate,
 }

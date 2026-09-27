@@ -6,6 +6,7 @@ import { getLogsDir } from '../GetLogsDir/GetLogsDir.ts'
 import { getWindowLogUri } from '../GetWindowLogUri/GetWindowLogUri.ts'
 import * as InputName from '../InputName/InputName.ts'
 import * as PlatformType from '../PlatformType/PlatformType.ts'
+import * as PreviewSandboxState from '../PreviewSandboxState/PreviewSandboxState.ts'
 
 export const loadOptions = async (platform: number): Promise<readonly Option[]> => {
   const extensionOptions = await getExtensionOptions()
@@ -14,13 +15,16 @@ export const loadOptions = async (platform: number): Promise<readonly Option[]> 
     return [...detailOptions, ...extensionOptions]
   }
   const logsFolderUri = await getLogsDir()
+  const previewSandboxActive = PreviewSandboxState.isActive()
   const previewSandboxLogUri = `${logsFolderUri}/log-preview-sandbox.txt`
-  try {
-    if (!(await FileSystemWorker.exists(previewSandboxLogUri))) {
-      await FileSystemWorker.writeFile(previewSandboxLogUri, '')
+  if (previewSandboxActive) {
+    try {
+      if (!(await FileSystemWorker.exists(previewSandboxLogUri))) {
+        await FileSystemWorker.writeFile(previewSandboxLogUri, '')
+      }
+    } catch {
+      // Keep the Output view usable if the preview log cannot be initialized.
     }
-  } catch {
-    // Keep the Output view usable if the preview log cannot be initialized.
   }
   const windowLogUri = platform === PlatformType.Electron ? await getWindowLogUri(logsFolderUri) : `${logsFolderUri}/log-window.txt`
 
@@ -40,11 +44,15 @@ export const loadOptions = async (platform: number): Promise<readonly Option[]> 
       label: 'Window',
       uri: windowLogUri,
     },
-    {
-      id: InputName.PreviewSandbox,
-      label: 'Preview Sandbox',
-      uri: previewSandboxLogUri,
-    },
+    ...(previewSandboxActive
+      ? [
+          {
+            id: InputName.PreviewSandbox,
+            label: 'Preview Sandbox',
+            uri: previewSandboxLogUri,
+          },
+        ]
+      : []),
     ...detailOptions,
     ...extensionOptions,
   ]
