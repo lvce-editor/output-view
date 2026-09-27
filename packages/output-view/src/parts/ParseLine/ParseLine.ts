@@ -4,7 +4,7 @@ import { getLinkMatch } from '../GetLinkMatch/GetLinkMatch.ts'
 import * as LinePartType from '../LinePartType/LinePartType.ts'
 import { parseStructuredLogLine } from '../ParseStructuredLogLine/ParseStructuredLogLine.ts'
 
-const RE_SOURCE_LINK = /^lvce(?:-oss)?:\/\//
+const RE_SOURCE_LINK = /^(?:lvce(?:-oss)?:\/\/|file:\/\/)/
 const RE_SOURCE_LOCATION = /:(\d+)(?::(\d+))?$/
 
 const getLinkPart = (match: string): LinePart => {
