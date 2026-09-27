@@ -2,8 +2,10 @@ import { expect, test } from '@jest/globals'
 import { ExtensionManagementWorker, FileSystemWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import { loadOptions } from '../src/parts/LoadOptions/LoadOptions.ts'
 import * as PlatformType from '../src/parts/PlatformType/PlatformType.ts'
+import * as PreviewSandboxState from '../src/parts/PreviewSandboxState/PreviewSandboxState.ts'
 
 test('loadOptions - electron', async () => {
+  PreviewSandboxState.setActive(false)
   const mockRendererRpc = RendererWorker.registerMockRpc({
     'GetWindowId.getWindowId': () => 42,
     'PlatformPaths.getLogsDir': () => 'file:///logs',
@@ -33,11 +35,6 @@ test('loadOptions - electron', async () => {
       uri: 'file:///logs/42/123456789.txt',
     },
     {
-      id: 'PreviewSandbox',
-      label: 'Preview Sandbox',
-      uri: 'file:///logs/log-preview-sandbox.txt',
-    },
-    {
       id: 'Extension',
       label: 'Extension',
       uri: 'extension-output://extension/channel',
@@ -46,13 +43,13 @@ test('loadOptions - electron', async () => {
   expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getLogsDir'], ['GetWindowId.getWindowId']])
   expect(mockFileSystemRpc.invocations).toEqual([
     ['FileSystem.readFile', 'memfs:///extension-detail-output.txt'],
-    ['FileSystem.exists', 'file:///logs/log-preview-sandbox.txt'],
     ['FileSystem.readDirWithFileTypes', 'file:///logs/42'],
   ])
   expect(mockExtensionManagementRpc.invocations).toEqual([['Extensions.getOutputChannelProviders']])
 })
 
 test('loadOptions - web', async () => {
+  PreviewSandboxState.setActive(false)
   const mockExtensionManagementRpc = ExtensionManagementWorker.registerMockRpc({
     'Extensions.getOutputChannelProviders': () => [{ id: 'Extension', label: 'Extension', uri: 'extension-output://extension/channel' }],
   })
@@ -62,6 +59,7 @@ test('loadOptions - web', async () => {
 })
 
 test('loadOptions - web with no output channels', async () => {
+  PreviewSandboxState.setActive(false)
   const mockExtensionManagementRpc = ExtensionManagementWorker.registerMockRpc({
     'Extensions.getOutputChannelProviders': () => [],
   })
@@ -71,6 +69,7 @@ test('loadOptions - web with no output channels', async () => {
 })
 
 test('loadOptions - test platform uses legacy window log file', async () => {
+  PreviewSandboxState.setActive(false)
   const mockRendererRpc = RendererWorker.registerMockRpc({
     'PlatformPaths.getLogsDir': () => 'file:///logs',
   })
@@ -87,20 +86,34 @@ test('loadOptions - test platform uses legacy window log file', async () => {
     label: 'Window',
     uri: 'file:///logs/log-window.txt',
   })
-  expect(options).toContainEqual({
-    id: 'PreviewSandbox',
-    label: 'Preview Sandbox',
-    uri: 'file:///logs/log-preview-sandbox.txt',
-  })
+  expect(options).not.toContainEqual(expect.objectContaining({ id: 'PreviewSandbox' }))
   expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getLogsDir']])
   expect(mockExtensionManagementRpc.invocations).toEqual([['Extensions.getOutputChannelProviders']])
-  expect(mockFileSystemRpc.invocations).toEqual([
-    ['FileSystem.readFile', 'memfs:///extension-detail-output.txt'],
-    ['FileSystem.exists', 'file:///logs/log-preview-sandbox.txt'],
-  ])
+  expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.readFile', 'memfs:///extension-detail-output.txt']])
 })
 
-test('loadOptions creates the preview sandbox log file so an open channel can watch it', async () => {
+test('loadOptions omits the preview channel and does not create its log until a preview opens', async () => {
+  PreviewSandboxState.setActive(false)
+  RendererWorker.registerMockRpc({
+    'PlatformPaths.getLogsDir': () => 'file:///logs',
+  })
+  ExtensionManagementWorker.registerMockRpc({
+    'Extensions.getOutputChannelProviders': () => [],
+  })
+  const mockFileSystemRpc = FileSystemWorker.registerMockRpc({
+    'FileSystem.exists': () => false,
+    'FileSystem.readFile': () => '',
+    'FileSystem.writeFile': () => undefined,
+  })
+
+  const options = await loadOptions(PlatformType.Test)
+
+  expect(options).not.toContainEqual(expect.objectContaining({ id: 'PreviewSandbox' }))
+  expect(mockFileSystemRpc.invocations).not.toContainEqual(['FileSystem.writeFile', 'file:///logs/log-preview-sandbox.txt', ''])
+})
+
+test('loadOptions creates the preview log while a preview is active', async () => {
+  PreviewSandboxState.setActive(true)
   RendererWorker.registerMockRpc({
     'PlatformPaths.getLogsDir': () => 'file:///logs',
   })
