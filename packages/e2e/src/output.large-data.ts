@@ -32,7 +32,21 @@ export const test: Test = async ({ Command, expect, Extension, FileSystem, Locat
   await Command.execute('Output.refresh')
   await expect(lines.first()).toHaveText('line 00000')
   await expect(offscreenLine).toHaveCount(0)
-  await Command.execute('Output.handleKeyDown', 'End')
+
+  // Scroll down and back up through the wheel listener.
+  // @ts-expect-error The locator accepts event initialization objects at runtime.
+  await Locator('.OutputContent').dispatchEvent('wheel', { bubbles: true, deltaMode: 0, deltaY: 36 })
+  await Command.execute('Output.refresh')
+  await expect(lines.first()).toHaveText('line 00002')
+  // @ts-expect-error The locator accepts event initialization objects at runtime.
+  await Locator('.OutputContent').dispatchEvent('wheel', { bubbles: true, deltaMode: 0, deltaY: -36 })
+  await Command.execute('Output.refresh')
+  await expect(lines.first()).toHaveText('line 00000')
+
+  // Scrolling beyond either end remains clamped to the available content.
+  // @ts-expect-error The locator accepts event initialization objects at runtime.
+  await Locator('.OutputContent').dispatchEvent('wheel', { bubbles: true, deltaMode: 0, deltaY: 1_000_000 })
+  await Command.execute('Output.refresh')
   await expect(lastDataLine).toHaveText(`line 09999 ${filterTarget}`)
 
   // act
