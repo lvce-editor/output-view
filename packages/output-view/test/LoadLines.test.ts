@@ -65,6 +65,22 @@ test('loadLines - reads isolated extension output through extension management w
   expect(mockRpc.invocations).toEqual([['Extensions.readOutputChannel', uri]])
 })
 
+test('loadLines - keeps link-like and structured output as plain text when linkification is disabled', async () => {
+  const uri = 'extension-output://test.extension/channel'
+  using mockRpc = ExtensionManagementWorker.registerMockRpc({
+    'Extensions.readOutputChannel': () => 'Starting Dev Containers for file:///workspace/project',
+  })
+
+  const result = await loadLines(uri, false)
+
+  expect(result).toEqual({
+    code: 0,
+    error: '',
+    lines: [[{ type: LinePartType.Text, value: 'Starting Dev Containers for file:///workspace/project' }]],
+  })
+  expect(mockRpc.invocations).toEqual([['Extensions.readOutputChannel', uri]])
+})
+
 test('loadLines - file not found', async () => {
   using mockRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile': () => {

@@ -21,7 +21,7 @@ export const clear = async (state: OutputState): Promise<OutputState> => {
   }
   const { uri } = option
   await clearOutput(uri)
-  const { code, error, lines } = await loadLines(uri)
+  const { code, error, lines } = await loadLines(uri, option.linkify)
   const filteredItems = filterItems(lines, filterValue)
   return {
     ...state,

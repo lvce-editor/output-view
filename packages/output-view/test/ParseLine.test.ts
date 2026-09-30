@@ -51,3 +51,9 @@ test('parseLine - keeps ordinary web links as external links', () => {
     { type: LinePartType.Text, value: '.' },
   ])
 })
+
+test('parseLine - preserves link-looking content as plain text when linkification is disabled', () => {
+  expect(parseLine('Starting Dev Containers for file:///workspace/project', false)).toEqual([
+    { type: LinePartType.Text, value: 'Starting Dev Containers for file:///workspace/project' },
+  ])
+})

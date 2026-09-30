@@ -12,10 +12,10 @@ const readOutput = async (uri: string): Promise<string> => {
   return FileSystemWorker.readFile(uri)
 }
 
-export const loadLines = async (uri: string): Promise<LoadLinesResult> => {
+export const loadLines = async (uri: string, linkify = true): Promise<LoadLinesResult> => {
   try {
     const content = await readOutput(uri)
-    const lines = aggregateLines(content.split('\n').map(parseLine))
+    const lines = aggregateLines(content.split('\n').map((line) => parseLine(line, linkify)))
     return {
       code: 0,
       error: '',

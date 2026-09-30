@@ -12,7 +12,7 @@ export const selectChannel = async (state: OutputState, id: string): Promise<Out
     return state
   }
   // TODO potential race condition when switching output channels fast
-  const { code, error, lines } = await loadLines(matchingOption.uri)
+  const { code, error, lines } = await loadLines(matchingOption.uri, matchingOption.linkify)
 
   // TODO memory leak and race condition, need to dispose file watcher of previous uri
   const newWatchId = isExtensionOutputUri(matchingOption.uri) ? 0 : createWatchId()

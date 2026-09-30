@@ -8,7 +8,7 @@ export const refresh = async (state: OutputState): Promise<OutputState> => {
   if (!matchingOption) {
     return state
   }
-  const { code, error, lines } = await loadLines(matchingOption.uri)
+  const { code, error, lines } = await loadLines(matchingOption.uri, matchingOption.linkify)
   const filteredItems = filterItems(lines, filterValue)
   return {
     ...state,
