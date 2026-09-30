@@ -1,6 +1,6 @@
 export interface Option {
   readonly id: string
   readonly label: string
-  readonly linkify?: boolean
+  readonly parseLinks?: boolean
   readonly uri: string
 }

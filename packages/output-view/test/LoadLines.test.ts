@@ -65,7 +65,7 @@ test('loadLines - reads isolated extension output through extension management w
   expect(mockRpc.invocations).toEqual([['Extensions.readOutputChannel', uri]])
 })
 
-test('loadLines - keeps link-like and structured output as plain text when linkification is disabled', async () => {
+test('loadLines - keeps link-like and structured output as plain text when link parsing is disabled', async () => {
   const uri = 'extension-output://test.extension/channel'
   using mockRpc = ExtensionManagementWorker.registerMockRpc({
     'Extensions.readOutputChannel': () => 'Starting Dev Containers for file:///workspace/project',

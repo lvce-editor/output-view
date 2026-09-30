@@ -7,7 +7,7 @@
     {
       "id": "plaintext",
       "label": "Plaintext",
-      "linkify": false
+      "parseLinks": false
     }
   ]
 }
