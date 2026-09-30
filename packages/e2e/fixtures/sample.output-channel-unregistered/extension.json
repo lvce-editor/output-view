@@ -1,0 +1,11 @@
+{
+  "browser": "main.js",
+  "main": "main.js",
+  "activation": ["onOutput"],
+  "outputChannelProviders": [
+    {
+      "id": "unregistered",
+      "label": "Unregistered Channel"
+    }
+  ]
+}
