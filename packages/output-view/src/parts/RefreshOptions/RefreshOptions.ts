@@ -29,7 +29,7 @@ export const refreshOptions = async (state: OutputState): Promise<OutputState> =
       options,
     }
   }
-  const { code, error, lines } = await loadLines(option.uri)
+  const { code, error, lines } = await loadLines(option.uri, option.parseLinks)
   const filteredItems = filterItems(lines, filterValue)
   const newWatchId = isExtensionOutputUri(option.uri) ? 0 : createWatchId()
   await setupChangeListener(watchId, newWatchId, option.uri)

@@ -24,7 +24,10 @@ const getLinkPart = (match: string): LinePart => {
   return { type: LinePartType.Link, value: match }
 }
 
-export const parseLine = (line: string): readonly LinePart[] => {
+export const parseLine = (line: string, parseLinks = true): readonly LinePart[] => {
+  if (!parseLinks) {
+    return [{ type: LinePartType.Text, value: line }]
+  }
   const structuredLine = parseStructuredLogLine(line)
   if (structuredLine) {
     return structuredLine
