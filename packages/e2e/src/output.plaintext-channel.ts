@@ -9,6 +9,7 @@ export const test: Test = async ({ expect, Extension, Locator, Output }) => {
   await Output.selectChannel('plaintext')
 
   const content = Locator('.OutputContent')
+  const link = Locator('.OutputContent a')
   await expect(content).toHaveText('Starting Dev Containers for file:///workspace/project')
-  await expect(Locator('.OutputContent a')).toHaveCount(0)
+  await expect(link).toHaveCount(0)
 }
