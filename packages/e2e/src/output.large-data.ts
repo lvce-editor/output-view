@@ -43,6 +43,15 @@ export const test: Test = async ({ Command, expect, Extension, FileSystem, Locat
   await Command.execute('Output.refresh')
   await expect(lines.first()).toHaveText('line 00000')
 
+  // Route a scrollbar pointer-down beyond the track and verify scrolling clamps at the bottom.
+  // @ts-expect-error The locator accepts event initialization objects at runtime.
+  await Locator('.OutputContent').dispatchEvent('wheel', { bubbles: true, deltaMode: 0, deltaY: 36 })
+  await Command.execute('Output.refresh')
+  await expect(lines.first()).toHaveText('line 00002')
+  await Command.execute('Output.handleScrollBarPointerDown', 100_000)
+  await Command.execute('Output.refresh')
+  await expect(lastDataLine).toHaveText(`line 09999 ${filterTarget}`)
+
   // Scrolling beyond either end remains clamped to the available content.
   // @ts-expect-error The locator accepts event initialization objects at runtime.
   await Locator('.OutputContent').dispatchEvent('wheel', { bubbles: true, deltaMode: 0, deltaY: 1_000_000 })

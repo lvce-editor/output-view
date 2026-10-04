@@ -18,7 +18,7 @@ import { handleFilterInput } from '../HandleFilterInput/HandleFilterInput.ts'
 import { handleKeyDown } from '../HandleKeyDown/HandleKeyDown.ts'
 import * as HandleMessagePort from '../HandleMessagePort/HandleMessagePort.ts'
 import { handleScrollBarCaptureLost } from '../HandleScrollBarCaptureLost/HandleScrollBarCaptureLost.ts'
-import { handleScrollBarClick } from '../HandleScrollBarClick/HandleScrollBarClick.ts'
+import { handleScrollBarClick, handleScrollBarPointerDown } from '../HandleScrollBarClick/HandleScrollBarClick.ts'
 import { handleScrollBarMove } from '../HandleScrollBarMove/HandleScrollBarMove.ts'
 import { handleSelect } from '../HandleSelect/HandleSelect.ts'
 import { handleSourceLinkClick } from '../HandleSourceLinkClick/HandleSourceLinkClick.ts'
@@ -92,6 +92,7 @@ export const commandMap = {
   'Output.handleScrollBarCaptureLost': WrapCommand.wrapCommand(handleScrollBarCaptureLost),
   'Output.handleScrollBarClick': WrapCommand.wrapCommand(handleScrollBarClick),
   'Output.handleScrollBarMove': WrapCommand.wrapCommand(handleScrollBarMove),
+  'Output.handleScrollBarPointerDown': WrapCommand.wrapCommand(handleScrollBarPointerDown),
   'Output.handleSelect': WrapCommand.wrapCommand(handleSelect),
   'Output.handleSourceLinkClick': WrapCommand.wrapCommand(handleSourceLinkClick),
   'Output.handleWheel': WrapCommand.wrapCommand(handleWheel),
