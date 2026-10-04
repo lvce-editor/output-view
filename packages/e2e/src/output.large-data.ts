@@ -43,20 +43,14 @@ export const test: Test = async ({ Command, expect, Extension, FileSystem, Locat
   await Command.execute('Output.refresh')
   await expect(lines.first()).toHaveText('line 00000')
 
-  // Route a scrollbar pointer-down at the track center and verify the visible rows move.
+  // Route a scrollbar pointer-down beyond the track and verify scrolling clamps at the bottom.
   // @ts-expect-error The locator accepts event initialization objects at runtime.
   await Locator('.OutputContent').dispatchEvent('wheel', { bubbles: true, deltaMode: 0, deltaY: 36 })
   await Command.execute('Output.refresh')
   await expect(lines.first()).toHaveText('line 00002')
-  const components = (await Command.execute('ComponentState.getComponents')) as readonly { moduleId: string; uid: number }[]
-  const outputComponent = components.find((component) => component.moduleId === 'Output')
-  if (!outputComponent) {
-    throw new Error('Expected an Output component')
-  }
-  const outputState = (await Command.execute('ComponentState.getState', outputComponent.uid)) as { height: number; y: number }
-  await Command.execute('Output.handleScrollBarPointerDown', outputState.y + outputState.height / 2)
+  await Command.execute('Output.handleScrollBarPointerDown', 100_000)
   await Command.execute('Output.refresh')
-  await expect(lines.first()).not.toHaveText('line 00002')
+  await expect(lastDataLine).toHaveText(`line 09999 ${filterTarget}`)
 
   // Scrolling beyond either end remains clamped to the available content.
   // @ts-expect-error The locator accepts event initialization objects at runtime.
