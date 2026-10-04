@@ -8,7 +8,7 @@ export const renderEventListeners = (): readonly DomEventListener[] => {
     { name: DomEventListenerFunctions.HandleKeyDown, params: ['handleKeyDown', 'event.key'] },
     {
       name: DomEventListenerFunctions.HandleScrollBarPointerDown,
-      params: ['handleScrollBarClick', 'event.clientY'],
+      params: ['handleScrollBarPointerDown', 'event.clientY'],
       preventDefault: true,
       stopPropagation: true,
       trackPointerEvents: [DomEventListenerFunctions.HandleScrollBarMove, DomEventListenerFunctions.HandleScrollBarPointerCaptureLost],

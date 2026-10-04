@@ -17,3 +17,5 @@ export const handleScrollBarClick = (state: OutputState, eventY: number): Output
   const deltaY = trackHeight > 0 ? ((relativeY - handleOffset) / trackHeight) * finalDeltaY : 0
   return { ...setDeltaY(state, deltaY), handleOffset, scrollBarActive: true }
 }
+
+export const handleScrollBarPointerDown = (state: OutputState, eventY: number): OutputState => handleScrollBarClick(state, eventY)
