@@ -1,4 +1,4 @@
-import { access, readFile, readdir, writeFile } from 'node:fs/promises'
+import { readFile, readdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
@@ -26,20 +26,25 @@ const dirents = await readdir(serverStaticPath)
 const commitHash = dirents.find(isCommitHash) || ''
 const rendererWorkerMainPath = join(serverStaticPath, commitHash, 'packages', 'renderer-worker', 'dist', 'rendererWorkerMain.js')
 
-try {
-  await access(rendererWorkerMainPath)
-} catch {
-  process.exit(0)
+const replace = async (path, occurrence, replacement) => {
+  const content = await readFile(path, 'utf8')
+  if (content.includes(replacement)) {
+    return
+  }
+  if (!content.includes(occurrence)) {
+    throw new Error(`Could not find expected output worker URL in ${path}`)
+  }
+  await writeFile(path, content.replace(occurrence, replacement))
 }
-
-const content = await readFile(rendererWorkerMainPath, 'utf-8')
 
 const remoteUrl = getRemoteUrl(workerPath)
-if (!content.includes('// const outputViewWorkerUrl = ')) {
-  const occurrence = `const outputViewWorkerUrl = \`\${assetDir}/packages/output-view/dist/outputViewWorkerMain.js\``
-  const replacement = `// const outputViewWorkerUrl = \`\${assetDir}/packages/output-view/dist/outputViewWorkerMain.js\`
-const outputViewWorkerUrl = \`${remoteUrl}\``
-
-  const newContent = content.replace(occurrence, replacement)
-  await writeFile(rendererWorkerMainPath, newContent)
-}
+await replace(
+  rendererWorkerMainPath,
+  '`${assetDir}/packages/renderer-worker/node_modules/@lvce-editor/output-view/dist/outputViewWorkerMain.js`',
+  `\`${remoteUrl}\``,
+)
+await replace(
+  join(serverStaticPath, 'index.html'),
+  `"develop.outputViewWorkerPath": "/${commitHash}/packages/output-view/dist/outputViewWorkerMain.js"`,
+  `"develop.outputViewWorkerPath": "${remoteUrl}"`,
+)

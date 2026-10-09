@@ -27,13 +27,21 @@ const workerPath = join(root, '.tmp/dist/dist/outputViewWorkerMain.js')
 const remoteUrl = getRemoteUrl(workerPath)
 const staticOutputViewWorkerPath = join(root, 'dist', commitHash, 'packages', 'output-view', 'dist', 'outputViewWorkerMain.js')
 
-const occurrence = `// const outputViewWorkerUrl = \`\${assetDir}/packages/output-view/dist/outputViewWorkerMain.js\`
-const outputViewWorkerUrl = \`${remoteUrl}\``
-const replacement = `const outputViewWorkerUrl = \`\${assetDir}/packages/output-view/dist/outputViewWorkerMain.js\``
-if (content.includes(occurrence)) {
-  const newContent = content.replace(occurrence, replacement)
-  await writeFile(rendererWorkerPath, newContent)
+const occurrence = `\`${remoteUrl}\``
+const replacement = '`${assetDir}/packages/output-view/dist/outputViewWorkerMain.js`'
+if (!content.includes(occurrence)) {
+  throw new Error('Could not find development output worker URL in static renderer')
 }
+await writeFile(rendererWorkerPath, content.replace(occurrence, replacement))
+
+const indexPath = join(root, 'dist', 'index.html')
+const indexContent = await readFile(indexPath, 'utf8')
+const indexOccurrence = `"develop.outputViewWorkerPath": "${remoteUrl}"`
+const indexReplacement = `"develop.outputViewWorkerPath": "/output-view/${commitHash}/packages/output-view/dist/outputViewWorkerMain.js"`
+if (!indexContent.includes(indexOccurrence)) {
+  throw new Error('Could not find development output worker URL in static configuration')
+}
+await writeFile(indexPath, indexContent.replace(indexOccurrence, indexReplacement))
 
 await cp(workerPath, staticOutputViewWorkerPath)
 await cp(join(root, 'dist'), join(root, '.tmp', 'static'), { recursive: true })
