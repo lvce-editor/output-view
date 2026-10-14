@@ -4,25 +4,25 @@ import { clear } from '../src/parts/Clear/Clear.ts'
 import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as LinePartType from '../src/parts/LinePartType/LinePartType.ts'
 import { loadContent } from '../src/parts/LoadContent/LoadContent.ts'
+import * as PlatformType from '../src/parts/PlatformType/PlatformType.ts'
 import { refresh } from '../src/parts/Refresh/Refresh.ts'
 import { refreshOptions } from '../src/parts/RefreshOptions/RefreshOptions.ts'
 import { selectChannel } from '../src/parts/SelectChannel/SelectChannel.ts'
-import * as PlatformType from '../src/parts/PlatformType/PlatformType.ts'
 
 test('application output listing, reading, selection, refresh and clearing stay isolated', async () => {
   const uri = 'extension-output://sample.extension/build'
   const logs: Record<string, string> = { preview: 'Preview build', source: 'Source build' }
   using fileSystemRpc = FileSystemWorker.registerMockRpc({})
   using extensionRpc = ExtensionManagementWorker.registerMockRpc({
-    'Extensions.invokeForApplication': (applicationId: string, command: string) => {
+    'Extensions.invokeForApplication': async (applicationId: string, command: string): Promise<unknown> => {
       switch (command) {
+        case 'Extensions.clearOutputChannel':
+          logs[applicationId] = ''
+          return undefined
         case 'Extensions.getOutputChannelProviders':
           return [{ id: 'build', label: 'Build', uri }]
         case 'Extensions.readOutputChannel':
           return logs[applicationId]
-        case 'Extensions.clearOutputChannel':
-          logs[applicationId] = ''
-          return undefined
         default:
           throw new Error(`Unexpected command ${command}`)
       }
