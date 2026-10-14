@@ -27,11 +27,11 @@ const getMatchingOpen = (options: readonly Option[], id: string): Option | undef
 }
 
 export const loadContent = async (state: OutputState, savedState: any): Promise<OutputState> => {
-  const { platform, uri: requestedChannel, watchId } = state
+  const { applicationId, platform, uri: requestedChannel, watchId } = state
   const collapsedUris = getSavedCollapsedUris(savedState)
   const { filterValue, scrollLockEnabled, selectedOption } = restoreState(savedState)
   const selectedId = getSelectedItem(requestedChannel || selectedOption, platform)
-  const options = await loadOptions(platform)
+  const options = await loadOptions(platform, applicationId)
   const option = getMatchingOpen(options, selectedId)
   if (!option) {
     await setupChangeListener(watchId, 0, '')
@@ -52,7 +52,7 @@ export const loadContent = async (state: OutputState, savedState: any): Promise<
     }
   }
   const { uri } = option
-  const { code, error, lines } = await loadLines(uri, option.parseLinks)
+  const { code, error, lines } = await loadLines(uri, option.parseLinks, applicationId)
   const filteredItems = filterItems(lines, filterValue)
   const newWatchId = isExtensionOutputUri(uri) ? 0 : createWatchId()
   await setupChangeListener(watchId, newWatchId, uri)
