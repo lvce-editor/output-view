@@ -7,8 +7,8 @@ import { loadOptions } from '../LoadOptions/LoadOptions.ts'
 import { setupChangeListener } from '../SetupChangeListener/SetupChangeListener.ts'
 
 export const refreshOptions = async (state: OutputState): Promise<OutputState> => {
-  const { filterValue, platform, selectedOption, watchId } = state
-  const options = await loadOptions(platform)
+  const { applicationId, filterValue, platform, selectedOption, watchId } = state
+  const options = await loadOptions(platform, applicationId)
   const option = options.find((option) => option.id === selectedOption) || options[0]
   if (!option) {
     await setupChangeListener(watchId, 0, '')
@@ -29,7 +29,7 @@ export const refreshOptions = async (state: OutputState): Promise<OutputState> =
       options,
     }
   }
-  const { code, error, lines } = await loadLines(option.uri, option.parseLinks)
+  const { code, error, lines } = await loadLines(option.uri, option.parseLinks, applicationId)
   const filteredItems = filterItems(lines, filterValue)
   const newWatchId = isExtensionOutputUri(option.uri) ? 0 : createWatchId()
   await setupChangeListener(watchId, newWatchId, option.uri)

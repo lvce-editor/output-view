@@ -8,8 +8,8 @@ import * as InputName from '../InputName/InputName.ts'
 import * as PlatformType from '../PlatformType/PlatformType.ts'
 import * as PreviewSandboxState from '../PreviewSandboxState/PreviewSandboxState.ts'
 
-export const loadOptions = async (platform: number): Promise<readonly Option[]> => {
-  const extensionOptions = await getExtensionOptions()
+export const loadOptions = async (platform: number, applicationId?: string): Promise<readonly Option[]> => {
+  const extensionOptions = await getExtensionOptions(applicationId)
   const detailOptions = await getExtensionDetailOptions()
   if (platform === PlatformType.Web) {
     return [...detailOptions, ...extensionOptions]

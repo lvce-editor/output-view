@@ -3,9 +3,20 @@ import * as Assert from '../Assert/Assert.ts'
 import * as InputSource from '../InputSource/InputSource.ts'
 import * as OutputStates from '../OutputStates/OutputStates.ts'
 
-export const create = (id: number, uri: string, x: number, y: number, width: number, height: number, platform: number, parentId: number): void => {
+export const create = (
+  id: number,
+  uri: string,
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  platform: number,
+  parentId: number,
+  applicationId?: string,
+): void => {
   Assert.number(parentId)
   const state: OutputState = {
+    ...(applicationId !== undefined && { applicationId }),
     buttons: [],
     collapsedUris: [],
     deltaY: 0,

@@ -6,13 +6,13 @@ import { loadLines } from '../LoadLines/LoadLines.ts'
 import { setupChangeListener } from '../SetupChangeListener/SetupChangeListener.ts'
 
 export const selectChannel = async (state: OutputState, id: string): Promise<OutputState> => {
-  const { filterValue, options, watchId } = state
+  const { applicationId, filterValue, options, watchId } = state
   const matchingOption = options.find((option) => option.id === id)
   if (!matchingOption) {
     return state
   }
   // TODO potential race condition when switching output channels fast
-  const { code, error, lines } = await loadLines(matchingOption.uri, matchingOption.parseLinks)
+  const { code, error, lines } = await loadLines(matchingOption.uri, matchingOption.parseLinks, applicationId)
 
   // TODO memory leak and race condition, need to dispose file watcher of previous uri
   const newWatchId = isExtensionOutputUri(matchingOption.uri) ? 0 : createWatchId()
