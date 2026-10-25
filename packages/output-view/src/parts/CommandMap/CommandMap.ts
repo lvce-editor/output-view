@@ -100,6 +100,7 @@ export const commandMap = {
   'Output.loadContent2': WrapCommand.wrapCommand(loadContent),
   'Output.openFindWidget': WrapCommand.wrapCommand(openFindWidget),
   'Output.refresh': WrapCommand.wrapCommand(refresh),
+  'Output.refreshOptions': WrapCommand.wrapCommand(refreshOptions),
   'Output.render2': Render2.render2,
   'Output.renderActions': WrapCommand.wrapGetter(renderActions),
   'Output.renderEventListeners': renderEventListeners,
